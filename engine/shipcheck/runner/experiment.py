@@ -1,7 +1,7 @@
-"""ExperimentRunner — 전체 실험 오케스트레이션.
+"""ExperimentRunner — Claude CLI 페르소나 에이전트 오케스트레이션.
 
-ThreadPoolExecutor로 병렬 실행. 각 세션은 독립된 브라우저 + LLM 프로세스.
-각 스레드 안에서 asyncio.run()으로 AsyncBrowserEnv를 구동한다.
+각 페르소나를 독립된 `claude -p` subprocess로 실행.
+asyncio + Semaphore로 동시성 제어.
 """
 
 from __future__ import annotations
@@ -9,126 +9,158 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
-import threading
+import os
+import tempfile
 import time
 import uuid
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import yaml
 
-from ..browser.pw_cli_env import PlaywrightCliEnv
-from ..data.collector import DataCollector
 from ..data.exporter import ANOVAExporter
 from ..layer1_persona.models import PersonaProfile
-from ..llm.claude_cli import ClaudeCli
-from .session import SessionRunner
-from .naive_session import NaiveSessionRunner
+from ..prompt_builder import build_system_prompt
 
 logger = logging.getLogger(__name__)
 
-_PROMPTS_DIR = Path(__file__).parent.parent.parent / "prompts"
-_completed_lock = threading.Lock()
+ENGINE_DIR = Path(__file__).resolve().parent.parent.parent  # engine/
 
 
-def load_prompts() -> dict[str, str]:
-    """프롬프트 템플릿 로드."""
-    return {
-        # 새 구조: 페르소나(스크린샷) + 액션 실행기(접근성 트리+스크린샷)
-        "persona_react": (_PROMPTS_DIR / "persona_react.txt").read_text(),
-        "action_executor": (_PROMPTS_DIR / "action_executor.txt").read_text(),
-        # legacy (이전 버전 호환)
-        "emotion_eval": (_PROMPTS_DIR / "emotion_eval.txt").read_text(),
-        "action_decide": (_PROMPTS_DIR / "action_decide.txt").read_text(),
-        # ablation
-        "naive_single": (_PROMPTS_DIR / "naive_single.txt").read_text(),
-    }
+def load_personas(persona_dir: Path) -> list[Path]:
+    """페르소나 YAML 파일 경로 목록 반환."""
+    return sorted(persona_dir.glob("*.yaml"))
 
 
-def load_personas(persona_dir: Path) -> list[PersonaProfile]:
-    """YAML 페르소나 파일들 로드."""
-    profiles = []
-    for path in sorted(persona_dir.glob("*.yaml")):
-        data = yaml.safe_load(path.read_text())
-        profiles.append(PersonaProfile.from_dict(data))
-    return profiles
-
-
-def _run_one_session(
-    persona: PersonaProfile,
-    product_name: str,
+async def _run_session_init(
+    persona_yaml: Path,
     product_url: str,
-    collector: DataCollector,
-    prompts: dict[str, str],
-    model: str,
-    max_steps: int,
-    headless: bool,
-    session_idx: int,
-    total_sessions: int,
-    mode: str = "full",  # "full" | "naive"
-) -> str:
-    """단일 세션 실행 (스레드 안에서 호출됨).
-
-    각 스레드가 asyncio.run()으로 자체 이벤트 루프를 생성하여
-    AsyncBrowserEnv를 구동한다.
-    """
-    return asyncio.run(
-        _run_one_session_async(
-            persona, product_name, product_url, collector, prompts,
-            model, max_steps, headless, session_idx, total_sessions, mode,
-        )
+    product_name: str,
+    session_id: str,
+    state_dir: str,
+) -> dict:
+    """session_init 도구 실행."""
+    cmd = [
+        "python3", "-m", "shipcheck.tools.session_init",
+        "--persona", str(persona_yaml),
+        "--product-url", product_url,
+        "--product-name", product_name,
+        "--session-id", session_id,
+        "--state-dir", state_dir,
+    ]
+    proc = await asyncio.create_subprocess_exec(
+        *cmd, cwd=str(ENGINE_DIR),
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
     )
+    stdout, stderr = await proc.communicate()
+    if proc.returncode != 0:
+        raise RuntimeError(f"session_init 실패: {stderr.decode()}")
+    return json.loads(stdout.decode())
 
 
-async def _run_one_session_async(
-    persona: PersonaProfile,
+async def _run_one_persona(
+    persona_yaml: Path,
     product_name: str,
     product_url: str,
-    collector: DataCollector,
-    prompts: dict[str, str],
+    output_dir: Path,
     model: str,
     max_steps: int,
-    headless: bool,
+    state_dir: str,
+    semaphore: asyncio.Semaphore,
     session_idx: int,
     total_sessions: int,
-    mode: str = "full",
 ) -> str:
-    """비동기 세션 실행."""
-    llm = ClaudeCli(model=model)
-    mode_tag = "" if mode == "full" else f"[{mode.upper()}]"
-    tag = f"[{session_idx}/{total_sessions}]{mode_tag} {persona.name} → {product_name}"
-    logger.info("%s 시작", tag)
+    """단일 페르소나 세션 실행."""
+    async with semaphore:
+        persona_id = persona_yaml.stem
+        session_id = f"{persona_id}_{product_name}_{uuid.uuid4().hex[:6]}"
+        tag = f"[{session_idx}/{total_sessions}] {persona_id} → {product_name}"
 
-    try:
-        async with PlaywrightCliEnv(
-            headless=headless,
-            screenshot_dir=collector.output_dir / "screenshots",
-        ) as env:
-            if mode == "naive":
-                raise NotImplementedError(
-                    "NaiveSessionRunner는 아직 async 미지원. "
-                    "mode='full'로 실행하거나 NaiveSessionRunner를 async로 전환 필요."
+        logger.info("%s 시작 (session_id=%s)", tag, session_id)
+        start = time.time()
+
+        try:
+            # 1. 세션 초기화
+            init_result = await _run_session_init(
+                persona_yaml, product_url, product_name, session_id, state_dir,
+            )
+            logger.info("%s 초기화 완료: %s (%s)", tag, init_result["persona_name"], init_result["segment"])
+
+            # 2. system prompt 생성
+            system_prompt = build_system_prompt(
+                persona_yaml_path=str(persona_yaml),
+                session_id=session_id,
+                product_url=product_url,
+                product_name=product_name,
+                engine_dir=str(ENGINE_DIR),
+                output_dir=str(output_dir),
+                state_dir=state_dir,
+                max_steps=max_steps,
+            )
+
+            # 3. system prompt를 임시 파일로 저장 (argv 길이 제한 회피)
+            prompt_file = tempfile.NamedTemporaryFile(
+                mode="w", suffix=".txt", prefix=f"shipcheck_{session_id}_",
+                delete=False,
+            )
+            prompt_file.write(system_prompt)
+            prompt_file.close()
+            prompt_path = prompt_file.name
+
+            try:
+                # max_turns: 스텝당 약 4턴 (snapshot + action + step_update + 사고)
+                max_turns = max_steps * 4
+                cmd = [
+                    "claude", "-p",
+                    "--model", model,
+                    "--system-prompt", f"$(cat {prompt_path})",
+                    "--allowedTools", "Bash",
+                    "--max-turns", str(max_turns),
+                    "--output-format", "json",
+                    "--permission-mode", "bypassPermissions",
+                ]
+
+                proc = await asyncio.create_subprocess_shell(
+                    " ".join(cmd),
+                    stdin=asyncio.subprocess.PIPE,
+                    stdout=asyncio.subprocess.PIPE,
+                    stderr=asyncio.subprocess.PIPE,
+                    cwd=str(ENGINE_DIR),
                 )
-            else:
-                runner = SessionRunner(
-                    profile=persona,
-                    browser_env=env,
-                    product_url=product_url,
-                    product_name=product_name,
-                    collector=collector,
-                    llm=llm,
-                    prompts=prompts,
-                    max_steps=max_steps,
+
+                # 초기 메시지
+                initial_msg = (
+                    f"{product_url}을 사용하십시오. "
+                    f"세션 ID: {session_id}. "
+                    f"playwright-cli open {product_url} 으로 시작하세요."
                 )
-                session_log = await runner.run()
-            return f"{tag} 완료 (steps={session_log.total_steps}, {session_log.terminated_by})"
-    except Exception as e:
-        logger.error("%s 실패: %s", tag, e)
-        return f"{tag} 실패: {e}"
+
+                stdout, stderr = await asyncio.wait_for(
+                    proc.communicate(input=initial_msg.encode()),
+                    timeout=600,  # 10분 타임아웃
+                )
+
+                elapsed = time.time() - start
+
+                if proc.returncode != 0:
+                    logger.error("%s 실패 (rc=%d): %s", tag, proc.returncode, stderr.decode()[:500])
+                    return f"{tag} 실패 (rc={proc.returncode}, {elapsed:.0f}s)"
+
+                logger.info("%s 완료 (%.0fs)", tag, elapsed)
+                return f"{tag} 완료 ({elapsed:.0f}s)"
+            finally:
+                os.unlink(prompt_path)
+
+        except asyncio.TimeoutError:
+            logger.error("%s 타임아웃 (10분)", tag)
+            return f"{tag} 타임아웃"
+        except Exception as e:
+            logger.error("%s 에러: %s", tag, e)
+            return f"{tag} 에러: {e}"
 
 
 class ExperimentRunner:
-    """실험 전체 실행. 병렬 지원."""
+    """실험 전체 실행. 페르소나별 claude -p subprocess 병렬 실행."""
 
     def __init__(self, config_path: Path) -> None:
         self.config = yaml.safe_load(config_path.read_text())
@@ -138,60 +170,57 @@ class ExperimentRunner:
 
     def run(self) -> Path:
         """실험 실행. output 디렉토리 경로 반환."""
+        return asyncio.run(self._run_async())
+
+    async def _run_async(self) -> Path:
         products = self.config["products"]
         max_steps = self.config.get("max_steps", 25)
         model = self.config.get("llm_model", "sonnet")
-        headless = self.config.get("headless", True)
         concurrency = self.config.get("concurrency", 2)
         persona_dir = Path(self.config["persona_dir"])
+        state_dir = self.config.get("state_dir", "/tmp")
 
-        # mode: "full" (파이프라인), "naive" (단일 콜), "ablation" (둘 다 실행)
-        mode = self.config.get("mode", "full")
+        persona_yamls = load_personas(persona_dir)
+        output_dir = Path("runs") / self.experiment_id
+        output_dir.mkdir(parents=True, exist_ok=True)
 
-        personas = load_personas(persona_dir)
-        prompts = load_prompts()
-        collector = DataCollector(self.experiment_id)
-
-        # 전체 세션 목록 생성: (persona, product_name, product_url, mode)
+        # 세션 목록: persona × product
         sessions = []
-        modes = ["full", "naive"] if mode == "ablation" else [mode]
-        for m in modes:
-            for product in products:
-                for persona in personas:
-                    sessions.append((persona, product["name"], product["url"], m))
+        for product in products:
+            for yaml_path in persona_yamls:
+                sessions.append((yaml_path, product["name"], product["url"]))
 
         total = len(sessions)
         logger.info(
-            "실험 시작: id=%s, personas=%d, products=%d, sessions=%d, concurrency=%d, mode=%s",
-            self.experiment_id, len(personas), len(products), total, concurrency, mode,
+            "실험 시작: id=%s, personas=%d, products=%d, sessions=%d, concurrency=%d",
+            self.experiment_id, len(persona_yamls), len(products), total, concurrency,
         )
         start = time.time()
 
         # 병렬 실행
-        completed = 0
-        with ThreadPoolExecutor(max_workers=concurrency) as pool:
-            futures = {}
-            for idx, (persona, prod_name, prod_url, m) in enumerate(sessions, 1):
-                f = pool.submit(
-                    _run_one_session,
-                    persona=persona,
-                    product_name=prod_name,
-                    product_url=prod_url,
-                    collector=collector,
-                    prompts=prompts,
-                    model=model,
-                    max_steps=max_steps,
-                    headless=headless,
-                    session_idx=idx,
-                    total_sessions=total,
-                    mode=m,
-                )
-                futures[f] = idx
+        semaphore = asyncio.Semaphore(concurrency)
+        tasks = [
+            _run_one_persona(
+                persona_yaml=yaml_path,
+                product_name=prod_name,
+                product_url=prod_url,
+                output_dir=output_dir,
+                model=model,
+                max_steps=max_steps,
+                state_dir=state_dir,
+                semaphore=semaphore,
+                session_idx=idx,
+                total_sessions=total,
+            )
+            for idx, (yaml_path, prod_name, prod_url) in enumerate(sessions, 1)
+        ]
 
-            for future in as_completed(futures):
-                completed += 1
-                result = future.result()
-                logger.info("(%d/%d 완료) %s", completed, total, result)
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        for r in results:
+            if isinstance(r, Exception):
+                logger.error("세션 예외: %s", r)
+            else:
+                logger.info(r)
 
         elapsed = time.time() - start
         logger.info(
@@ -200,22 +229,24 @@ class ExperimentRunner:
         )
 
         # ANOVA CSV
-        exporter = ANOVAExporter(collector.output_dir)
-        csv_path = exporter.export()
-        logger.info("ANOVA CSV: %s", csv_path)
+        try:
+            exporter = ANOVAExporter(output_dir)
+            csv_path = exporter.export()
+            logger.info("ANOVA CSV: %s", csv_path)
+        except Exception as e:
+            logger.warning("ANOVA CSV 생성 실패: %s", e)
 
         # 메타데이터
         meta = {
             "experiment_id": self.experiment_id,
-            "total_personas": len(personas),
+            "total_personas": len(persona_yamls),
             "total_products": len(products),
             "total_sessions": total,
             "concurrency": concurrency,
             "elapsed_seconds": elapsed,
             "config": self.config,
-            "stats": collector.stats,
         }
-        meta_path = collector.output_dir / "experiment.json"
+        meta_path = output_dir / "experiment.json"
         meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2, default=str))
 
-        return collector.output_dir
+        return output_dir
