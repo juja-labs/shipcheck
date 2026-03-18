@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<title>ShipCheck Live</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#333;border-radius:2px}
+body{font-family:'Noto Sans KR',sans-serif;background:#09090b;color:#e4e4e7;overflow-x:hidden}
+
+.header{padding:20px 24px 16px;border-bottom:1px solid #1c1c1e;position:sticky;top:0;background:#09090b;z-index:10}
+.header h1{font-size:15px;font-weight:400;color:#71717a;letter-spacing:0.5px}
+.header h1 b{color:#4ade80;font-weight:700}
+.header .stats{display:flex;gap:24px;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#52525b}
+.header .stats span{color:#a1a1aa}
+
+.columns{display:flex;height:calc(100vh - 80px);overflow-x:auto}
+.col{flex:0 0 20%;min-width:280px;border-right:1px solid #1c1c1e;display:flex;flex-direction:column}
+.col:last-child{border-right:none}
+
+.col-head{padding:12px 16px;border-bottom:1px solid #1c1c1e;background:#0f0f11;position:sticky;top:0}
+.col-head .name{font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
+.col-head .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.col-head .dot.running{background:#4ade80;box-shadow:0 0 6px #4ade80;animation:pulse 2s infinite}
+.col-head .dot.completed{background:#52525b}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.col-head .badge{font-size:10px;padding:1px 6px;border-radius:8px;font-weight:600;margin-left:auto}
+.badge.anxious{background:#451a03;color:#fdba74}
+.badge.intuitive{background:#172554;color:#93c5fd}
+.badge.tech_savvy{background:#052e16;color:#86efac}
+.badge.power_user{background:#2e1065;color:#c4b5fd}
+.badge.critical_vocal{background:#450a0a;color:#fca5a5}
+.badge.explorer{background:#422006;color:#fde68a}
+.badge.calm{background:#083344;color:#67e8f9}
+.badge.cautious_methodical{background:#27272a;color:#d4d4d8}
+.badge.tech_novice{background:#431407;color:#fed7aa}
+.col-head .sub{font-size:10px;color:#52525b;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.col-head .gauge{display:flex;gap:12px;margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:11px}
+.col-head .gauge .v{font-weight:600}
+.col-head .gauge .v.pos{color:#4ade80}.col-head .gauge .v.neg{color:#f87171}.col-head .gauge .v.neu{color:#a1a1aa}
+
+.chat{flex:1;overflow-y:auto;padding:12px 16px}
+.bubble{margin-bottom:10px;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+.bubble.text{background:#1c1c1e;border-radius:2px 10px 10px 10px;padding:10px 12px;font-size:12px;line-height:1.6;color:#d4d4d8}
+.bubble.action{font-family:'JetBrains Mono',monospace;font-size:11px;color:#4ade80;padding:4px 0;opacity:.9}
+.bubble.emotion{font-family:'JetBrains Mono',monospace;font-size:10px;background:#1a1a0a;border-left:2px solid #fbbf24;padding:4px 10px;border-radius:0 6px 6px 0;color:#fbbf24}
+.bubble.system{font-size:11px;color:#f87171;text-align:center;padding:6px 0;font-weight:600}
+</style></head><body>
+
+<div class="header">
+  <h1><b>ShipCheck</b> Live — 페르소나 분화 테스트</h1>
+  <div class="stats" id="stats"></div>
+</div>
+<div class="columns" id="cols"></div>
+
+<script>
+let prevLen = {};
+
+async function update() {
+  try {
+    const r = await fetch('/api/status');
+    const d = await r.json();
+    const entries = Object.entries(d);
+    if (!entries.length) return;
+
+    // stats
+    const running = entries.filter(([,v]) => v.status === 'running').length;
+    const done = entries.filter(([,v]) => v.status === 'completed').length;
+    const totalSteps = entries.reduce((s, [,v]) => (v.steps || []).length + s, 0);
+    document.getElementById('stats').innerHTML =
+      `<span>실행 중 <b style="color:#4ade80">${running}</b></span>` +
+      `<span>완료 <b style="color:#a1a1aa">${done}</b></span>` +
+      `<span>총 스텝 <b style="color:#a1a1aa">${totalSteps}</b></span>`;
+
+    // columns - 최초 1회만 구조 생성
+    const cols = document.getElementById('cols');
+    if (!cols.children.length) {
+      cols.innerHTML = entries.map(([id, c]) => `<div class="col" id="col-${id}">
+        <div class="col-head">
+          <div class="name"><span class="dot ${c.status}"></span>${c.name}<span class="badge ${c.segment}">${c.segment}</span></div>
+          <div class="sub">${c.occupation || ''}${c.age ? ' · ' + c.age + '세' : ''}</div>
+          <div class="gauge" id="gauge-${id}"></div>
+        </div>
+        <div class="chat" id="chat-${id}"></div>
+      </div>`).join('');
+    }
+
+    // 각 카드 업데이트
+    entries.forEach(([id, c]) => {
+      // dot
+      const dot = document.querySelector(`#col-${id} .dot`);
+      if (dot) dot.className = 'dot ' + c.status;
+
+      // gauge
+      const p = c.current_pleasure || 0;
+      const pc = p > 0.1 ? 'pos' : p < -0.1 ? 'neg' : 'neu';
+      const g = document.getElementById('gauge-' + id);
+      if (g) g.innerHTML = `P <span class="v ${pc}">${p >= 0 ? '+' : ''}${p.toFixed(2)}</span> · ` +
+        `step <span class="v">${c.current_step >= 0 ? c.current_step : '-'}</span> · ` +
+        `<span class="v">${c.current_emotion || '…'}</span>`;
+
+      // messages - append만 (전체 재렌더 안 함)
+      const chat = document.getElementById('chat-' + id);
+      const msgs = c.messages || [];
+      const prev = prevLen[id] || 0;
+      if (msgs.length > prev) {
+        for (let i = prev; i < msgs.length; i++) {
+          const m = msgs[i];
+          const el = document.createElement('div');
+          el.className = 'bubble ' + m.type;
+          el.textContent = m.content;
+          chat.appendChild(el);
+        }
+        chat.scrollTop = chat.scrollHeight;
+        prevLen[id] = msgs.length;
+      }
+    });
+  } catch(e) { console.error(e); }
+}
+
+setInterval(update, 1500);
+update();
+</script></body></html>
