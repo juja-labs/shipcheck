@@ -1,0 +1,10 @@
+# Dry run: 2명 × 1제품 × 5스텝
+experiment_id: "dryrun_001"
+persona_dir: "configs/personas/generated"
+products:
+  - name: "tally"
+    url: "https://tally.so"
+max_steps: 15
+headless: false
+concurrency: 1
+llm_model: "sonnet"

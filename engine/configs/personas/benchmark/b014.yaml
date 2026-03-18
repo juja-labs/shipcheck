@@ -1,0 +1,41 @@
+background_narrative: 'Derek teaches non-credit professional development courses at
+  a mid-sized community college in Lagos, Nigeria, where enrollment cycles are chaotic
+  — students sign up for the wrong course level, submit incomplete prerequisite info,
+  or register for time slots that conflict with their shift schedules. He''s loud,
+  opinionated, and quick to publicly complain on educator Facebook groups when a tool
+  wastes his time. His tech comfort level is practical but shallow: he can follow
+  step-by-step instructions but gets visibly frustrated the moment a UI doesn''t behave
+  the way he expects, and he has zero patience for reading documentation.'
+big_five:
+  agreeableness: 0.27
+  conscientiousness: 0.31
+  extraversion: 0.91
+  neuroticism: 0.44
+  openness: 0.53
+budget_sensitivity: very_high
+demographics:
+  age: 41
+  company_size: 1-50
+  occupation: Community College Course Instructor (Continuing Education)
+digital_literacy: 2
+jtbd:
+  primary_goal: Build a single registration form that automatically routes students
+    into the right course section based on their answers — e.g., if a student selects
+    'beginner' proficiency and 'evening only' availability, the form should show only
+    the relevant course options and hide irrelevant fields entirely, without requiring
+    Derek to manually filter submissions or follow up with dozens of correction emails
+    every cycle
+  prior_tools:
+  - Google Forms
+  success_criterion: After one enrollment cycle (roughly 2 weeks), Derek receives
+    zero 'I signed up for the wrong thing' emails and spends less than 30 minutes
+    total reviewing submissions — down from the 3+ hours he currently loses untangling
+    Google Forms responses in a spreadsheet
+  willingness_to_pay: 0.13
+name: Derek O.
+persona_id: b014
+prior_tools_detail:
+- Google Forms
+role_id: educator_nonprofit
+segment: critical_vocal
+use_context: 학생/학부모 설문조사

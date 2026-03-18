@@ -1,0 +1,30 @@
+background_narrative: 암스테르담 출신으로 현재 베를린 소재 소규모 데이터 인프라 스타트업에서 일한다. 팀 내 유일한 백엔드 엔지니어로,
+  고객사 데이터를 수집·정제·전달하는 파이프라인을 혼자 설계하고 유지한다. 문서화와 자동화에 집착에 가까운 기준을 갖고 있으며, '내가 직접 만들면
+  확실하다'는 믿음이 강해 외부 툴에 회의적이지만, 기술적으로 설계가 탄탄하다고 판단하면 빠르게 수용한다.
+big_five:
+  agreeableness: 0.3
+  conscientiousness: 0.83
+  extraversion: 0.46
+  neuroticism: 0.17
+  openness: 0.94
+budget_sensitivity: low
+demographics:
+  age: 31
+  company_size: 11-50
+  occupation: Backend Engineer (Full-Stack 겸직, 11인 B2B 데이터 스타트업)
+digital_literacy: 3
+jtbd:
+  primary_goal: 고객사 운영팀이 제출하는 데이터(온보딩 정보, 파라미터 설정값, 이벤트 트리거 조건 등)를 폼으로 수집하되, 제출 즉시
+    웹훅으로 내부 ETL 파이프라인에 자동 공급되어야 한다. 수작업 CSV 내보내기나 중간 스크립트 없이 폼 → 파이프라인이 직결되는 구조를 원한다.
+  prior_tools:
+  - custom code
+  success_criterion: 폼 제출 후 3초 이내에 웹훅 페이로드가 파이프라인 수신 엔드포인트에 도달하고, 필드 스키마가 API 응답 구조와
+    일치하여 추가 변환 코드 없이 바로 DB 적재가 가능한 상태. 조건부 필드(분기 로직)도 웹훅 페이로드에 그대로 반영될 것.
+  willingness_to_pay: 0.64
+name: Arjan V.
+persona_id: b020
+prior_tools_detail:
+- custom code
+role_id: tech_professional
+segment: power_user
+use_context: 데이터 파이프라인 입력 폼

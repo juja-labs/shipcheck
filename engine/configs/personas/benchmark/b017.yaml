@@ -1,0 +1,31 @@
+background_narrative: 런던 동부에서 야외 부트캠프 클래스와 6주 피트니스 챌린지를 혼자 운영하며, Instagram과 WhatsApp
+  그룹으로 60~90명 규모의 커뮤니티를 직접 관리한다. 앱이나 웹 도구는 곧잘 다루지만 설정에 30분 이상 쓰는 건 참지 못하고, 결과물이 마음에
+  안 들면 미련 없이 갈아탄다. 수익 대부분이 월 단위 챌린지 등록비로 들어오다 보니 도구 유료 전환엔 극도로 인색하고, 폼 링크 하나를 공유할
+  때도 '이게 프로처럼 보이냐'를 먼저 따진다.
+big_five:
+  agreeableness: 0.16
+  conscientiousness: 0.35
+  extraversion: 0.71
+  neuroticism: 0.7
+  openness: 0.68
+budget_sensitivity: very_high
+demographics:
+  age: 34
+  company_size: 1-10
+  occupation: Fitness Coach (야외 부트캠프 & 챌린지 프로그램 독립 운영)
+digital_literacy: 3
+jtbd:
+  primary_goal: 다음 달 킥오프하는 6주 바디 트랜스포메이션 챌린지 참가 신청을 받기 위해, 이름·전화번호·경험 수준·결제 완료 여부를
+    수집하는 등록 폼을 만들어 Instagram Stories 링크와 WhatsApp 그룹 메시지로 즉시 공유하고 싶다
+  prior_tools:
+  - Google Forms
+  success_criterion: 폼 첫 화면 접속부터 공유 가능한 링크 생성까지 30분 이내 완료, 챌린지 시작 전까지 최소 20건 신청 접수
+    확인
+  willingness_to_pay: 0.18
+name: Tariq B.
+persona_id: b017
+prior_tools_detail:
+- Google Forms
+role_id: small_biz_operator
+segment: critical_vocal
+use_context: 예약/등록 폼

@@ -1,0 +1,38 @@
+background_narrative: 'Camila launched a small HR consulting firm 18 months ago with
+  a college friend — she handles biz dev and ops while her co-founder manages client
+  delivery. She''s a gut-feel operator: if a tool takes more than 20 minutes to figure
+  out, she closes the tab and falls back on whatever she used before. Her Notion workspace
+  has 40+ half-finished pages, her inbox is her to-do list, and she''s sent three
+  separate ''we need a proper system'' WhatsApp messages to her co-founder this month
+  without following up on any of them.'
+big_five:
+  agreeableness: 0.53
+  conscientiousness: 0.18
+  extraversion: 0.41
+  neuroticism: 0.36
+  openness: 0.24
+budget_sensitivity: high
+demographics:
+  age: 33
+  company_size: 1-10
+  occupation: Co-founder & CEO, B2B HR Consulting Startup (Mexico City)
+digital_literacy: 3
+jtbd:
+  primary_goal: 스타트업 웹사이트에 리드 수집 폼을 이번 주 안에 올려서, 잠재 고객이 사이트를 방문했을 때 이름·이메일·회사 규모·니즈를
+    남길 수 있는 명확한 CTA를 만들고 싶다. 개발자 친구한테 부탁하지 않고 본인이 직접 임베드할 수 있어야 한다.
+  prior_tools:
+  - SurveyMonkey
+  - Google Forms
+  - Typeform
+  success_criterion: 설정을 시작한 날 안에 폼이 웹사이트에 실제로 떠 있고, 누군가 제출하면 이메일 알림이 오는 것을 직접 확인.
+    제출 데이터가 어디 있는지 10초 안에 찾을 수 있으면 성공.
+  willingness_to_pay: 0.23
+name: Camila R.
+persona_id: b005
+prior_tools_detail:
+- SurveyMonkey
+- Google Forms
+- Typeform
+role_id: startup_founder
+segment: intuitive
+use_context: 리드 캡처 및 고객 피드백 수집

@@ -1,0 +1,4 @@
+[     288ms] ReferenceError: ex is not defined
+    at http://localhost:8769/report-screens-v4.html:2012:26
+    at http://localhost:8769/report-screens-v4.html:2017:5
+[     871ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8769/favicon.ico:0

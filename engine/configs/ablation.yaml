@@ -1,0 +1,12 @@
+# Ablation 테스트: 같은 페르소나 × full pipeline vs naive (단일 콜)
+# 동일 2명 × 2조건 × Tally = 4세션
+experiment_id: "ablation_001"
+persona_dir: "configs/personas/generated"
+mode: "ablation"  # "full", "naive", "ablation" (둘 다)
+products:
+  - name: "tally"
+    url: "https://tally.so"
+max_steps: 10
+headless: false
+concurrency: 2
+llm_model: "sonnet"

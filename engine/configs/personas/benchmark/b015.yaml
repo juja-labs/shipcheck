@@ -1,0 +1,31 @@
+background_narrative: Marcus는 마이애미에서 야외 그룹 부트캠프와 HIIT 세션을 운영하며, 20~30명 규모의 단골 클라이언트
+  커뮤니티를 Instagram Stories와 WhatsApp 단체방으로 관리한다. 스마트폰과 웹 도구를 충분히 다룰 수 있지만 계획을 세우기보다는
+  직감적으로 결정하는 편이라, 등록 취합이나 참석자 관리 같은 행정 작업은 늘 마지막 순간으로 미뤄진다. 클라이언트들과 직접 몸으로 부대끼는 걸
+  좋아하고 에너지가 넘치는 반면, 스프레드시트 앞에 앉아 있는 시간은 최대한 줄이고 싶어 한다.
+big_five:
+  agreeableness: 0.63
+  conscientiousness: 0.26
+  extraversion: 0.62
+  neuroticism: 0.33
+  openness: 0.17
+budget_sensitivity: very_high
+demographics:
+  age: 36
+  company_size: 1-10
+  occupation: Fitness Coach (야외 부트캠프 & 그룹 HIIT 강사)
+digital_literacy: 3
+jtbd:
+  primary_goal: 6주짜리 야외 부트캠프 프로그램 개강 전에 참가 등록 폼을 만들어 WhatsApp 링크로 바로 공유하고 싶다 — 폼이
+    모바일에서 깔끔하게 열리고, 이름·연락처·참가 여부 정도만 받을 수 있으면 충분하다. 앱 설치 없이 링크 하나로 끝나야 한다.
+  prior_tools:
+  - Google Forms
+  success_criterion: 폼 만들겠다고 마음먹은 날 당일 20분 안에 링크를 완성해서 단체방에 뿌릴 수 있어야 하고, 첫 세션 전날까지
+    10명 이상의 확정 응답이 들어오면 성공으로 본다.
+  willingness_to_pay: 0.01
+name: Marcus T.
+persona_id: b015
+prior_tools_detail:
+- Google Forms
+role_id: small_biz_operator
+segment: intuitive
+use_context: 내부 피드백 수집

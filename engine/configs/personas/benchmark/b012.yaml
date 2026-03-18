@@ -1,0 +1,31 @@
+background_narrative: Nadia는 로테르담에서 혼자 운영하는 온라인 마인드셋 코칭 비즈니스로, 번아웃을 겪는 중간 관리자들을 타겟으로
+  한다. 이메일 뉴스레터·Canva·소셜 예약 툴 정도가 그녀의 '안전한 도구 스택'이고, 새 툴을 온보딩할 때는 처음 몇 단계가 조금만 불분명해도
+  '내가 뭔가 망치고 있는 건 아닐까' 불안이 치솟아 절반쯤에서 탭을 닫는 패턴이 반복된다. 클라이언트 파이프라인 전부를 인스타그램에서 홍보하는
+  리드 퀴즈 하나에 의존하다 보니, 그 퀴즈가 '충분히 프리미엄해 보이는가'를 지속적으로 걱정하며 같은 랜딩 페이지를 몇 번이고 다시 들여다본다.
+big_five:
+  agreeableness: 0.5
+  conscientiousness: 0.58
+  extraversion: 0.37
+  neuroticism: 0.87
+  openness: 0.35
+budget_sensitivity: high
+demographics:
+  age: 41
+  company_size: 1-5
+  occupation: Freelance Mindset Coach (solopreneur, Netherlands)
+digital_literacy: 2
+jtbd:
+  primary_goal: 내 코칭 브랜드 컬러·폰트·말투와 정확히 맞아떨어지는 리드 마그넷 퀴즈를 — 설정 도중 '내가 틀리게 하고 있는 건 아닐까'
+    하는 불안 없이 — 혼자 완성해서, 인스타 팔로워를 이메일 리스트로 전환하고 싶다
+  prior_tools:
+  - Typeform
+  success_criterion: 퀴즈를 3일 안에 단독으로 완성하고, 2주 내 이메일 구독자 50명 이상이 결과 페이지까지 완료하며, 지인에게
+    링크를 보냈을 때 '전문 디자이너가 만든 것 같다'는 반응이 나오는 것
+  willingness_to_pay: 0.29
+name: Nadia R.
+persona_id: b012
+prior_tools_detail:
+- Typeform
+role_id: creative_freelancer
+segment: anxious
+use_context: 리드 마그넷 (퀴즈, 스코어카드)

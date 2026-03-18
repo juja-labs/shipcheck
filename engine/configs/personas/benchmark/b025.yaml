@@ -1,0 +1,37 @@
+background_narrative: 우크라이나 출신으로 독일 뮌헨에 정착해 저소득 이주민 아동 대상 방과후 교육 프로그램을 운영 중이다. 업무의
+  절반은 보조금 신청서 작성과 학부모 소통인데, Excel과 Google 도구 정도는 쓰지만 새 서비스를 익히는 데 시간이 걸리고 '내가 잘못 설정한
+  건 아닐까' 하는 걱정이 늘 앞선다. 연간 운영 예산이 빠듯해 유료 도구 구독은 이사회 승인이 필요한 구조라 개인 카드로도, 조직 예산으로도 SaaS
+  비용을 쓰는 것 자체가 심리적 장벽이다.
+big_five:
+  agreeableness: 0.54
+  conscientiousness: 0.5
+  extraversion: 0.46
+  neuroticism: 0.8
+  openness: 0.43
+budget_sensitivity: very_high
+demographics:
+  age: 38
+  company_size: 1-50
+  occupation: After-School Program Coordinator, small educational NGO (직원 12명)
+digital_literacy: 2
+jtbd:
+  primary_goal: 학부모·학생 대상 만족도 설문을 후원 기관에 보여줘도 부끄럽지 않을 만큼 보기 좋게 만들고 싶다 — Google Forms의
+    밋밋한 기본 레이아웃 때문에 '대충 만든 것처럼 보인다'는 피드백을 받은 적이 있어서, 폼 자체가 조직의 전문성을 떨어뜨리지 않았으면 한다.
+    단, 무료 플랜에서 모든 기능이 해결되어야 하고, 설정 과정에서 실수할 여지가 적어야 한다.
+  prior_tools:
+  - Microsoft Forms
+  - Google Forms
+  - 네이버 폼
+  success_criterion: ① 설문 링크를 처음 열었을 때 학부모가 '이거 신뢰할 수 있는 곳에서 보낸 거구나'라고 느낄 만한 레이아웃
+    완성 (로고·색상 적용 포함), ② 조건부 질문(독일어·아랍어 언어 선택 → 해당 언어 문항 표시) 무료로 구현, ③ 혼자서 30분 이내에
+    설문 초안 완성 — 도중에 막혀서 YouTube 튜토리얼을 찾아야 하면 실패로 간주
+  willingness_to_pay: 0.01
+name: Elena K.
+persona_id: b025
+prior_tools_detail:
+- Microsoft Forms
+- Google Forms
+- 네이버 폼
+role_id: educator_nonprofit
+segment: anxious
+use_context: 학생/학부모 설문조사

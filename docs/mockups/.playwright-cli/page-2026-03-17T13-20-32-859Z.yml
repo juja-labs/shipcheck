@@ -1,0 +1,181 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: S
+      - text: ShipCheck
+    - generic [ref=e6]:
+      - generic [ref=e7]: 워크스페이스
+      - generic [ref=e8] [cursor=pointer]:
+        - generic [ref=e9]: ◻
+        - text: 대시보드
+      - generic [ref=e10] [cursor=pointer]:
+        - generic [ref=e11]: ▶
+        - text: 시뮬레이션
+        - generic [ref=e12]: "30"
+      - generic [ref=e13] [cursor=pointer]:
+        - generic [ref=e14]: ◉
+        - text: 페르소나
+        - generic [ref=e15]: "30"
+      - generic [ref=e16] [cursor=pointer]:
+        - generic [ref=e17]: ◧
+        - text: 리포트
+    - generic [ref=e18]:
+      - generic [ref=e19]: 세그먼트
+      - generic [ref=e20] [cursor=pointer]:
+        - generic [ref=e21]: ●
+        - text: 코어
+        - generic [ref=e22]: "12"
+      - generic [ref=e23] [cursor=pointer]:
+        - generic [ref=e24]: ●
+        - text: 엣지
+        - generic [ref=e25]: "12"
+      - generic [ref=e26] [cursor=pointer]:
+        - generic [ref=e27]: ●
+        - text: 와일드카드
+        - generic [ref=e28]: "6"
+    - generic [ref=e29]:
+      - generic [ref=e30]: TaskFlow v1.2
+      - generic [ref=e31]: 스테이징 · 2026.03.15 실행
+  - generic [ref=e32]:
+    - generic [ref=e33]:
+      - generic [ref=e34] [cursor=pointer]: 시뮬레이션 뷰
+      - generic [ref=e35] [cursor=pointer]: 페르소나 인터뷰
+      - generic [ref=e36] [cursor=pointer]: 리포트 요약
+      - generic [ref=e37] [cursor=pointer]: 설문 결과
+      - generic [ref=e38] [cursor=pointer]: 감정 궤적
+      - generic [ref=e40]: 조건부 출시
+    - generic [ref=e43]:
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - text: Action Trace
+          - generic [ref=e46]: 6 actions
+        - generic [ref=e47]:
+          - generic [ref=e48] [cursor=pointer]:
+            - generic [ref=e49]:
+              - generic [ref=e50]: 14:23:01
+              - generic [ref=e51]: goto
+              - generic [ref=e52]: 😐
+            - generic [ref=e53]: landing_page
+            - generic [ref=e54]: TaskFlow 랜딩 페이지 도착. 히어로 섹션 스캔 시작.
+          - generic [ref=e55] [cursor=pointer]:
+            - generic [ref=e56]:
+              - generic [ref=e57]: 14:24:18
+              - generic [ref=e58]: click
+              - generic [ref=e59]: 😐
+            - generic [ref=e60]: signup_button
+            - generic [ref=e61]: "\"무료로 시작하기\" 클릭. 소셜 로그인이 없어서 살짝 귀찮음."
+          - generic [ref=e62] [cursor=pointer]:
+            - generic [ref=e63]:
+              - generic [ref=e64]: 14:25:44
+              - generic [ref=e65]: fill
+              - generic [ref=e66]: 😐
+            - generic [ref=e67]: profile_form
+            - generic [ref=e68]: 이름, 직업 입력. 여기까진 익숙한 화면이라 무난하게 진행.
+          - generic [ref=e69] [cursor=pointer]:
+            - generic [ref=e70]:
+              - generic [ref=e71]: 14:26:32
+              - generic [ref=e72]: select
+              - generic [ref=e73]: 😕
+            - generic [ref=e74]: work_type_dropdown
+            - generic [ref=e75]: 업무 유형 목록에서 "번역"을 찾지 못함. 당황하기 시작.
+          - generic [ref=e76] [cursor=pointer]:
+            - generic [ref=e77]:
+              - generic [ref=e78]: 14:28:13
+              - generic [ref=e79]: scan
+              - generic [ref=e80]: 😤
+            - generic [ref=e81]: template_selection
+            - generic [ref=e82]: 템플릿 6개를 훑어봤지만 전부 모르는 용어. 뭘 골라야 할지 전혀 감이 안 잡힘.
+          - generic [ref=e83] [cursor=pointer]:
+            - generic [ref=e84]:
+              - generic [ref=e85]: 14:28:41
+              - generic [ref=e86]: exit
+              - generic [ref=e87]: 😠
+            - generic [ref=e88]: browser_tab_close
+            - generic [ref=e89]: "\"이건 내가 쓸 수 있는 도구가 아니다\" — 포기하고 탭을 닫음."
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - generic [ref=e97]: taskflow.app/onboarding/step3
+          - generic [ref=e98]:
+            - generic [ref=e99]: 프로젝트 템플릿을 선택하세요
+            - generic [ref=e100]: 업무 스타일에 맞는 템플릿으로 시작하면 더 빠르게 셋업할 수 있어요.
+            - generic [ref=e101]:
+              - generic [ref=e102] [cursor=pointer]:
+                - generic [ref=e103]: 이해 불가
+                - generic [ref=e104]: 📋
+                - generic [ref=e105]: 칸반 보드
+                - generic [ref=e106]: 팀 프로젝트 관리
+              - generic [ref=e107] [cursor=pointer]:
+                - generic [ref=e108]: 미지 용어
+                - generic [ref=e109]: 📊
+                - generic [ref=e110]: 간트 차트
+                - generic [ref=e111]: 장기 프로젝트 일정
+              - generic [ref=e112] [cursor=pointer]:
+                - generic [ref=e113]: 미지 용어
+                - generic [ref=e114]: 🏃
+                - generic [ref=e115]: 스프린트
+                - generic [ref=e116]: 애자일 소프트웨어 개발
+              - generic [ref=e117] [cursor=pointer]:
+                - generic [ref=e118]: 📝
+                - generic [ref=e119]: 콘텐츠 달력
+                - generic [ref=e120]: 마케팅/SNS 운영
+              - generic [ref=e121] [cursor=pointer]:
+                - generic [ref=e122]: ✅
+                - generic [ref=e123]: 업무 목록
+                - generic [ref=e124]: 개인 생산성
+              - generic [ref=e125] [cursor=pointer]:
+                - generic [ref=e126]: ➕
+                - generic [ref=e127]: 빈 프로젝트
+                - generic [ref=e128]: 직접 구성
+            - generic [ref=e129]:
+              - generic [ref=e130]: 건너뛰기
+              - generic [ref=e131]: 다음 →
+        - generic [ref=e132]:
+          - generic [ref=e133]: 순
+          - generic [ref=e134]:
+            - generic [ref=e135]: 김순자 · 52세 번역가
+            - generic [ref=e136]: 와일드카드 세그먼트 · 기술 숙련도 매우 낮음
+          - generic [ref=e137]:
+            - generic [ref=e138]: 😤 좌절
+            - generic [ref=e139]: 용어를 몰라 답답한 상태
+      - generic [ref=e140]:
+        - generic [ref=e141]: 페르소나의 머릿속
+        - generic [ref=e142]:
+          - generic [ref=e143]: 😤
+          - generic [ref=e144]: 좌절
+          - generic [ref=e145]: "\"칸반? 스프린트? 이게 다 뭐야... 번역하는 사람한테 맞는 건 하나도 없잖아. 그냥 나가자.\""
+        - generic [ref=e146]:
+          - generic [ref=e147]: 지금 상황
+          - generic [ref=e148]:
+            - generic [ref=e149]: 혼란 원인
+            - generic [ref=e150]: 모르는 IT 용어가 3개 연속 나옴 (칸반, 간트, 스프린트). 어디를 눌러야 할지 감이 안 잡힘.
+          - generic [ref=e151]:
+            - generic [ref=e152]: 혼란 수준
+            - generic [ref=e156]: 매우 높음
+        - generic [ref=e157]:
+          - generic [ref=e158]: 의지 vs 능력
+          - generic [ref=e159]:
+            - generic [ref=e160]: 하고 싶은 것
+            - generic [ref=e161]: "\"번역 마감 일정을 체계적으로 관리하고 싶다\""
+          - generic [ref=e162]:
+            - generic [ref=e163]: 막히는 것
+            - generic [ref=e164]: 용어를 몰라서 다음 단계로 못 넘어감. 방법은 모르겠고, 의지만 있는 상태.
+          - generic [ref=e165]: 의지는 있지만 → 방법을 몰라서 포기
+        - generic [ref=e166]:
+          - generic [ref=e167]: 결론
+          - generic [ref=e168]:
+            - generic [ref=e169]: 이 사람이 내린 판단
+            - generic [ref=e170]: "\"이 도구는 개발자용이다. 나한테는 안 맞는다.\""
+          - generic [ref=e171]:
+            - generic [ref=e172]: 다음 행동
+            - generic [ref=e173]: 브라우저 탭 닫음 → 익숙한 엑셀로 복귀
+        - generic [ref=e174]:
+          - generic [ref=e175]: 기억에 남은 것
+          - generic [ref=e176]:
+            - generic [ref=e177]: 👀 발견
+            - generic [ref=e178]: 템플릿 6개가 전부 IT 용어. 번역/출판 옵션이 없음.
+          - generic [ref=e179]:
+            - generic [ref=e180]: 💭 생각
+            - generic [ref=e181]: 이 도구는 개발자나 마케터를 위한 것이다. 번역가인 나에게는 맞지 않는다.
+          - generic [ref=e182]:
+            - generic [ref=e183]: 👀 발견
+            - generic [ref=e184]: 비밀번호 규칙이 복잡하고 소셜 로그인이 없었다.

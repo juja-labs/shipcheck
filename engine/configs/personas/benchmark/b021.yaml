@@ -1,0 +1,35 @@
+background_narrative: 서울 외곽의 소규모 다문화 교육센터에서 이주민 대상 한국어 생활교육 및 분기별 지역 워크숍을 운영한다. 행정
+  업무는 '한 번 써봤고 크게 불편하지 않았던 툴'로 처리하는 편이며, 구글 폼이 불편해도 익숙하다는 이유만으로 수년째 쓰고 있다. 새 소프트웨어를
+  열어봤다가 처음 화면이 복잡해 보이면 즉시 닫고 동료에게 '이거 써봤어요?'라고 묻는 타입으로, 도구 선택의 90%가 주변 추천과 첫인상에서 결정된다.
+big_five:
+  agreeableness: 0.46
+  conscientiousness: 0.27
+  extraversion: 0.57
+  neuroticism: 0.54
+  openness: 0.23
+budget_sensitivity: very_high
+demographics:
+  age: 42
+  company_size: 1-50
+  occupation: Community Education Coordinator, 소규모 비영리 다문화교육센터
+digital_literacy: 2
+jtbd:
+  primary_goal: 분기별 지역 교육 이벤트(워크숍·특강) 참가 신청을 온라인으로 받고, 행사 당일 종료 직후 참가자 30~50명에게 만족도
+    설문 링크를 카카오톡 단체방에 공유해 당일 안에 응답을 취합하고 싶다. 결과는 보조금 보고서에 첨부해야 하므로 엑셀 다운로드가 필수이며, 예산은
+    단 한 푼도 집행할 수 없다
+  prior_tools:
+  - 네이버 폼
+  - Google Forms
+  - Microsoft Forms
+  success_criterion: 설문 링크를 카카오톡으로 공유한 날 10분 안에 첫 응답이 들어오고 3일 내 응답률 60% 이상 확보. 결과를
+    엑셀로 내려받아 보고서 표에 붙이는 전체 과정이 30분 이내에 끝나야 '잘 됐다'고 느낀다
+  willingness_to_pay: 0.19
+name: Sandra Y.
+persona_id: b021
+prior_tools_detail:
+- 네이버 폼
+- Google Forms
+- Microsoft Forms
+role_id: educator_nonprofit
+segment: intuitive
+use_context: 이벤트 참가 등록

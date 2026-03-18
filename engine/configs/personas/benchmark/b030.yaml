@@ -1,0 +1,42 @@
+background_narrative: Derek works at a 30-person B2B SaaS startup in Amsterdam where
+  he wears multiple hats — shipping product features by day and maintaining the internal
+  tooling stack by night. He's blunt in Slack, opinionated in code reviews, and has
+  a low tolerance for tools that look pretty but break under real-world conditions.
+  He's been burned before by form builders that couldn't handle branching logic beyond
+  two levels, and he keeps a running Notion doc of "tools we tried and why we ditched
+  them."
+big_five:
+  agreeableness: 0.29
+  conscientiousness: 0.55
+  extraversion: 0.93
+  neuroticism: 0.64
+  openness: 0.43
+budget_sensitivity: low
+demographics:
+  age: 34
+  company_size: 11-50
+  occupation: Software Engineer (Full-Stack, doubled as internal tools lead)
+digital_literacy: 3
+jtbd:
+  primary_goal: 현재 팀이 사용 중인 폼 빌더를 대체할 수 있는지, 세 가지 핵심
+    유즈케이스로 검증한다 — (1) 고객 서포트 인테이크 폼(6단계 조건 분기),
+    (2) 제출 시 웹훅으로 Airtable에 라우팅하고 Slack 채널에 핑하는 파이프라인,
+    (3) 파일 업로드가 포함된 내부 버그 리포트 폼. 조건 분기가 다중 변수 의존성을
+    처리하는지(단순 if/else가 아닌), 웹훅 페이로드가 미들웨어 레이어 없이
+    파싱 가능할 만큼 깔끔한지 확인해야 한다.
+  prior_tools:
+  - JotForm
+  - Airtable
+  success_criterion: '오후 반나절 테스트 안에: (1) 기존 조건 분기 플로우를 워크어라운드
+    없이 그대로 재현, (2) 테스트 엔드포인트에 웹훅이 정확히 발화하고 JSON 페이로드가
+    기대 스키마와 일치, (3) Airtable 동기화 시 필드가 1:1 매핑되어 수동 컬럼
+    리매핑 불필요. 세 가지 모두 통과하면 같은 주에 팀에 마이그레이션 제안.'
+  willingness_to_pay: 0.79
+name: Derek V.
+persona_id: b030
+prior_tools_detail:
+- JotForm
+- Airtable
+role_id: tech_professional
+segment: critical_vocal
+use_context: 서포트 티켓 수집 및 웹훅 연동

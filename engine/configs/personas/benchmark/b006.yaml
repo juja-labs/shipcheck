@@ -1,0 +1,33 @@
+background_narrative: 호주 멜버른에서 소규모 비즈니스 창업자와 코치들을 대상으로 브랜드 포토그래피를 하는 1인 프리랜서다. 인스타그램과
+  오프라인 네트워킹으로 클라이언트를 유치하며, 직설적이고 에너지 넘치는 성격 덕에 입소문은 빠르지만 예산 맞지 않는 문의가 많아 통화 낭비가 잦다.
+  Canva로 견적서와 패키지 안내자료를 만들고, Google Forms로 문의를 받고 있지만 폼 디자인이 촌스럽다는 걸 알면서도 개선할 기술적
+  여유나 지식이 없어 불만이 쌓여 있다.
+big_five:
+  agreeableness: 0.25
+  conscientiousness: 0.5
+  extraversion: 0.84
+  neuroticism: 0.6
+  openness: 0.49
+budget_sensitivity: high
+demographics:
+  age: 33
+  company_size: 1-5
+  occupation: Brand Photographer (1인 프리랜서)
+digital_literacy: 2
+jtbd:
+  primary_goal: 신규 클라이언트가 포토그래피 의뢰 전 프로젝트 목적, 예산 범위, 촬영 일정, 스타일 레퍼런스를 사전 제출하는 인테이크
+    폼을 만들어 웹사이트에 바로 임베드하고, 디스커버리 콜 전 예산 미스매치 리드를 걸러내고 싶다
+  prior_tools:
+  - Google Forms
+  - Canva
+  success_criterion: 코딩 없이 1~2시간 내에 폼 완성 후 웹사이트에 삽입, 이후 신규 문의의 대부분이 예산·일정 정보를 사전 제출해서
+    '예산이 얼마예요?' 질문 없이 콜을 시작할 수 있는 상태
+  willingness_to_pay: 0.16
+name: Jade M.
+persona_id: b006
+prior_tools_detail:
+- Google Forms
+- Canva
+role_id: creative_freelancer
+segment: critical_vocal
+use_context: 클라이언트 프로젝트 브리프

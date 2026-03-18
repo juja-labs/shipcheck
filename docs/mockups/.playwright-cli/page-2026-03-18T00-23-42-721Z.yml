@@ -1,0 +1,182 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: S
+      - text: ShipCheck
+    - generic [ref=e6]:
+      - generic [ref=e7]: 워크스페이스
+      - generic [ref=e8] [cursor=pointer]:
+        - generic [ref=e9]: ◻
+        - text: 대시보드
+      - generic [ref=e10] [cursor=pointer]:
+        - generic [ref=e11]: ▶
+        - text: 시뮬레이션
+        - generic [ref=e12]: "19"
+      - generic [ref=e13] [cursor=pointer]:
+        - generic [ref=e14]: ◉
+        - text: 페르소나
+        - generic [ref=e15]: "19"
+      - generic [ref=e16] [cursor=pointer]:
+        - generic [ref=e17]: ◧
+        - text: 리포트
+    - generic [ref=e18]:
+      - generic [ref=e19]: 세그먼트
+      - generic [ref=e20] [cursor=pointer]:
+        - generic [ref=e21]: ●
+        - text: 박서연
+        - generic [ref=e22]: "1"
+      - generic [ref=e23] [cursor=pointer]:
+        - generic [ref=e24]: ●
+        - text: 김도현
+        - generic [ref=e25]: "1"
+      - generic [ref=e26] [cursor=pointer]:
+        - generic [ref=e27]: ●
+        - text: 불안형
+        - generic [ref=e28]: /span>
+    - generic [ref=e29]:
+      - generic [ref=e30]: tally.so
+      - generic [ref=e31]: 프로덕션 · 2026.03.15 실행
+  - generic [ref=e32]:
+    - generic [ref=e33]:
+      - generic [ref=e34] [cursor=pointer]: 시뮬레이션 뷰
+      - generic [ref=e35] [cursor=pointer]: 페르소나 인터뷰
+      - generic [ref=e36] [cursor=pointer]: 리포트 요약
+      - generic [ref=e37] [cursor=pointer]: 설문 결과
+      - generic [ref=e38] [cursor=pointer]: 감정 궤적
+      - generic [ref=e39] [cursor=pointer]: 커뮤니티 반응
+      - generic [ref=e41]: 조건부 출시
+    - generic [ref=e44]:
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - text: Action Trace
+          - generic [ref=e47]: 6 actions
+        - generic [ref=e48]:
+          - generic [ref=e49] [cursor=pointer]:
+            - generic [ref=e50]:
+              - generic [ref=e51]: 14:23:01
+              - generic [ref=e52]: click
+              - generic [ref=e53]: 😐
+            - generic [ref=e54]: "\"Create a free form\" 버튼"
+            - generic [ref=e55]: 전부 영어... 한국어가 하나도 없네. 이거 한국에서 쓰는 도구가 맞나?
+          - generic [ref=e56] [cursor=pointer]:
+            - generic [ref=e57]:
+              - generic [ref=e58]: 14:24:18
+              - generic [ref=e59]: click
+              - generic [ref=e60]: 😟
+            - generic [ref=e61]: "\"Use a template\" 버튼"
+            - generic [ref=e62]: 뭘 해야 할지 모르겠다. 구글 폼은 한국어로 다 나왔고 버튼이 뭔지 알겠었는데...
+          - generic [ref=e63] [cursor=pointer]:
+            - generic [ref=e64]:
+              - generic [ref=e65]: 14:25:44
+              - generic [ref=e66]: scroll
+              - generic [ref=e67]: 😰
+            - generic [ref=e68]: 템플릿 목록 탐색
+            - generic [ref=e69]: Registration form, Lead generation form... 이게 다 뭐지? 학부모 설문이랑 관련 있는 게 하나도 안 보인다.
+          - generic [ref=e70] [cursor=pointer]:
+            - generic [ref=e71]:
+              - generic [ref=e72]: 14:26:32
+              - generic [ref=e73]: click
+              - generic [ref=e74]: 😰
+            - generic [ref=e75]: Customer Satisfaction Survey
+            - generic [ref=e76]: "\"고객 만족도\"가 학부모 설문이랑 같은 건지 확신이 안 드는데... 일단 눌러보자."
+          - generic [ref=e77] [cursor=pointer]:
+            - generic [ref=e78]:
+              - generic [ref=e79]: 14:28:13
+              - generic [ref=e80]: click
+              - generic [ref=e81]: 😕
+            - generic [ref=e82]: Preview 버튼
+            - generic [ref=e83]: 내용이 전부 이탤릭체 영어. 편집 화면인지 미리보기인지 모르겠다. Sign up이 또 보여서 불안.
+          - generic [ref=e84] [cursor=pointer]:
+            - generic [ref=e85]:
+              - generic [ref=e86]: 14:28:41
+              - generic [ref=e87]: exit
+              - generic [ref=e88]: 😠
+            - generic [ref=e89]: 브라우저 탭 닫음
+            - generic [ref=e90]: "\"가입하기는 싫고... 그냥 이 도구 포기하고 구글 폼으로 돌아가자.\""
+      - generic [ref=e91]:
+        - generic [ref=e92]:
+          - generic [ref=e98]: tally.so/templates
+          - generic [ref=e99]:
+            - generic [ref=e100]: Choose a template
+            - generic [ref=e101]: Get started quickly with a pre-built form template
+            - generic [ref=e102]:
+              - generic [ref=e103] [cursor=pointer]:
+                - generic [ref=e104]: 뭔 말인지 모름
+                - generic [ref=e105]: 📋
+                - generic [ref=e106]: Registration Form
+                - generic [ref=e107]: Collect registrations
+              - generic [ref=e108] [cursor=pointer]:
+                - generic [ref=e109]: 뭔 말인지 모름
+                - generic [ref=e110]: 📊
+                - generic [ref=e111]: Lead Generation
+                - generic [ref=e112]: Capture qualified leads
+              - generic [ref=e113] [cursor=pointer]:
+                - generic [ref=e114]: 💬
+                - generic [ref=e115]: Contact Form
+                - generic [ref=e116]: Simple contact page
+              - generic [ref=e117] [cursor=pointer]:
+                - generic [ref=e118]: 이거인가?
+                - generic [ref=e119]: ⭐
+                - generic [ref=e120]: Customer Satisfaction
+                - generic [ref=e121]: Measure satisfaction
+              - generic [ref=e122] [cursor=pointer]:
+                - generic [ref=e123]: 📝
+                - generic [ref=e124]: Feedback Form
+                - generic [ref=e125]: Collect user feedback
+              - generic [ref=e126] [cursor=pointer]:
+                - generic [ref=e127]: 🎯
+                - generic [ref=e128]: Personality Quiz
+                - generic [ref=e129]: Fun quiz template
+            - generic [ref=e130]:
+              - generic [ref=e131]: Start from scratch
+              - generic [ref=e132]: Use template →
+        - generic [ref=e133]:
+          - generic [ref=e134]: 서연
+          - generic [ref=e135]:
+            - generic [ref=e136]: 박서연 · 52세 초등학교 교사
+            - generic [ref=e137]: 불안형 · 기술 숙련도 낮음
+          - generic [ref=e138]:
+            - generic [ref=e139]: 😤 좌절
+            - generic [ref=e140]: 전부 영어라서 불안한 상태
+      - generic [ref=e141]:
+        - generic [ref=e142]: 페르소나의 머릿속
+        - generic [ref=e143]:
+          - generic [ref=e144]: 😤
+          - generic [ref=e145]: 좌절
+          - generic [ref=e146]: "\"Registration form? Lead generation? 이게 다 뭐야... 학부모 설문이랑 비슷한 게 하나도 없잖아. 한국어가 하나도 없는데 이걸 어떻게 써.\""
+        - generic [ref=e147]:
+          - generic [ref=e148]: 지금 상황
+          - generic [ref=e149]:
+            - generic [ref=e150]: 혼란 원인
+            - generic [ref=e151]: 템플릿이 전부 영어. Registration form, Lead generation 등 뭔 말인지 모르겠고, 학부모 설문과 비슷한 게 안 보임.
+          - generic [ref=e152]:
+            - generic [ref=e153]: 혼란 수준
+            - generic [ref=e157]: 매우 높음
+        - generic [ref=e158]:
+          - generic [ref=e159]: 의지 vs 능력
+          - generic [ref=e160]:
+            - generic [ref=e161]: 하고 싶은 것
+            - generic [ref=e162]: "\"학부모 설문조사 양식을 5분 안에 만들고 싶다\""
+          - generic [ref=e163]:
+            - generic [ref=e164]: 막히는 것
+            - generic [ref=e165]: 전부 영어라서 뭘 골라야 할지 모름. Sign up 버튼이 계속 보여서 결국 가입해야 하나 불안.
+          - generic [ref=e166]: 쓰고 싶지만 → 전부 영어 + 가입 불안 → 포기
+        - generic [ref=e167]:
+          - generic [ref=e168]: 결론
+          - generic [ref=e169]:
+            - generic [ref=e170]: 이 사람이 내린 판단
+            - generic [ref=e171]: "\"이 도구는 한국에서 쓰는 게 아닌 것 같다. 구글 폼이 낫다.\""
+          - generic [ref=e172]:
+            - generic [ref=e173]: 다음 행동
+            - generic [ref=e174]: 브라우저 탭 닫음 → 익숙한 구글 폼으로 복귀
+        - generic [ref=e175]:
+          - generic [ref=e176]: 기억에 남은 것
+          - generic [ref=e177]:
+            - generic [ref=e178]: 👀 발견
+            - generic [ref=e179]: 템플릿이 전부 영어. Registration, Lead generation 등 학부모 설문과 관련 없는 것들뿐.
+          - generic [ref=e180]:
+            - generic [ref=e181]: 💭 생각
+            - generic [ref=e182]: 이 도구는 한국어 지원이 안 되고, Sign up 없이는 제대로 못 쓰는 것 같다. 구글 폼으로 돌아가자.
+          - generic [ref=e183]:
+            - generic [ref=e184]: 👀 발견
+            - generic [ref=e185]: No signup required라고 해놓고 Sign up 버튼이 계속 보임. 모순되는 메시지.

@@ -1,0 +1,21 @@
+persona_id: "p001"
+name: "박서연"
+segment: "anxious"
+big_five:
+  openness: 0.35
+  conscientiousness: 0.45
+  extraversion: 0.25
+  agreeableness: 0.55
+  neuroticism: 0.88
+digital_literacy: 2
+demographics:
+  age: 52
+  occupation: "초등학교 교사"
+background_narrative: "학교 행정 업무에 컴퓨터를 쓰지만 새로운 프로그램에는 불안감을 느낀다. 동료가 추천하면 시도하지만 막히면 금방 포기하는 편이다."
+jtbd:
+  primary_goal: "학부모 설문조사 양식을 만들어서 배포하고 싶다"
+  success_criterion: "5분 안에 간단한 설문 양식을 만들 수 있는지 확인"
+  prior_tools:
+    - "Google Forms"
+    - "네이버 폼"
+  willingness_to_pay: 0.3

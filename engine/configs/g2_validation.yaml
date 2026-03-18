@@ -1,0 +1,24 @@
+# G2 벤치마크 검증: 5개 세그먼트 대표 페르소나 × Tally × 15스텝
+# 목적: G2 리뷰 데이터와 페르소나 시뮬레이션 결과의 방향 일치 여부 검증
+# 페르소나 구성:
+#   b005 (Camila R.)  — startup_founder / intuitive / digital_literacy 3
+#   b010 (Dani R.)    — small_biz_operator / intuitive / digital_literacy 2
+#   b013 (Marcus T.)  — tech_professional / cautious_methodical / digital_literacy 2
+#   b020 (Arjan V.)   — tech_professional / power_user / digital_literacy 3
+#   b022 (Camille D.) — marketing_pro / tech_savvy / digital_literacy 4
+experiment_id: "g2_validation_001"
+persona_dir: "configs/personas/benchmark"
+personas:
+  - "configs/personas/benchmark/b005.yaml"
+  - "configs/personas/benchmark/b010.yaml"
+  - "configs/personas/benchmark/b013.yaml"
+  - "configs/personas/benchmark/b020.yaml"
+  - "configs/personas/benchmark/b022.yaml"
+products:
+  - name: "tally"
+    url: "https://tally.so"
+max_steps: 15
+headless: true
+concurrency: 5
+mode: "full"
+llm_model: "sonnet"

@@ -1,0 +1,33 @@
+background_narrative: Dara는 3년 전 시카고의 마케팅 대행사를 그만두고 자신의 회복 경험을 바탕으로 소브리어티 코칭을 시작했으며,
+  현재 포틀랜드에서 원격으로 약 10명의 클라이언트를 관리하고 있다. 새로운 앱과 워크플로 도구를 탐색하는 것을 즐기고—한 번은 Notion 템플릿을
+  이틀 동안 파고든 적도 있다—하지만 유료 구독으로 이어지는 경우는 거의 없으며, '지금 쓰는 것'이 한계에 부딪혀야 비로소 대안을 진지하게 찾는다.
+  인스타그램 DM과 Linktree로 신규 문의를 받고 있지만, 진지하지 않은 잠재 클라이언트를 걸러낼 방법이 없어 디스커버리 콜 전 사전 정보를
+  받을 수 있는 폼이 필요해졌다.
+big_five:
+  agreeableness: 0.5
+  conscientiousness: 0.2
+  extraversion: 0.32
+  neuroticism: 0.3
+  openness: 0.72
+budget_sensitivity: very_high
+demographics:
+  age: 34
+  company_size: 1-10
+  occupation: Independent Sobriety Coach (1인 사업자, 원격 운영)
+digital_literacy: 3
+jtbd:
+  primary_goal: 신규 클라이언트가 디스커버리 콜을 신청하기 전에 소브리어티 이력, 코칭 목표, 선호 일정을 자동으로 수집하는 인테이크
+    폼 링크를 만들어—인스타그램 DM이나 Linktree에 바로 붙여넣기 가능한 형태로—추후 콜 전 스크리닝 기준으로 활용하고 싶다. 반드시 무료여야
+    하며, 응답은 한 곳에서 바로 열람할 수 있어야 한다.
+  prior_tools:
+  - Google Forms
+  success_criterion: 지금 앉은 자리에서 30분 안에 폼 링크를 만들어 인스타그램 바이오에 붙여넣고, 첫 응답 1건이 들어오는 것을
+    확인하는 것. 결제 정보를 입력하는 단계가 생기면 즉시 이탈.
+  willingness_to_pay: 0.12
+name: Dara F.
+persona_id: b011
+prior_tools_detail:
+- Google Forms
+role_id: small_biz_operator
+segment: explorer
+use_context: 클라이언트 인테이크 설문

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShipCheck — tally.so 검증 리포트</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface-alt: #f5f5f5;
+      --border: #e8e8e8; --text: #111; --text-2: #555; --text-3: #999;
+      --blue: #2563eb; --blue-light: #eff6ff;
+      --green: #059669; --green-light: #ecfdf5;
+      --amber: #d97706; --amber-light: #fffbeb;
+      --red: #dc2626; --red-light: #fef2f2;
+      --violet: #7c3aed; --violet-light: #f5f3ff;
+      --font: 'Noto Sans KR', 'DM Sans', sans-serif;
+      --mono: 'DM Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); font-family: var(--font); font-size: 14px; color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* ── Top Bar ── */
+    .topbar { height: 52px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 32px; position: sticky; top: 0; z-index: 100; }
+    .topbar-logo { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px; margin-right: 40px; }
+    .logo-dot { width: 24px; height: 24px; background: var(--text); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: 700; }
+    .topbar-tabs { display: flex; gap: 4px; }
+    .topbar-tab { font-size: 13px; font-weight: 500; color: var(--text-3); padding: 14px 16px; border-bottom: 2px solid transparent; cursor: pointer; transition: all .15s; }
+    .topbar-tab:hover { color: var(--text-2); }
+    .topbar-tab.active { color: var(--text); border-bottom-color: var(--text); font-weight: 600; }
+    .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+    .topbar-product { font-size: 12px; color: var(--text-3); }
+    .topbar-product strong { color: var(--text-2); }
+
+    /* ── Content ── */
+    .content { max-width: 1120px; margin: 0 auto; padding: 40px 32px; }
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* ── Overview ── */
+    .overview-hero { text-align: center; margin-bottom: 48px; }
+    .overview-hero h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .overview-hero p { font-size: 15px; color: var(--text-2); }
+
+    .verdict-banner { background: var(--red-light); border: 1px solid rgba(220,38,38,.12); border-radius: 12px; padding: 28px 32px; text-align: center; margin-bottom: 40px; }
+    .verdict-banner .big { font-size: 24px; font-weight: 700; color: var(--red); margin-bottom: 4px; }
+    .verdict-banner .sub { font-size: 14px; color: var(--text-2); }
+
+    .persona-compare { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; margin-bottom: 48px; align-items: start; }
+    .persona-compare .vs { display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text-3); padding-top: 80px; }
+
+    .persona-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+    .persona-card.anxious { border-top: 3px solid var(--red); }
+    .persona-card.power { border-top: 3px solid var(--blue); }
+
+    .pc-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .pc-avatar { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+    .pc-avatar.anxious { background: var(--red); }
+    .pc-avatar.power { background: var(--blue); }
+    .pc-name { font-size: 18px; font-weight: 700; }
+    .pc-desc { font-size: 13px; color: var(--text-2); }
+    .pc-segment { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-left: auto; }
+    .pc-segment.anxious { background: var(--red-light); color: var(--red); }
+    .pc-segment.power { background: var(--blue-light); color: var(--blue); }
+
+    .pc-field { margin-bottom: 14px; }
+    .pc-field-label { font-size: 11px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 3px; }
+    .pc-field-value { font-size: 13px; }
+
+    .pc-quote { padding: 16px; background: var(--surface-alt); border-radius: 8px; border-left: 3px solid var(--border); margin-top: 16px; }
+    .pc-quote.anxious { border-left-color: var(--red); }
+    .pc-quote.power { border-left-color: var(--blue); }
+    .pc-quote-text { font-size: 13px; color: var(--text-2); line-height: 1.8; font-style: italic; }
+    .pc-quote-label { font-size: 11px; color: var(--text-3); margin-top: 6px; }
+
+    .pc-result { margin-top: 16px; padding: 12px; border-radius: 8px; text-align: center; font-size: 13px; font-weight: 600; }
+    .pc-result.abandoned { background: var(--red-light); color: var(--red); }
+
+    .findings-section { margin-bottom: 40px; }
+    .findings-section h2 { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+
+    .finding-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 12px; display: flex; gap: 16px; align-items: flex-start; }
+    .finding-num { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--text-3); flex-shrink: 0; width: 28px; }
+    .finding-content h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .finding-content p { font-size: 13px; color: var(--text-2); }
+    .finding-tag { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-top: 6px; display: inline-block; }
+    .finding-tag.critical { background: var(--red-light); color: var(--red); }
+    .finding-tag.high { background: var(--amber-light); color: var(--amber); }
+
+    /* ── Journey ── */
+    .journey-header { text-align: center; margin-bottom: 32px; }
+    .journey-header h2 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .journey-header p { font-size: 14px; color: var(--text-2); }
+
+    .journey-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+    .journey-col h3 { font-size: 14px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .journey-col h3 .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .journey-col h3 .dot.red { background: var(--red); }
+    .journey-col h3 .dot.blue { background: var(--blue); }
+
+    .step-card { padding: 14px 16px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 8px; cursor: pointer; transition: all .15s; position: relative; }
+    .step-card:hover { border-color: var(--text-3); }
+    .step-card.critical { border-color: var(--red); background: var(--red-light); }
+    .step-card.highlight { border-color: var(--amber); background: var(--amber-light); }
+
+    .step-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .step-num { font-family: var(--mono); font-size: 11px; color: var(--text-3); }
+    .step-action { font-family: var(--mono); font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 3px; text-transform: uppercase; }
+    .step-action.click { background: var(--blue-light); color: var(--blue); }
+    .step-action.scroll { background: var(--surface-alt); color: var(--text-3); }
+    .step-action.type { background: var(--green-light); color: var(--green); }
+    .step-action.exit { background: var(--red-light); color: var(--red); }
+    .step-action.key { background: var(--violet-light); color: var(--violet); }
+    .step-emoji { margin-left: auto; font-size: 16px; }
+    .step-thought { font-size: 12px; color: var(--text-2); line-height: 1.6; }
+    .step-metrics { display: flex; gap: 12px; margin-top: 6px; font-family: var(--mono); font-size: 10px; color: var(--text-3); }
+
+    .chart-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 32px; }
+    .chart-section h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .chart-section .chart-sub { font-size: 12px; color: var(--text-3); margin-bottom: 20px; }
+    .chart-legend { display: flex; gap: 24px; margin-bottom: 16px; }
+    .chart-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2); }
+    .chart-legend-line { width: 16px; height: 3px; border-radius: 2px; }
+
+    /* ── Detail ── */
+    .detail-header { margin-bottom: 32px; }
+    .detail-header h2 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .detail-header p { font-size: 14px; color: var(--text-2); }
+
+    .moment-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 32px; }
+    .moment-header { padding: 20px 24px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); }
+    .moment-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: white; }
+    .moment-info h3 { font-size: 15px; font-weight: 600; }
+    .moment-info span { font-size: 12px; color: var(--text-3); }
+    .moment-badge { margin-left: auto; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; background: var(--red-light); color: var(--red); }
+
+    .moment-body { display: grid; grid-template-columns: 1fr 380px; }
+    .moment-screenshot { background: var(--surface-alt); padding: 24px; display: flex; align-items: center; justify-content: center; min-height: 400px; }
+    .moment-screenshot img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+    .screenshot-placeholder { text-align: center; color: var(--text-3); font-size: 12px; }
+    .screenshot-placeholder .path { font-family: var(--mono); font-size: 11px; display: block; margin-top: 4px; word-break: break-all; }
+
+    .moment-mind { padding: 24px; border-left: 1px solid var(--border); }
+    .thought-bubble { padding: 20px; background: var(--surface-alt); border-radius: 10px; margin-bottom: 20px; border-left: 3px solid var(--red); }
+    .thought-bubble.blue { border-left-color: var(--blue); }
+    .thought-emoji { font-size: 24px; margin-bottom: 8px; }
+    .thought-label { font-size: 11px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+    .thought-text { font-size: 13px; color: var(--text-2); line-height: 1.8; }
+
+    .mind-field { margin-bottom: 14px; }
+    .mind-field-label { font-size: 11px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+    .mind-field-value { font-size: 13px; }
+    .mind-bar { height: 6px; background: var(--surface-alt); border-radius: 3px; overflow: hidden; margin-top: 4px; }
+    .mind-bar-fill { height: 100%; border-radius: 3px; }
+
+    /* ── Interview ── */
+    .interview-grid { display: grid; grid-template-columns: 300px 1fr; height: calc(100vh - 140px); background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .iv-sidebar { border-right: 1px solid var(--border); padding: 24px; overflow-y: auto; }
+    .iv-avatar { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: white; margin-bottom: 16px; }
+    .iv-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .iv-desc { font-size: 13px; color: var(--text-2); margin-bottom: 16px; }
+    .iv-field { margin-bottom: 12px; }
+    .iv-field-label { font-size: 11px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 3px; }
+    .iv-field-value { font-size: 13px; }
+
+    .iv-chat { display: flex; flex-direction: column; background: var(--bg); }
+    .iv-chat-header { padding: 16px 24px; background: var(--surface); border-bottom: 1px solid var(--border); font-size: 13px; font-weight: 600; flex-shrink: 0; }
+    .iv-messages { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+    .iv-msg { max-width: 520px; }
+    .iv-msg.user { align-self: flex-end; }
+    .iv-msg-label { font-size: 11px; font-weight: 600; color: var(--text-3); margin-bottom: 4px; }
+    .iv-msg.user .iv-msg-label { text-align: right; }
+    .iv-bubble { padding: 12px 16px; border-radius: 12px; font-size: 13px; line-height: 1.7; }
+    .iv-msg.user .iv-bubble { background: var(--text); color: white; border-bottom-right-radius: 4px; }
+    .iv-msg.persona .iv-bubble { background: var(--surface); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+    .iv-ref { font-size: 11px; color: var(--text-3); margin-top: 4px; font-style: italic; }
+    .iv-input { padding: 16px 24px; background: var(--surface); border-top: 1px solid var(--border); display: flex; gap: 8px; flex-shrink: 0; }
+    .iv-input input { flex: 1; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; font-family: var(--font); font-size: 13px; outline: none; background: var(--surface-alt); }
+    .iv-input button { padding: 10px 20px; background: var(--text); color: white; border: none; border-radius: 8px; font-family: var(--font); font-size: 13px; font-weight: 600; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-logo"><div class="logo-dot">S</div> ShipCheck</div>
+  <div class="topbar-tabs">
+    <div class="topbar-tab active" data-screen="overview">개요</div>
+    <div class="topbar-tab" data-screen="journey">감정 여정</div>
+    <div class="topbar-tab" data-screen="detail">결정적 순간</div>
+    <div class="topbar-tab" data-screen="interview">인터뷰</div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-product"><strong>tally.so</strong> · 2026.03.15 실행 · 페르소나 2명</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════ 개요 ═══════════════════════ -->
+<div class="content">
+<div class="screen active" id="overview">
+
+  <div class="overview-hero">
+    <h1>tally.so 검증 리포트</h1>
+    <p>2명의 AI 페르소나가 실제 제품을 사용하고 느낀 것</p>
+  </div>
+
+  <div class="verdict-banner">
+    <div class="big">2명 모두 이탈</div>
+    <div class="sub">온보딩 과정에서 두 유저 모두 제품을 떠났습니다 — 이유는 전혀 달랐습니다</div>
+  </div>
+
+  <!-- Persona Comparison -->
+  <div class="persona-compare">
+
+    <!-- 박서연 -->
+    <div class="persona-card anxious">
+      <div class="pc-header">
+        <div class="pc-avatar anxious">서연</div>
+        <div>
+          <div class="pc-name">박서연</div>
+          <div class="pc-desc">52세 · 초등학교 교사 · 서울</div>
+        </div>
+        <span class="pc-segment anxious">불안형</span>
+      </div>
+      <div class="pc-field">
+        <div class="pc-field-label">목표</div>
+        <div class="pc-field-value">학부모 설문조사 양식을 5분 안에 만들고 싶다</div>
+      </div>
+      <div class="pc-field">
+        <div class="pc-field-label">기존 도구</div>
+        <div class="pc-field-value">Google Forms, 네이버 폼</div>
+      </div>
+      <div class="pc-field">
+        <div class="pc-field-label">기술 수준</div>
+        <div class="pc-field-value">낮음 — 새 프로그램에 불안감, 막히면 금방 포기</div>
+      </div>
+      <div class="pc-quote anxious">
+        <div class="pc-quote-text">"화면이 전부 영어로만 되어 있어서 일단 좀 불안하다. 구글 폼도 충분히 쓰고 있었는데 왜 이걸 써야 하나 싶기도 하다. 근데 한국어가 하나도 없네... 이거 한국에서 쓰는 도구가 맞나?"</div>
+        <div class="pc-quote-label">— 랜딩 페이지 첫 인상</div>
+      </div>
+      <div class="pc-result abandoned">8단계에서 이탈 — "구글 폼으로 돌아가자"</div>
+    </div>
+
+    <div class="vs">VS</div>
+
+    <!-- 김도현 -->
+    <div class="persona-card power">
+      <div class="pc-header">
+        <div class="pc-avatar power">도현</div>
+        <div>
+          <div class="pc-name">김도현</div>
+          <div class="pc-desc">29세 · 스타트업 PM · 판교</div>
+        </div>
+        <span class="pc-segment power">파워유저</span>
+      </div>
+      <div class="pc-field">
+        <div class="pc-field-label">목표</div>
+        <div class="pc-field-value">조건부 로직과 인테그레이션을 테스트, Typeform 대비 판단</div>
+      </div>
+      <div class="pc-field">
+        <div class="pc-field-label">기존 도구</div>
+        <div class="pc-field-value">Typeform, Notion Forms, Airtable</div>
+      </div>
+      <div class="pc-field">
+        <div class="pc-field-label">기술 수준</div>
+        <div class="pc-field-value">높음 — 다양한 SaaS를 빠르게 평가, 기대 미달 시 바로 이탈</div>
+      </div>
+      <div class="pc-quote power">
+        <div class="pc-quote-text">"이미 같은 목록을 10번째 보고 있는 것 같아서 진짜 지쳐가고 있다. 조건부 로직 찾으러 왔다가 그냥 폼 블록 목록만 계속 스크롤하고 있는 거면 이 도구는 내가 원하는 게 아닐 수도 있다."</div>
+        <div class="pc-quote-label">— 이탈 직전</div>
+      </div>
+      <div class="pc-result abandoned">9단계에서 이탈 — 조건부 로직을 끝내 찾지 못함</div>
+    </div>
+  </div>
+
+  <!-- Key Findings -->
+  <div class="findings-section">
+    <h2>핵심 발견 3가지</h2>
+    <div class="finding-card">
+      <span class="finding-num">#1</span>
+      <div class="finding-content">
+        <h3>전체 UI가 영어 → 비-IT 유저 즉시 이탈 위험</h3>
+        <p>박서연은 첫 화면부터 "한국어가 하나도 없네"라고 반응. 템플릿 목록에서도 Registration form, Lead generation form 등 영어 용어에 막혀 "이게 다 뭔 말인지 하나도 모르겠다"며 패닉.</p>
+        <span class="finding-tag critical">치명적</span>
+      </div>
+    </div>
+    <div class="finding-card">
+      <span class="finding-num">#2</span>
+      <div class="finding-content">
+        <h3>핵심 기능(조건부 로직)이 블록 드롭다운에서 발견 불가</h3>
+        <p>김도현은 '/' 드롭다운에서 조건부 로직을 찾으려 스크롤과 타이핑을 반복했지만 끝내 발견하지 못함. "검색 필터가 작동하는 건지 아닌 건지 피드백도 없다."</p>
+        <span class="finding-tag critical">치명적</span>
+      </div>
+    </div>
+    <div class="finding-card">
+      <span class="finding-num">#3</span>
+      <div class="finding-content">
+        <h3>'Sign up' 버튼이 불안 유발 — 가입 없이 쓸 수 있는 건지 혼란</h3>
+        <p>두 페르소나 모두 우측 상단의 'Sign up' 버튼에 반복적으로 불안을 느낌. 박서연: "결국 가입을 해야 하는 건지 확인하고 싶은데, 가입하기는 싫고..." 김도현: "작업하다 날아가면 짜증날 것 같다."</p>
+        <span class="finding-tag high">중요</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ 감정 여정 ═══════════════════════ -->
+<div class="screen" id="journey">
+
+  <div class="journey-header">
+    <h2>두 사람의 감정 여정</h2>
+    <p>같은 제품을 사용했지만, 느끼는 감정은 완전히 달랐습니다</p>
+  </div>
+
+  <!-- Emotion Chart -->
+  <div class="chart-section">
+    <h3>감정 변화 (만족 ↔ 좌절)</h3>
+    <div class="chart-sub">각 행동 단계에서 페르소나가 느끼는 감정 수준</div>
+    <div class="chart-legend">
+      <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--red)"></div>박서연 (불안형)</div>
+      <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--blue)"></div>김도현 (파워유저)</div>
+    </div>
+    <svg id="emo-chart" viewBox="0 0 1060 300" style="width:100%"></svg>
+  </div>
+
+  <!-- Step-by-step side by side -->
+  <div class="journey-grid">
+    <div class="journey-col">
+      <h3><span class="dot red"></span> 박서연의 여정 (9단계)</h3>
+
+      <div class="step-card">
+        <div class="step-top"><span class="step-num">0</span><span class="step-action click">click</span><span style="font-size:12px;color:var(--text-2)">Create a free form</span><span class="step-emoji">😐</span></div>
+        <div class="step-thought">"화면이 전부 영어... 한국어가 하나도 없네. 이거 한국에서 쓰는 도구가 맞나?"</div>
+        <div class="step-metrics"><span>이탈위험 32%</span><span>혼란도 35%</span></div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-top"><span class="step-num">1</span><span class="step-action click">click</span><span style="font-size:12px;color:var(--text-2)">Use a template</span><span class="step-emoji">😟</span></div>
+        <div class="step-thought">"뭘 해야 할지 모르겠다. 구글 폼은 한국어로 다 나왔고 버튼이 뭔지 알겠었는데..."</div>
+        <div class="step-metrics"><span>이탈위험 38%</span><span>혼란도 10%</span></div>
+      </div>
+
+      <div class="step-card highlight">
+        <div class="step-top"><span class="step-num">2</span><span class="step-action scroll">scroll</span><span style="font-size:12px;color:var(--text-2)">템플릿 목록 탐색</span><span class="step-emoji">😰</span></div>
+        <div class="step-thought">"Registration form, Lead generation form... 이게 다 뭐지? 학부모 설문이랑 관련 있는 게 하나도 안 보인다"</div>
+        <div class="step-metrics"><span style="color:var(--red);font-weight:600">이탈위험 61%</span><span>혼란도 28%</span></div>
+      </div>
+
+      <div class="step-card highlight">
+        <div class="step-top"><span class="step-num">3-4</span><span class="step-action scroll">scroll+click</span><span style="font-size:12px;color:var(--text-2)">Customer Satisfaction Survey 발견</span><span class="step-emoji">😰</span></div>
+        <div class="step-thought">"'고객 만족도 설문'이 학부모 대상 설문이랑 정말 같은 건지 모르겠고, 이게 맞는 건가..."</div>
+        <div class="step-metrics"><span style="color:var(--red);font-weight:600">이탈위험 71%</span></div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-top"><span class="step-num">5-7</span><span class="step-action click">click</span><span style="font-size:12px;color:var(--text-2)">템플릿 미리보기</span><span class="step-emoji">😕</span></div>
+        <div class="step-thought">"이탤릭체 영어로 죽 써있는데 편집 화면인지 미리보기인지 모르겠다. Sign up이 또 보이니까 결국 가입해야 하나 싶어서 지친다"</div>
+      </div>
+
+      <div class="step-card critical">
+        <div class="step-top"><span class="step-num">8</span><span class="step-action exit">이탈</span><span style="font-size:12px;color:var(--red);font-weight:600">포기</span><span class="step-emoji">😠</span></div>
+        <div class="step-thought">"결국 가입을 해야 하는 건지 확인하고 싶은데, 가입하기는 싫고... 그냥 이 도구 포기하고 구글 폼으로 돌아가자."</div>
+        <div class="step-metrics"><span style="color:var(--red);font-weight:600">이탈위험 82%</span></div>
+      </div>
+    </div>
+
+    <div class="journey-col">
+      <h3><span class="dot blue"></span> 김도현의 여정 (10단계)</h3>
+
+      <div class="step-card">
+        <div class="step-top"><span class="step-num">0</span><span class="step-action click">click</span><span style="font-size:12px;color:var(--text-2)">Create a free form</span><span class="step-emoji">😐</span></div>
+        <div class="step-thought">"랜딩 페이지 첫인상은 '또 이런 류구나' 싶다. 그나마 눈에 띄는 건 free랑 No signup required"</div>
+        <div class="step-metrics"><span>이탈위험 10%</span></div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-top"><span class="step-num">1</span><span class="step-action click">click</span><span style="font-size:12px;color:var(--text-2)">Form title (에디터 진입)</span><span class="step-emoji">🙂</span></div>
+        <div class="step-thought">"오, 회원가입 없이 바로 에디터. Notion이랑 거의 똑같은 UX. 근데 저장 표시가 없어서 날아갈까봐 찜찜."</div>
+        <div class="step-metrics"><span>이탈위험 18%</span></div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-top"><span class="step-num">2</span><span class="step-action click">click</span><span style="font-size:12px;color:var(--text-2)">첫 블록 삽입</span><span class="step-emoji">😐</span></div>
+        <div class="step-thought">"저장 표시가 여전히 없다. 내 작업이 어디 저장되는지 모르겠다. 일단 '/'부터 눌러서 조건부 로직을 찾자."</div>
+        <div class="step-metrics"><span>이탈위험 28%</span></div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-top"><span class="step-num">3</span><span class="step-action key">key</span><span style="font-size:12px;color:var(--text-2)">'/' 입력 → 블록 목록</span><span class="step-emoji">😐</span></div>
+        <div class="step-thought">"'/' 눌렀더니 블록 목록이 뜨네. 기본 타입들은 보이는데 내가 원하는 건 조건부 로직인데..."</div>
+        <div class="step-metrics"><span>이탈위험 21%</span></div>
+      </div>
+
+      <div class="step-card highlight">
+        <div class="step-top"><span class="step-num">4-6</span><span class="step-action scroll">scroll</span><span style="font-size:12px;color:var(--text-2)">블록 목록 반복 스크롤</span><span class="step-emoji">😕</span></div>
+        <div class="step-thought">"Short answer부터 Phone number까지 기본 타입만 보이고, Conditional logic이나 Logic Jump 같은 게 안 보인다. 유료 플랜에만 있는 건가?"</div>
+        <div class="step-metrics"><span style="color:var(--amber);font-weight:600">이탈위험 44%</span></div>
+      </div>
+
+      <div class="step-card highlight">
+        <div class="step-top"><span class="step-num">7-8</span><span class="step-action type">type</span><span style="font-size:12px;color:var(--text-2)">'conditional' 검색 시도</span><span class="step-emoji">😤</span></div>
+        <div class="step-thought">"드롭다운에서 'conditional' 타이핑했는데 검색 필터가 작동하는 건지 아닌 건지 피드백도 없다. 같은 목록을 10번째 보고 있는 것 같다."</div>
+        <div class="step-metrics"><span style="color:var(--amber);font-weight:600">이탈위험 41%</span></div>
+      </div>
+
+      <div class="step-card critical">
+        <div class="step-top"><span class="step-num">9</span><span class="step-action exit">이탈</span><span style="font-size:12px;color:var(--red);font-weight:600">포기</span><span class="step-emoji">😑</span></div>
+        <div class="step-thought">"검색 필터가 작동하는 건지 아닌 건지 피드백도 없고, 이미 같은 목록을 10번째 보고 있는 것 같아서 진짜 지쳐가고 있다."</div>
+        <div class="step-metrics"><span style="color:var(--red);font-weight:600">이탈위험 74%</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ 결정적 순간 ═══════════════════════ -->
+<div class="screen" id="detail">
+
+  <div class="detail-header">
+    <h2>결정적 순간 — 이탈 직전</h2>
+    <p>이 순간이 사용자를 잃는 지점입니다</p>
+  </div>
+
+  <!-- 박서연 이탈 순간 -->
+  <div class="moment-card">
+    <div class="moment-header">
+      <div class="moment-avatar" style="background:var(--red)">서연</div>
+      <div class="moment-info">
+        <h3>박서연 — Step 8 (이탈)</h3>
+        <span>52세 · 초등학교 교사 · 불안형</span>
+      </div>
+      <div class="moment-badge">이탈</div>
+    </div>
+    <div class="moment-body">
+      <div class="moment-screenshot">
+        <div class="screenshot-placeholder">
+          <div style="font-size:40px;margin-bottom:12px">📸</div>
+          실제 실행 시 tally.so 스크린샷이 여기에 표시됩니다
+          <span class="path">engine/runs/dryrun_001/screenshots/p001_tally_8c4914_step8.png</span>
+        </div>
+      </div>
+      <div class="moment-mind">
+        <div class="thought-bubble">
+          <div class="thought-emoji">😠</div>
+          <div class="thought-label">이 순간의 속마음</div>
+          <div class="thought-text">
+            "이 화면을 보고 있는데, 제목은 보이고 설명도 이탤릭체 영어로 죽 써있는데 이게 '미리보기'인지 '편집 화면'인지 도대체 모르겠다. 위에 'Sign up'이라는 글자가 또 보이니까 결국 가입 없이는 제대로 못 쓰는 거 아닌가 싶어서 지친다. 학부모한테 보낼 설문이랑 전혀 관계없는 것 같고..."
+          </div>
+        </div>
+        <div class="mind-field">
+          <div class="mind-field-label">이탈 이유</div>
+          <div class="mind-field-value" style="color:var(--red);font-weight:500">"가입하기는 싫고... 그냥 이 도구 포기하고 구글 폼으로 돌아가자"</div>
+        </div>
+        <div class="mind-field">
+          <div class="mind-field-label">이탈 위험도</div>
+          <div class="mind-bar"><div class="mind-bar-fill" style="width:82%;background:var(--red)"></div></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--red);margin-top:2px">82%</div>
+        </div>
+        <div class="mind-field">
+          <div class="mind-field-label">핵심 문제</div>
+          <div class="mind-field-value">영어 전용 UI + Sign up 버튼 불안 + 편집/미리보기 구분 불가</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 김도현 이탈 순간 -->
+  <div class="moment-card">
+    <div class="moment-header">
+      <div class="moment-avatar" style="background:var(--blue)">도현</div>
+      <div class="moment-info">
+        <h3>김도현 — Step 9 (이탈)</h3>
+        <span>29세 · 스타트업 PM · 파워유저</span>
+      </div>
+      <div class="moment-badge">이탈</div>
+    </div>
+    <div class="moment-body">
+      <div class="moment-screenshot">
+        <div class="screenshot-placeholder">
+          <div style="font-size:40px;margin-bottom:12px">📸</div>
+          실제 실행 시 tally.so 스크린샷이 여기에 표시됩니다
+          <span class="path">engine/runs/dryrun_001/screenshots/p002_tally_04521d_step9.png</span>
+        </div>
+      </div>
+      <div class="moment-mind">
+        <div class="thought-bubble blue">
+          <div class="thought-emoji">😑</div>
+          <div class="thought-label">이 순간의 속마음</div>
+          <div class="thought-text">
+            "이 드롭다운에서 'conditional'이나 'logic'을 타이핑해서 필터가 되는지 확인하려는데, 화면에 여전히 Short answer부터 Phone number까지 기본 타입만 보인다. 검색 필터가 작동하는 건지 아닌 건지 피드백도 없고, 이미 같은 목록을 10번째 보고 있는 것 같아서 진짜 지쳐가고 있다."
+          </div>
+        </div>
+        <div class="mind-field">
+          <div class="mind-field-label">이탈 이유</div>
+          <div class="mind-field-value" style="color:var(--blue);font-weight:500">핵심 기능(조건부 로직)을 찾을 수 없어 도구 평가 불가 → 시간 낭비 판단</div>
+        </div>
+        <div class="mind-field">
+          <div class="mind-field-label">이탈 위험도</div>
+          <div class="mind-bar"><div class="mind-bar-fill" style="width:74%;background:var(--blue)"></div></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--blue);margin-top:2px">74%</div>
+        </div>
+        <div class="mind-field">
+          <div class="mind-field-label">핵심 문제</div>
+          <div class="mind-field-value">블록 드롭다운에서 조건부 로직 미노출 + 검색 필터 미작동/미피드백</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ 인터뷰 ═══════════════════════ -->
+<div class="screen" id="interview">
+  <div class="interview-grid">
+    <div class="iv-sidebar">
+      <div class="iv-avatar" style="background:var(--red)">서연</div>
+      <div class="iv-name">박서연</div>
+      <div class="iv-desc">52세 · 초등학교 교사</div>
+      <div class="iv-field">
+        <div class="iv-field-label">세그먼트</div>
+        <div class="iv-field-value" style="color:var(--red);font-weight:600">불안형</div>
+      </div>
+      <div class="iv-field">
+        <div class="iv-field-label">기술 수준</div>
+        <div class="iv-field-value">웹 검색/이메일 수준</div>
+      </div>
+      <div class="iv-field">
+        <div class="iv-field-label">목표</div>
+        <div class="iv-field-value">학부모 설문조사 양식을 5분 안에 만들기</div>
+      </div>
+      <div class="iv-field">
+        <div class="iv-field-label">결과</div>
+        <div class="iv-field-value" style="color:var(--red)">8단계에서 이탈</div>
+      </div>
+      <div class="iv-field">
+        <div class="iv-field-label">배경</div>
+        <div class="iv-field-value" style="font-size:12px;color:var(--text-2);line-height:1.6">학교 행정 업무에 컴퓨터를 쓰지만 새로운 프로그램에는 불안감을 느낀다. 동료가 추천하면 시도하지만 막히면 금방 포기하는 편이다.</div>
+      </div>
+    </div>
+    <div class="iv-chat">
+      <div class="iv-chat-header">페르소나 인터뷰 — 체험 기억 기반 응답</div>
+      <div class="iv-messages">
+        <div class="iv-msg user">
+          <div class="iv-msg-label">나</div>
+          <div class="iv-bubble">Tally를 처음 열었을 때 첫인상이 어땠어요?</div>
+        </div>
+        <div class="iv-msg persona">
+          <div class="iv-msg-label">박서연</div>
+          <div class="iv-bubble">
+            전부 영어더라고요. 'The simplest way to create forms'라고 써있었는데, 솔직히 구글 폼도 잘 쓰고 있는데 왜 이걸 써야 하나 싶었어요. 그나마 'No signup required'라는 게 보여서 가입 없이 써볼 수 있다길래 일단 들어가봤는데... 한국어가 하나도 없는 건 좀 당황스러웠어요.
+          </div>
+          <div class="iv-ref">↳ 랜딩 페이지 첫 진입 시점의 기억에 기반</div>
+        </div>
+        <div class="iv-msg user">
+          <div class="iv-msg-label">나</div>
+          <div class="iv-bubble">템플릿 고르는 화면에서 어떤 점이 어려웠나요?</div>
+        </div>
+        <div class="iv-msg persona">
+          <div class="iv-msg-label">박서연</div>
+          <div class="iv-bubble">
+            Registration form, Lead generation form, Web Project Intake Questionnaire... 이런 게 쭉 나오는데 하나도 모르겠더라고요. 학부모 설문이랑 비슷한 게 어딨는지 한참 찾다가 겨우 'Customer Satisfaction Survey'라는 걸 봤는데, 이게 '고객 만족도'지 학부모 설문이랑 같은 건지 확신이 안 들었어요. 한국어 템플릿이 하나라도 있었으면...
+          </div>
+          <div class="iv-ref">↳ 템플릿 탐색 과정 (step 2~5)의 혼란 경험에 기반</div>
+        </div>
+        <div class="iv-msg user">
+          <div class="iv-msg-label">나</div>
+          <div class="iv-bubble">결국 왜 나가셨어요?</div>
+        </div>
+        <div class="iv-msg persona">
+          <div class="iv-msg-label">박서연</div>
+          <div class="iv-bubble">
+            오른쪽 위에 'Sign up'이라는 파란 글씨가 계속 보이는데, 아까 'No signup required'라고 해놓고 결국 가입해야 쓸 수 있는 건가 싶었어요. 가입까지 해서 써야 할 정도로 필요한 건 아니고... 구글 폼이 한국어도 되고 익숙하니까 그냥 그걸로 하자 싶었어요. 새로운 거 배우는 게 쉽지 않은 나이다 보니요.
+          </div>
+          <div class="iv-ref">↳ 이탈 직전 (step 8) "구글 폼으로 돌아가자"는 판단에 기반</div>
+        </div>
+      </div>
+      <div class="iv-input">
+        <input type="text" placeholder="후속 질문을 입력하세요...">
+        <button>전송</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.topbar-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.topbar-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.screen).classList.add('active');
+    });
+  });
+
+  // Emotion chart (real data)
+  (function() {
+    const svg = document.getElementById('emo-chart');
+    if (!svg) return;
+    const W = 1060, H = 300;
+    const pad = { top: 24, right: 30, bottom: 40, left: 50 };
+    const plotW = W - pad.left - pad.right;
+    const plotH = H - pad.top - pad.bottom;
+
+    // Real PAD_pleasure data from dryrun_001
+    const p001 = [0.11, 0.06, 0.13, 0.46, 0.49, 0.55, 0.54, 0.77, 0.86];
+    const p002 = [0.09, 0.15, -0.02, 0.15, 0.26, 0.32, 0.06, 0.15, 0.19, 0.01];
+
+    const maxSteps = Math.max(p001.length, p002.length);
+    function toX(i) { return pad.left + (i / (maxSteps - 1)) * plotW; }
+    function toY(v) { return pad.top + plotH * (1 - (v + 0.2) / 1.2); }
+
+    function smoothPath(pts) {
+      if (pts.length < 2) return '';
+      let d = `M ${pts[0].x} ${pts[0].y}`;
+      for (let i = 0; i < pts.length - 1; i++) {
+        const p0 = pts[Math.max(0, i-1)];
+        const p1 = pts[i];
+        const p2 = pts[i+1];
+        const p3 = pts[Math.min(pts.length-1, i+2)];
+        d += ` C ${(p1.x+(p2.x-p0.x)/6).toFixed(1)} ${(p1.y+(p2.y-p0.y)/6).toFixed(1)}, ${(p2.x-(p3.x-p1.x)/6).toFixed(1)} ${(p2.y-(p3.y-p1.y)/6).toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+      }
+      return d;
+    }
+
+    let html = '';
+
+    // Grid lines
+    [0, 0.25, 0.5, 0.75, 1.0].forEach(v => {
+      const y = toY(v - 0.2);
+      html += `<line x1="${pad.left}" y1="${y}" x2="${W-pad.right}" y2="${y}" stroke="#eee" stroke-width="1"/>`;
+      const label = v === 0 ? '불안' : v === 0.5 ? '중립' : v === 1.0 ? '만족' : '';
+      if (label) html += `<text x="${pad.left-8}" y="${y+4}" text-anchor="end" fill="#999" font-size="11">${label}</text>`;
+    });
+
+    // X labels
+    for (let i = 0; i < maxSteps; i++) {
+      const x = toX(i);
+      html += `<text x="${x}" y="${H-pad.bottom+18}" text-anchor="middle" fill="#999" font-family="'DM Mono',monospace" font-size="11">step ${i}</text>`;
+    }
+
+    // Lines
+    const pts1 = p001.map((v,i) => ({x:toX(i), y:toY(v)}));
+    const pts2 = p002.map((v,i) => ({x:toX(i), y:toY(v)}));
+
+    html += `<path d="${smoothPath(pts1)}" fill="none" stroke="#dc2626" stroke-width="2.5"/>`;
+    html += `<path d="${smoothPath(pts2)}" fill="none" stroke="#2563eb" stroke-width="2.5"/>`;
+
+    pts1.forEach(p => html += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="white" stroke="#dc2626" stroke-width="2"/>`);
+    pts2.forEach(p => html += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="white" stroke="#2563eb" stroke-width="2"/>`);
+
+    // Annotations
+    const exit1 = pts1[pts1.length-1];
+    html += `<text x="${exit1.x}" y="${exit1.y-14}" text-anchor="middle" fill="#dc2626" font-size="11" font-weight="600">이탈 😠</text>`;
+    const exit2 = pts2[pts2.length-1];
+    html += `<text x="${exit2.x+8}" y="${exit2.y-14}" text-anchor="start" fill="#2563eb" font-size="11" font-weight="600">이탈 😑</text>`;
+
+    // Divergence annotation at step 3
+    const divX = toX(3);
+    html += `<line x1="${divX}" y1="${toY(0.46)}" x2="${divX}" y2="${toY(0.15)}" stroke="#999" stroke-width="1" stroke-dasharray="3,3"/>`;
+
+    svg.innerHTML = html;
+  })();
+</script>
+
+</body>
+</html>

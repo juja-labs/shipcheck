@@ -1,0 +1,39 @@
+background_narrative: Marcus manages internal tooling and workflow automation for
+  a 30-person B2B software company in Toronto, where he's the de facto 'fix-it guy'
+  for anything ops-related. He's methodical by nature — he keeps a personal Notion
+  wiki of every tool evaluation he's ever done, complete with pros/cons tables and
+  cost-per-seat calculations. Not an early adopter by any stretch; he'd rather spend
+  two extra days vetting a tool than migrate to something that breaks in six months.
+big_five:
+  agreeableness: 0.65
+  conscientiousness: 0.72
+  extraversion: 0.35
+  neuroticism: 0.58
+  openness: 0.3
+budget_sensitivity: low
+demographics:
+  age: 34
+  company_size: 11-50
+  occupation: IT Systems Administrator
+digital_literacy: 2
+jtbd:
+  primary_goal: '팀이 현재 쓰고 있는 폼 빌더를 대체할 수 있는지 검증하기 위해 두
+    가지 핵심 폼을 재현해본다: (1) 고객 온보딩 인테이크 — 7단계 조건 분기(직무 →
+    팀 규모 → 유즈케이스 → 기능 우선순위), (2) 주간 내부 운영 체크인 — 응답이
+    Google Sheet에 자동 기록되고 Zapier로 Slack 알림. 조건 분기 깊이, 기본 제공
+    통합, 무료 티어에서 프로덕션 운영 가능 여부를 확인해야 한다.'
+  prior_tools:
+  - custom code
+  - JotForm
+  success_criterion: 두 폼을 3시간 이내에 재구축하고, 조건 분기가 기존 폼과 동일하게
+    작동하며, Zapier 웹훅이 정상 동작하고, 90일 내 유료 업그레이드가 필수적인
+    기능 잠금이 없어야 성공으로 판단.
+  willingness_to_pay: 0.78
+name: Marcus T.
+persona_id: b013
+prior_tools_detail:
+- custom code
+- JotForm
+role_id: tech_professional
+segment: cautious_methodical
+use_context: 내부 도구 및 워크플로우 자동화

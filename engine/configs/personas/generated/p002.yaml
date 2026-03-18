@@ -1,0 +1,22 @@
+persona_id: "p002"
+name: "김도현"
+segment: "power_user"
+big_five:
+  openness: 0.85
+  conscientiousness: 0.78
+  extraversion: 0.65
+  agreeableness: 0.32
+  neuroticism: 0.12
+digital_literacy: 4
+demographics:
+  age: 29
+  occupation: "스타트업 PM"
+background_narrative: "다양한 SaaS 도구를 매일 사용하며 새로운 도구를 빠르게 평가하는 데 익숙하다. 도구가 기대에 못 미치면 바로 대안을 찾는다."
+jtbd:
+  primary_goal: "고객 피드백 수집용 폼을 만들고, 조건부 로직과 인테그레이션을 테스트하고 싶다"
+  success_criterion: "Typeform 대비 더 나은 점이 있는지 10분 내에 판단"
+  prior_tools:
+    - "Typeform"
+    - "Notion Forms"
+    - "Airtable"
+  willingness_to_pay: 0.8

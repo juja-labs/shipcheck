@@ -1,0 +1,82 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: S
+      - text: ShipCheck
+    - generic [ref=e5]:
+      - generic [ref=e6] [cursor=pointer]: 개요
+      - generic [ref=e7] [cursor=pointer]: 감정 여정
+      - generic [ref=e8] [cursor=pointer]: 결정적 순간
+      - generic [ref=e9] [cursor=pointer]: 인터뷰
+    - generic [ref=e11]:
+      - strong [ref=e12]: tally.so
+      - text: · 2026.03.15 실행 · 페르소나 2명
+  - generic [ref=e14]:
+    - generic [ref=e15]:
+      - heading "tally.so 검증 리포트" [level=1] [ref=e16]
+      - paragraph [ref=e17]: 2명의 AI 페르소나가 실제 제품을 사용하고 느낀 것
+    - generic [ref=e18]:
+      - generic [ref=e19]: 2명 모두 이탈
+      - generic [ref=e20]: 온보딩 과정에서 두 유저 모두 제품을 떠났습니다 — 이유는 전혀 달랐습니다
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - generic [ref=e23]:
+          - generic [ref=e24]: 서연
+          - generic [ref=e25]:
+            - generic [ref=e26]: 박서연
+            - generic [ref=e27]: 52세 · 초등학교 교사 · 서울
+          - generic [ref=e28]: 불안형
+        - generic [ref=e29]:
+          - generic [ref=e30]: 목표
+          - generic [ref=e31]: 학부모 설문조사 양식을 5분 안에 만들고 싶다
+        - generic [ref=e32]:
+          - generic [ref=e33]: 기존 도구
+          - generic [ref=e34]: Google Forms, 네이버 폼
+        - generic [ref=e35]:
+          - generic [ref=e36]: 기술 수준
+          - generic [ref=e37]: 낮음 — 새 프로그램에 불안감, 막히면 금방 포기
+        - generic [ref=e38]:
+          - generic [ref=e39]: "\"화면이 전부 영어로만 되어 있어서 일단 좀 불안하다. 구글 폼도 충분히 쓰고 있었는데 왜 이걸 써야 하나 싶기도 하다. 근데 한국어가 하나도 없네... 이거 한국에서 쓰는 도구가 맞나?\""
+          - generic [ref=e40]: — 랜딩 페이지 첫 인상
+        - generic [ref=e41]: 8단계에서 이탈 — "구글 폼으로 돌아가자"
+      - generic [ref=e42]: VS
+      - generic [ref=e43]:
+        - generic [ref=e44]:
+          - generic [ref=e45]: 도현
+          - generic [ref=e46]:
+            - generic [ref=e47]: 김도현
+            - generic [ref=e48]: 29세 · 스타트업 PM · 판교
+          - generic [ref=e49]: 파워유저
+        - generic [ref=e50]:
+          - generic [ref=e51]: 목표
+          - generic [ref=e52]: 조건부 로직과 인테그레이션을 테스트, Typeform 대비 판단
+        - generic [ref=e53]:
+          - generic [ref=e54]: 기존 도구
+          - generic [ref=e55]: Typeform, Notion Forms, Airtable
+        - generic [ref=e56]:
+          - generic [ref=e57]: 기술 수준
+          - generic [ref=e58]: 높음 — 다양한 SaaS를 빠르게 평가, 기대 미달 시 바로 이탈
+        - generic [ref=e59]:
+          - generic [ref=e60]: "\"이미 같은 목록을 10번째 보고 있는 것 같아서 진짜 지쳐가고 있다. 조건부 로직 찾으러 왔다가 그냥 폼 블록 목록만 계속 스크롤하고 있는 거면 이 도구는 내가 원하는 게 아닐 수도 있다.\""
+          - generic [ref=e61]: — 이탈 직전
+        - generic [ref=e62]: 9단계에서 이탈 — 조건부 로직을 끝내 찾지 못함
+    - generic [ref=e63]:
+      - heading "핵심 발견 3가지" [level=2] [ref=e64]
+      - generic [ref=e65]:
+        - generic [ref=e66]: "#1"
+        - generic [ref=e67]:
+          - heading "전체 UI가 영어 → 비-IT 유저 즉시 이탈 위험" [level=3] [ref=e68]
+          - paragraph [ref=e69]: 박서연은 첫 화면부터 "한국어가 하나도 없네"라고 반응. 템플릿 목록에서도 Registration form, Lead generation form 등 영어 용어에 막혀 "이게 다 뭔 말인지 하나도 모르겠다"며 패닉.
+          - generic [ref=e70]: 치명적
+      - generic [ref=e71]:
+        - generic [ref=e72]: "#2"
+        - generic [ref=e73]:
+          - heading "핵심 기능(조건부 로직)이 블록 드롭다운에서 발견 불가" [level=3] [ref=e74]
+          - paragraph [ref=e75]: 김도현은 '/' 드롭다운에서 조건부 로직을 찾으려 스크롤과 타이핑을 반복했지만 끝내 발견하지 못함. "검색 필터가 작동하는 건지 아닌 건지 피드백도 없다."
+          - generic [ref=e76]: 치명적
+      - generic [ref=e77]:
+        - generic [ref=e78]: "#3"
+        - generic [ref=e79]:
+          - heading "'Sign up' 버튼이 불안 유발 — 가입 없이 쓸 수 있는 건지 혼란" [level=3] [ref=e80]
+          - paragraph [ref=e81]: "두 페르소나 모두 우측 상단의 'Sign up' 버튼에 반복적으로 불안을 느낌. 박서연: \"결국 가입을 해야 하는 건지 확인하고 싶은데, 가입하기는 싫고...\" 김도현: \"작업하다 날아가면 짜증날 것 같다.\""
+          - generic [ref=e82]: 중요

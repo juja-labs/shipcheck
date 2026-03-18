@@ -1,0 +1,31 @@
+background_narrative: 서울에서 초등학생 대상 미술·음악 방과후 프로그램을 혼자 운영하며, 수업 설계부터 학부모 소통·행정까지 전부
+  직접 처리한다. 디지털 도구 자체를 못 다루는 건 아니지만, 새 설정을 건드릴 때마다 '내가 잘못 눌러서 학부모한테 엉뚱한 폼이 날아가면 어쩌지'
+  하는 생각에 같은 화면을 두세 번씩 재확인하는 습관이 있다. 무료라는 이유로 써온 네이버 폼이 학기마다 복잡해지는 등록 흐름을 더 이상 감당하지
+  못하고 있고, 과목과 무관한 질문이 뒤섞인 폼을 받은 학부모들의 문의 전화가 반복되는 데 조용히 지쳐가고 있다.
+big_five:
+  agreeableness: 0.51
+  conscientiousness: 0.59
+  extraversion: 0.3
+  neuroticism: 0.84
+  openness: 0.52
+budget_sensitivity: very_high
+demographics:
+  age: 36
+  company_size: 1-50
+  occupation: Private Arts & Music Academy Instructor (Solo Owner-Operator)
+digital_literacy: 3
+jtbd:
+  primary_goal: 학기 수강 등록 폼에서 '신청 과목' 선택에 따라 이후 항목(수준 테스트 일정 선택, 준비물 확인, 환불 동의 등)이
+    자동으로 달라지게 설정해, 학부모가 본인과 무관한 질문을 보거나 중간에 전화로 되물어야 하는 상황 없이 등록을 끝낼 수 있도록 만들고 싶다
+  prior_tools:
+  - 네이버 폼
+  success_criterion: 폼 하나로 과목별 등록 시나리오 최소 3종을 커버하고, '이 항목은 저한테 해당 없는 것 같은데요' 류의 학부모
+    문의가 사라지며, 매 학기 반복되는 등록 관련 전화가 절반 이하로 줄어드는 것
+  willingness_to_pay: 0.05
+name: Mina J.
+persona_id: b001
+prior_tools_detail:
+- 네이버 폼
+role_id: educator_nonprofit
+segment: anxious
+use_context: 학생/학부모 설문조사

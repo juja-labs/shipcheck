@@ -1,0 +1,2 @@
+[      75ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://www.g2.com/:0
+[     231ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ https://www.g2.com/cdn-cgi/challenge-platform/h/g/jsd/oneshot/ea2d291c0fdc/0.6102748809663175:1773711386:oCPHuUwIYI9uKqxQpTDPqkNEtECJGeNA7LahY3YvhME/9dd8891578a8ea14:0

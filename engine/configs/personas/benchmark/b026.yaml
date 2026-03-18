@@ -1,0 +1,32 @@
+background_narrative: Marcus는 핀테크 스타트업에서 Product Manager로 4년 일하다 퇴사 후 HR-tech 솔루션을
+  공동 창업했다. 노션·리니어·슬랙을 중심으로 업무 스택을 직접 설계할 만큼 도구 선택에 까다롭고, 새 툴을 도입하기 전 반드시 무료 플랜부터 직접
+  테스트한다. 예산을 쓸 때는 ROI를 스프레드시트로 계산하는 편이며, 팀원들에게 도구를 설명하는 시간조차 비용으로 인식한다.
+big_five:
+  agreeableness: 0.39
+  conscientiousness: 0.54
+  extraversion: 0.65
+  neuroticism: 0.14
+  openness: 0.78
+budget_sensitivity: high
+demographics:
+  age: 34
+  company_size: 1-10
+  occupation: Co-founder & CEO, B2B SaaS startup (5명 규모)
+digital_literacy: 4
+jtbd:
+  primary_goal: 신규 B2B 고객이 계약 직후 별도 미팅 없이도 필요한 정보(회사 규모, 사용 목적, 담당자 정보, 연동 요구사항)를
+    스스로 제출하고, 그 데이터가 Notion CRM에 자동으로 기록되는 온보딩 파이프라인을 만들고 싶다
+  prior_tools:
+  - SurveyMonkey
+  - Typeform
+  success_criterion: 신규 고객 온보딩 1건당 수동 개입 시간이 현재 45분에서 10분 이하로 줄고, 첫 응답 수집까지 24시간 내
+    완료되는 것을 3개 고객 연속으로 확인
+  willingness_to_pay: 0.2
+name: Marcus T.
+persona_id: b026
+prior_tools_detail:
+- SurveyMonkey
+- Typeform
+role_id: startup_founder
+segment: tech_savvy
+use_context: 투자자/파트너 데이터 수집

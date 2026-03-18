@@ -1,0 +1,30 @@
+background_narrative: 상파울루 출신의 소프트웨어 엔지니어 겸 창업자로, 라틴아메리카 중소기업 대상 채용 자동화 SaaS를 운영한다.
+  Notion으로 사업 전체를 관리하고 Zapier 워크플로우를 직접 짜는 등 자동화 도구에 익숙하며, 무엇이든 직접 해보고 '작동하면 스케일'하는
+  방식을 선호한다. 팀이 7명뿐이라 모든 도구 구독은 ROI 스프레드시트로 검토하고, 무료 티어로 먼저 한계까지 써보는 것이 철칙이다.
+big_five:
+  agreeableness: 0.56
+  conscientiousness: 0.83
+  extraversion: 0.75
+  neuroticism: 0.11
+  openness: 0.78
+budget_sensitivity: high
+demographics:
+  age: 34
+  company_size: 1-10
+  occupation: Co-founder & CEO, B2B HR Tech Startup (7명)
+digital_literacy: 3
+jtbd:
+  primary_goal: 신규 고객이 계약 서명 후 별도 미팅이나 이메일 없이 셀프서브로 온보딩을 완료할 수 있도록, 인테이크 폼 → Notion
+    DB 자동 기입 → Slack 알림 파이프라인을 구축해 팀의 수동 개입을 제거하고 싶다
+  prior_tools:
+  - Typeform
+  success_criterion: 신규 고객이 계약 후 24시간 이내에 팀 개입 없이 온보딩을 완료하고, 주당 3시간 이상 쓰이던 데이터 입력
+    및 후속 이메일 작업이 사라지는 것
+  willingness_to_pay: 0.32
+name: Rafael C.
+persona_id: b028
+prior_tools_detail:
+- Typeform
+role_id: startup_founder
+segment: power_user
+use_context: 리드 캡처 및 고객 피드백 수집

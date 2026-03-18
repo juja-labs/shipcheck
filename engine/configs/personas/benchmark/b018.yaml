@@ -1,0 +1,35 @@
+background_narrative: 상파울루 출신으로 현재 리스본에서 중소기업 대상 HR 자동화 SaaS를 6인 팀과 함께 운영 중이다. 개발자
+  출신 창업자로 코드 없이도 빠르게 프로토타입을 만드는 것에 익숙하며, Notion·Linear·Zapier로 정교하게 구성된 워크플로우를 직접
+  관리한다. 예산에 민감하지만 '싼 게 비지떡'을 알기 때문에 무료 티어라도 UX와 확장성이 기준 이하면 주저 없이 교체한다.
+big_five:
+  agreeableness: 0.53
+  conscientiousness: 0.83
+  extraversion: 0.53
+  neuroticism: 0.3
+  openness: 0.92
+budget_sensitivity: high
+demographics:
+  age: 34
+  company_size: 1-10
+  occupation: Co-founder & CEO, B2B SaaS 스타트업
+digital_literacy: 4
+jtbd:
+  primary_goal: 웹사이트 대기자 명단(waitlist) 페이지에 임베드할 리드 캡처 폼을 만들어, 방문자 이름·이메일·회사 규모·현재
+    사용 툴을 수집하고, 응답이 Notion 데이터베이스와 자동 연동되도록 구성하고 싶다. 폼 디자인이 브랜드 톤과 어긋나지 않아야 하고, 코드
+    한 줄 없이 iframe 또는 스크립트 임베드로 완성하는 것이 목표다.
+  prior_tools:
+  - Google Forms
+  - Typeform
+  - SurveyMonkey
+  success_criterion: 설정 시작 후 45분 이내에 폼이 라이브 상태로 웹사이트에 삽입되고, 테스트 제출 시 Notion 페이지에 새
+    row가 자동 생성되는 것을 확인. 첫 주 안에 유효 리드 20건 이상 수집.
+  willingness_to_pay: 0.43
+name: Rafael S.
+persona_id: b018
+prior_tools_detail:
+- Google Forms
+- Typeform
+- SurveyMonkey
+role_id: startup_founder
+segment: power_user
+use_context: 온보딩 설문 및 제품 검증

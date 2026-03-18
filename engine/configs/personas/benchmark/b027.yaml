@@ -1,0 +1,32 @@
+background_narrative: Renata는 캐나다 토론토에서 5년째 1인 회복 코칭 실무를 운영하며, 화상통화와 암호화 메시지 앱을 통해
+  8~12명의 클라이언트를 동시에 관리한다. 클라이언트 기밀 유지에 극도로 신중하지만, 막상 본인의 인테이크 프로세스는 2021년에 한 오후 만에
+  급조한 Google Forms 설문지를 아직 쓰고 있으며, 그 사실이 늘 마음 한켠에 걸린다. 이전에 새 도구로 갈아탔다가 예상보다 시간과 돈을
+  더 쓴 경험이 있어, 현재 도구가 불만족스러워도 바꾸는 결정을 최대한 미루는 편이다.
+big_five:
+  agreeableness: 0.45
+  conscientiousness: 0.31
+  extraversion: 0.22
+  neuroticism: 0.76
+  openness: 0.33
+budget_sensitivity: very_high
+demographics:
+  age: 43
+  company_size: 1-10
+  occupation: Certified Recovery Coach (Sobriety Coach), 1인 사업자
+digital_literacy: 3
+jtbd:
+  primary_goal: 약물·알코올 이력, 정신건강 배경, 현재 지지 네트워크, 세션 목표, 비상 연락처를 섹션별로 구조화한 인테이크 폼을 만들어,
+    신규 클라이언트가 첫 세션 전에 필요한 모든 정보를 빠짐없이 제출하도록 하고 — 동시에 폼의 외관이 '1인 코치의 급조된 설문'이 아닌 '전문
+    실무자의 온보딩 프로세스'처럼 보이게 해 클라이언트의 초기 신뢰를 확보한다
+  prior_tools:
+  - Google Forms
+  success_criterion: 신규 클라이언트가 예약 후 24시간 이내에 폼을 완료하고, '이 질문은 무슨 뜻인가요?' 같은 추가 이메일 없이
+    응답이 들어오며, 첫 세션 전에 날것의 스프레드시트를 다시 파싱하지 않고도 바로 참고할 수 있는 정리된 형태로 수신된다
+  willingness_to_pay: 0.08
+name: Renata B.
+persona_id: b027
+prior_tools_detail:
+- Google Forms
+role_id: small_biz_operator
+segment: anxious
+use_context: 클라이언트 인테이크 설문

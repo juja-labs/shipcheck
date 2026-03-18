@@ -1,0 +1,36 @@
+background_narrative: 8년째 소형 로컬 비즈니스를 대상으로 브랜딩·웹 패키지를 납품하는 1인 프리랜서다. 프로젝트마다 Google
+  Sheets로 체크리스트를 직접 만들어 납품 단계별로 체크할 만큼 체계적이지만, 검증되지 않은 새 도구는 쉽게 손대지 않는다 — 신규 도구를 도입하기
+  전엔 반드시 공식 문서, G2·ProductHunt 후기, 유튜브 튜토리얼을 순서대로 확인하는 루틴이 있다. 클라이언트 폼 작업은 수년째 Typeform
+  또는 Google Forms로만 처리해 왔으며, 스타일 커스터마이징 한계에 불편함을 느끼면서도 '익숙한 게 낫다'는 판단으로 유지하고 있다.
+big_five:
+  agreeableness: 0.57
+  conscientiousness: 0.91
+  extraversion: 0.44
+  neuroticism: 0.46
+  openness: 0.13
+budget_sensitivity: high
+demographics:
+  age: 38
+  company_size: 1-5
+  occupation: Freelance Web Designer (1인 스튜디오, 독일 뮌헨 기반)
+digital_literacy: 3
+jtbd:
+  primary_goal: 소형 부티크 뷰티 브랜드 클라이언트의 뉴스레터 론칭 프로젝트 일환으로, 브랜드 컬러(#D4A5A0 계열)와 폰트(Playfair
+    Display)가 정확히 적용된 이메일 구독 폼을 납품 기한 5일 안에 완성해 클라이언트의 Webflow 사이트에 embed 코드로 삽입 가능한
+    상태로 전달해야 한다. Typeform 기본 테마로는 브랜드 톤을 맞출 수 없어 대안을 탐색 중이다.
+  prior_tools:
+  - Canva
+  - Typeform
+  - Google Forms
+  success_criterion: ① 폼이 클라이언트 Webflow 페이지에 깨짐 없이 정상 렌더링되고, ② 테스트 제출 1건이 클라이언트 이메일함에
+    즉시 수신되며, ③ 추가 도구 학습에 소요된 시간이 1시간 이내일 것. 디자인 수정 요청 없이 클라이언트 1차 승인이 나면 완료로 판단.
+  willingness_to_pay: 0.26
+name: Sandra K.
+persona_id: b024
+prior_tools_detail:
+- Canva
+- Typeform
+- Google Forms
+role_id: creative_freelancer
+segment: cautious_methodical
+use_context: 클라이언트 프로젝트 브리프

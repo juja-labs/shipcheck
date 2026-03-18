@@ -1,0 +1,36 @@
+background_narrative: 프랑스 리옹을 기반으로 혼자 운영하는 1인 사진 스튜디오의 주인으로, 필름 사진과 시각 문화를 주제로 한 뉴스레터를
+  간헐적으로 발행하고 있다. 디자인 감각이 있어 Canva로 SNS 콘텐츠를 직접 만들고 새 도구를 발견하면 즉시 시도해보는 편이지만, 한 도구에
+  오래 정착하지 못하고 워크플로우가 들쭉날쭉하다. 혼자 모든 비용을 감당하다 보니 월 구독료에 민감하고, 무료 티어로 충분히 해결할 수 없다는 확신이
+  생기기 전까지는 결제를 미루는 경향이 있다.
+big_five:
+  agreeableness: 0.38
+  conscientiousness: 0.27
+  extraversion: 0.36
+  neuroticism: 0.2
+  openness: 0.77
+budget_sensitivity: high
+demographics:
+  age: 31
+  company_size: 1-5
+  occupation: Freelance Documentary Photographer & Newsletter Creator
+digital_literacy: 3
+jtbd:
+  primary_goal: 인스타그램 팔로워 2,300명을 실제 이메일 구독자로 전환하기 위해, 포트폴리오 웹사이트에 자신의 미니멀·다크 무드 브랜딩과
+    어울리는 구독 폼을 직접 삽입하고 싶다. Google Forms는 너무 투박하고 Typeform은 유료 기능 없이는 브랜딩이 안 되어 포기한
+    상태.
+  prior_tools:
+  - Canva
+  - Google Forms
+  - Typeform
+  success_criterion: 별도 개발자 없이 48시간 안에 폼이 포트폴리오 사이트에 라이브 배포되고, 폼 색상·폰트가 자신의 브랜드 팔레트와
+    일치하며, 첫 4주 안에 이메일 리스트 40명 이상을 확보하는 것.
+  willingness_to_pay: 0.29
+name: Camille D.
+persona_id: b003
+prior_tools_detail:
+- Canva
+- Google Forms
+- Typeform
+role_id: creative_freelancer
+segment: explorer
+use_context: 뉴스레터 구독 및 브랜딩 폼

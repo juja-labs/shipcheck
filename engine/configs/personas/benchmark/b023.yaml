@@ -1,0 +1,42 @@
+background_narrative: Simone is a Rotterdam-based freelance photographer who shoots
+  lifestyle and portrait work while sharing behind-the-scenes content to 28K Instagram
+  followers and a growing YouTube channel — all managed entirely solo with no assistant
+  or agency. She's vocal online and doesn't hold back when software wastes her time
+  or hides basic features behind a paywall; her community knows her as someone who
+  tells it like it is. While she's comfortable with tools she's relied on for years,
+  she tends to shut down fast when setup looks complicated, and quickly loses patience
+  if the first five minutes don't feel intuitive.
+big_five:
+  agreeableness: 0.29
+  conscientiousness: 0.34
+  extraversion: 0.8
+  neuroticism: 0.58
+  openness: 0.43
+budget_sensitivity: high
+demographics:
+  age: 33
+  company_size: 1-5
+  occupation: Freelance Lifestyle Photographer & Content Creator
+digital_literacy: 2
+jtbd:
+  primary_goal: Ahead of her Lightroom preset pack launch next month, place a branded
+    email subscription form on her website homepage and Instagram link-in-bio page
+    to convert interested followers into a direct list she owns — so she's not depending
+    on the algorithm to reach people on launch day.
+  prior_tools:
+  - Google Forms
+  - Typeform
+  - Canva
+  success_criterion: The form is live and collecting real signups within 30 minutes
+    of starting, looks clean and on-brand on mobile without extra CSS work, and stays
+    fully functional on a free plan past the first 100 responses.
+  willingness_to_pay: 0.16
+name: Simone V.
+persona_id: b023
+prior_tools_detail:
+- Google Forms
+- Typeform
+- Canva
+role_id: creative_freelancer
+segment: critical_vocal
+use_context: 뉴스레터 구독 및 브랜딩 폼

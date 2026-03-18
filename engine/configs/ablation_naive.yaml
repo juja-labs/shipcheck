@@ -1,0 +1,11 @@
+# Naive only — full 결과는 dryrun_001에 이미 있음
+experiment_id: "ablation_naive"
+persona_dir: "configs/personas/generated"
+mode: "naive"
+products:
+  - name: "tally"
+    url: "https://tally.so"
+max_steps: 10
+headless: false
+concurrency: 2
+llm_model: "sonnet"

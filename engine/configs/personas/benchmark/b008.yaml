@@ -1,0 +1,36 @@
+background_narrative: Elena는 바르셀로나 소재 커뮤니티 기반 비영리 단체에서 성인 대상 직업 재교육 프로그램을 운영하며, 한
+  학기에 6~8개 강좌의 수강 신청을 혼자 관리한다. 디지털 도구를 실용적으로 활용하는 편이라 헬프 문서를 읽고 따라 하는 건 어렵지 않지만, 설정에
+  지나치게 많은 시간을 쓰는 것을 싫어하고 '일단 돌아가면 바꾸지 않는' 성향이 강하다. 예산 승인 없이 유료 도구를 도입하는 건 거의 불가능해서,
+  새 도구를 시도할 때는 무료 플랜에서 핵심 기능이 충분한지 먼저 꼼꼼히 확인하는 습관이 있다.
+big_five:
+  agreeableness: 0.44
+  conscientiousness: 0.51
+  extraversion: 0.43
+  neuroticism: 0.24
+  openness: 0.49
+budget_sensitivity: very_high
+demographics:
+  age: 38
+  company_size: 1-50
+  occupation: 성인 계속교육 코디네이터 (소규모 비영리 단체, 바르셀로나)
+digital_literacy: 3
+jtbd:
+  primary_goal: 학습자가 선택한 수강 레벨(초급·중급·고급)과 희망 요일에 따라 이후 질문 항목이 자동으로 달라지는 수강 신청 폼을 만들어,
+    운영자가 접수 후 수작업으로 지원자를 분류·재배정하는 반복 작업을 없애고 싶다. 특히 사전 이수 조건이 있는 과목은 조건 미충족자에게 즉시
+    안내 메시지가 노출되어 행정 문의 이메일을 줄이는 것이 목표다.
+  prior_tools:
+  - Google Forms
+  - Microsoft Forms
+  - 네이버 폼
+  success_criterion: 폼 제작 소요 시간 2시간 이내, 조건 분기 경로 최소 3개 정상 작동, 다음 학기 파일럿 접수에서 참가자 15명이
+    혼동 없이 완료하고 별도 스프레드시트 수동 분류 작업 없이 결과를 바로 강좌 배정에 활용 가능한 상태
+  willingness_to_pay: 0.16
+name: Elena M.
+persona_id: b008
+prior_tools_detail:
+- Google Forms
+- Microsoft Forms
+- 네이버 폼
+role_id: educator_nonprofit
+segment: calm
+use_context: 이벤트 참가 등록

@@ -1,0 +1,214 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: S
+      - text: ShipCheck
+    - generic [ref=e6]:
+      - generic [ref=e7]: 워크스페이스
+      - generic [ref=e8] [cursor=pointer]:
+        - generic [ref=e9]: ◻
+        - text: 대시보드
+      - generic [ref=e10] [cursor=pointer]:
+        - generic [ref=e11]: ▶
+        - text: 시뮬레이션
+        - generic [ref=e12]: "30"
+      - generic [ref=e13] [cursor=pointer]:
+        - generic [ref=e14]: ◉
+        - text: 페르소나
+        - generic [ref=e15]: "30"
+      - generic [ref=e16] [cursor=pointer]:
+        - generic [ref=e17]: ◧
+        - text: 리포트
+    - generic [ref=e18]:
+      - generic [ref=e19]: 세그먼트
+      - generic [ref=e20] [cursor=pointer]:
+        - generic [ref=e21]: ●
+        - text: 코어
+        - generic [ref=e22]: "12"
+      - generic [ref=e23] [cursor=pointer]:
+        - generic [ref=e24]: ●
+        - text: 엣지
+        - generic [ref=e25]: "12"
+      - generic [ref=e26] [cursor=pointer]:
+        - generic [ref=e27]: ●
+        - text: 와일드카드
+        - generic [ref=e28]: "6"
+    - generic [ref=e29]:
+      - generic [ref=e30]: TaskFlow v1.2
+      - generic [ref=e31]: 스테이징 · 2026.03.15 실행
+  - generic [ref=e32]:
+    - generic [ref=e33]:
+      - generic [ref=e34] [cursor=pointer]: 시뮬레이션 뷰
+      - generic [ref=e35] [cursor=pointer]: 페르소나 인터뷰
+      - generic [ref=e36] [cursor=pointer]: 리포트 요약
+      - generic [ref=e37] [cursor=pointer]: 설문 결과
+      - generic [ref=e38] [cursor=pointer]: 감정 궤적
+      - generic [ref=e40]: 조건부 출시
+    - generic [ref=e43]:
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - text: Action Trace
+          - generic [ref=e46]: 6 actions
+        - generic [ref=e47]:
+          - generic [ref=e48] [cursor=pointer]:
+            - generic [ref=e49]:
+              - generic [ref=e50]: 14:23:01
+              - generic [ref=e51]: goto
+              - generic [ref=e52]: 😐
+            - generic [ref=e53]: landing_page
+            - generic [ref=e54]: TaskFlow 랜딩 페이지 도착. 히어로 섹션 스캔 시작.
+          - generic [ref=e55] [cursor=pointer]:
+            - generic [ref=e56]:
+              - generic [ref=e57]: 14:24:18
+              - generic [ref=e58]: click
+              - generic [ref=e59]: 😐
+            - generic [ref=e60]: signup_button
+            - generic [ref=e61]: "\"무료로 시작하기\" 버튼 클릭. 가입 의향은 있으나 소셜 로그인 부재에 불안."
+          - generic [ref=e62] [cursor=pointer]:
+            - generic [ref=e63]:
+              - generic [ref=e64]: 14:25:44
+              - generic [ref=e65]: fill
+              - generic [ref=e66]: 😐
+            - generic [ref=e67]: profile_form
+            - generic [ref=e68]: 이름, 직업 입력. 인지 부하 낮음. 멘탈 모델과 일치.
+          - generic [ref=e69] [cursor=pointer]:
+            - generic [ref=e70]:
+              - generic [ref=e71]: 14:26:32
+              - generic [ref=e72]: select
+              - generic [ref=e73]: 😕
+            - generic [ref=e74]: work_type_dropdown
+            - generic [ref=e75]: 업무 유형에서 "번역" 탐색 실패. 정보 향기 급감. 혼란 시작.
+          - generic [ref=e76] [cursor=pointer]:
+            - generic [ref=e77]:
+              - generic [ref=e78]: 14:28:13
+              - generic [ref=e79]: scan
+              - generic [ref=e80]: 😤
+            - generic [ref=e81]: template_selection
+            - generic [ref=e82]: 템플릿 6개 스캔. "칸반", "스프린트" 등 미지 용어. 인지 과부하 → Fogg Ability 임계값 미달.
+          - generic [ref=e83] [cursor=pointer]:
+            - generic [ref=e84]:
+              - generic [ref=e85]: 14:28:41
+              - generic [ref=e86]: exit
+              - generic [ref=e87]: 😠
+            - generic [ref=e88]: browser_tab_close
+            - generic [ref=e89]: "이탈. BDI-E: 도구가 자신의 직군에 맞지 않다는 신념 형성. 브라우저 탭 닫음."
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - generic [ref=e97]: taskflow.app/onboarding/step3
+          - generic [ref=e98]:
+            - generic [ref=e99]: 프로젝트 템플릿을 선택하세요
+            - generic [ref=e100]: 업무 스타일에 맞는 템플릿으로 시작하면 더 빠르게 셋업할 수 있어요.
+            - generic [ref=e101]:
+              - generic [ref=e102] [cursor=pointer]:
+                - generic [ref=e103]: 이해 불가
+                - generic [ref=e104]: 📋
+                - generic [ref=e105]: 칸반 보드
+                - generic [ref=e106]: 팀 프로젝트 관리
+              - generic [ref=e107] [cursor=pointer]:
+                - generic [ref=e108]: 미지 용어
+                - generic [ref=e109]: 📊
+                - generic [ref=e110]: 간트 차트
+                - generic [ref=e111]: 장기 프로젝트 일정
+              - generic [ref=e112] [cursor=pointer]:
+                - generic [ref=e113]: 미지 용어
+                - generic [ref=e114]: 🏃
+                - generic [ref=e115]: 스프린트
+                - generic [ref=e116]: 애자일 소프트웨어 개발
+              - generic [ref=e117] [cursor=pointer]:
+                - generic [ref=e118]: 📝
+                - generic [ref=e119]: 콘텐츠 달력
+                - generic [ref=e120]: 마케팅/SNS 운영
+              - generic [ref=e121] [cursor=pointer]:
+                - generic [ref=e122]: ✅
+                - generic [ref=e123]: 업무 목록
+                - generic [ref=e124]: 개인 생산성
+              - generic [ref=e125] [cursor=pointer]:
+                - generic [ref=e126]: ➕
+                - generic [ref=e127]: 빈 프로젝트
+                - generic [ref=e128]: 직접 구성
+            - generic [ref=e129]:
+              - generic [ref=e130]: 건너뛰기
+              - generic [ref=e131]: 다음 →
+        - generic [ref=e132]:
+          - generic [ref=e133]: 순
+          - generic [ref=e134]:
+            - generic [ref=e135]: 김순자 · 52세 번역가
+            - generic [ref=e136]: 와일드카드 세그먼트 · 기술 숙련도 매우 낮음
+          - generic [ref=e137]:
+            - generic [ref=e138]: 좌절
+            - generic [ref=e139]: P:-0.6 A:0.5 D:-0.5
+      - generic [ref=e140]:
+        - generic [ref=e141]: 5-Layer Engine State
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - generic [ref=e144]: L2
+            - text: 인지 Cognitive
+          - generic [ref=e145]:
+            - generic [ref=e146]: 정보 향기
+            - generic [ref=e149]: "0.1"
+          - generic [ref=e150]:
+            - generic [ref=e151]: 인지 부하
+            - generic [ref=e154]: 85%
+          - generic [ref=e155]:
+            - generic [ref=e156]: 멘탈 모델 Gap
+            - generic [ref=e159]: HIGH
+          - generic [ref=e160]:
+            - generic [ref=e161]: TAM 유용성
+            - generic [ref=e164]: "0.3"
+        - generic [ref=e165]:
+          - generic [ref=e166]:
+            - generic [ref=e167]: L3
+            - text: 감정 Emotion
+          - generic [ref=e168]: 좌절 (frustration)
+          - generic [ref=e169]:
+            - generic [ref=e170]: Pleasure
+            - generic [ref=e173]: "-0.6"
+          - generic [ref=e174]:
+            - generic [ref=e175]: Arousal
+            - generic [ref=e178]: "0.5"
+          - generic [ref=e179]:
+            - generic [ref=e180]: Dominance
+            - generic [ref=e183]: "-0.5"
+          - generic [ref=e184]: "volatility σ=0.25 (neuroticism: 68%)"
+        - generic [ref=e185]:
+          - generic [ref=e186]:
+            - generic [ref=e187]: L4
+            - text: 의사결정 Decision
+          - generic [ref=e188]:
+            - generic [ref=e189]: Belief
+            - generic [ref=e190]: "\"이 도구는 IT 개발자를 위한 것이다\""
+          - generic [ref=e191]:
+            - generic [ref=e192]: Desire
+            - generic [ref=e193]: "\"번역 마감을 체계적으로 관리하고 싶다\""
+          - generic [ref=e194]:
+            - generic [ref=e195]: Intent
+            - generic [ref=e196]: → 이탈 (belief-desire 불일치)
+          - generic [ref=e197]:
+            - generic [ref=e198]: FOGG CHECK (B = M × A × P)
+            - generic [ref=e199]:
+              - generic [ref=e200]:
+                - generic [ref=e201]: Motivation
+                - generic [ref=e202]: "0.7"
+              - generic [ref=e203]:
+                - generic [ref=e204]: Ability
+                - generic [ref=e205]: "0.2"
+              - generic [ref=e206]:
+                - generic [ref=e207]: Prompt
+                - generic [ref=e208]: "0.5"
+            - generic [ref=e209]: Ability 미달 → 행동 불발
+        - generic [ref=e210]:
+          - generic [ref=e211]:
+            - generic [ref=e212]: L5
+            - text: 메모리 Memory
+          - generic [ref=e213]:
+            - generic [ref=e214]: observation
+            - generic [ref=e215]: 템플릿 선택 화면에 번역/출판 관련 옵션이 없음. 모든 템플릿이 IT 용어로 되어 있음.
+            - generic [ref=e216]: "importance: 0.8 · recency: 1.0"
+          - generic [ref=e217]:
+            - generic [ref=e218]: reflection
+            - generic [ref=e219]: 이 도구는 개발자나 마케터 같은 IT 직군을 위한 것이다. 번역가인 나에게는 맞지 않는다. 익숙한 엑셀로 돌아가는 게 나을 것 같다.
+            - generic [ref=e220]: "importance: 0.9 · recency: 1.0"
+          - generic [ref=e221]:
+            - generic [ref=e222]: observation
+            - generic [ref=e223]: 비밀번호 생성 규칙이 복잡했다. 소셜 로그인 옵션이 없었다.
+            - generic [ref=e224]: "importance: 0.5 · recency: 0.7"

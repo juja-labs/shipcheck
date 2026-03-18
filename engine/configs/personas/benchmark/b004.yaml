@@ -1,0 +1,32 @@
+background_narrative: Daniel은 핀테크 스타트업(직원 약 35명)에서 내부 툴링과 백오피스 시스템을 전담하는 풀스택 개발자다.
+  기존 폼 빌더로 고객 서포트 폼을 운영해왔지만 브랜딩 제약과 API 연동 과정의 번거로움에 더 나은 대안을 주기적으로 탐색한다.
+  새로운 기술을 빠르게 흡수하는 편이지만 과도한 설정 오버헤드를 싫어하고, '작동하면 됐다'는 실용주의적 태도로 도구를 평가한다.
+big_five:
+  agreeableness: 0.5
+  conscientiousness: 0.54
+  extraversion: 0.43
+  neuroticism: 0.24
+  openness: 0.77
+budget_sensitivity: low
+demographics:
+  age: 31
+  company_size: 11-50
+  occupation: Full-Stack Developer
+digital_literacy: 4
+jtbd:
+  primary_goal: 고객 서포트 티켓 접수 폼을 사내 Notion 페이지와 Slack 채널에 임베드하고, 제출 시 Zapier 또는 웹훅으로
+    Airtable 베이스에 자동 기록되도록 30분 이내에 연동 완료하고 싶다
+  prior_tools:
+  - Typeform
+  - Airtable
+  success_criterion: 폼 빌드 → 임베드 코드 삽입 → 웹훅 연동 → Airtable 자동 기록까지 전 과정을 1시간 내 완료하고,
+    팀원이 별도 교육 없이 폼을 편집할 수 있는 상태
+  willingness_to_pay: 0.79
+name: Daniel S.
+persona_id: b004
+prior_tools_detail:
+- Typeform
+- Airtable
+role_id: tech_professional
+segment: tech_savvy
+use_context: 서포트 티켓 수집 및 웹훅 연동

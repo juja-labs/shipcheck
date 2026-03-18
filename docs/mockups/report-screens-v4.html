@@ -1,0 +1,2530 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShipCheck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f4f5f7;
+      --surface: #ffffff;
+      --surface-alt: #f9fafb;
+      --border: #e5e7eb;
+      --border-focus: #d1d5db;
+      --text: #111827;
+      --text-2: #4b5563;
+      --text-3: #9ca3af;
+      --blue: #2563eb;
+      --blue-light: #eff6ff;
+      --green: #059669;
+      --green-light: #ecfdf5;
+      --amber: #d97706;
+      --amber-light: #fffbeb;
+      --red: #dc2626;
+      --red-light: #fef2f2;
+      --violet: #7c3aed;
+      --violet-light: #f5f3ff;
+      --font: 'Noto Sans KR', 'DM Sans', sans-serif;
+      --mono: 'DM Mono', monospace;
+      --radius: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      font-family: var(--font);
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── App Shell ── */
+    .app {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 220px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .sidebar-logo {
+      padding: 20px 20px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--text);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .sidebar-section {
+      padding: 12px 12px 8px;
+    }
+
+    .sidebar-section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 0 8px;
+      margin-bottom: 4px;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .sidebar-item:hover { background: var(--surface-alt); }
+    .sidebar-item.active { background: var(--blue-light); color: var(--blue); font-weight: 600; }
+
+    .sidebar-item .icon {
+      width: 18px;
+      text-align: center;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .sidebar-item .badge {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--surface-alt);
+      padding: 1px 6px;
+      border-radius: 10px;
+      color: var(--text-3);
+    }
+
+    .sidebar-project {
+      margin-top: auto;
+      padding: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .project-meta {
+      font-size: 11px;
+      color: var(--text-3);
+    }
+
+    /* ── Main Area ── */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .topbar {
+      height: 48px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .tab {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-3);
+      padding: 12px 16px;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .tab:hover { color: var(--text-2); }
+    .tab.active { color: var(--text); border-bottom-color: var(--text); font-weight: 600; }
+
+    .topbar-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .topbar-badge {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    .topbar-badge.warning {
+      background: var(--amber-light);
+      color: var(--amber);
+    }
+
+    .content {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .screen {
+      display: none;
+      height: 100%;
+    }
+
+    .screen.active { display: flex; }
+
+    /* ════════════════════════════════════════════
+       Screen 6: SNS Feed
+       ════════════════════════════════════════════ */
+    .sns-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      height: 100%;
+      overflow: hidden;
+    }
+    .sns-feed {
+      overflow-y: auto;
+      padding: 24px 32px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .sns-sidebar {
+      border-left: 1px solid var(--border);
+      padding: 24px;
+      overflow-y: auto;
+      background: var(--surface);
+    }
+
+    /* Post */
+    .post {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .post-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+    .post-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .post-handle {
+      font-size: 12px;
+      color: var(--text-3);
+    }
+    .post-segment {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: auto;
+    }
+    .seg-anxious { background: var(--red-light); color: var(--red); }
+    .seg-power { background: var(--blue-light); color: var(--blue); }
+    .seg-intuitive { background: var(--violet-light); color: var(--violet); }
+    .seg-calm { background: var(--green-light); color: var(--green); }
+    .seg-explorer { background: var(--amber-light); color: var(--amber); }
+    .seg-critical { background: #fef2f2; color: #b91c1c; }
+    .seg-methodical { background: var(--green-light); color: var(--green); }
+    .seg-novice { background: #f5f5f5; color: #6b7280; }
+
+    .post-body {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 14px;
+      white-space: pre-line;
+    }
+    .post-product-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--blue);
+      background: var(--blue-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    .post-actions {
+      display: flex;
+      gap: 24px;
+      font-size: 12px;
+      color: var(--text-3);
+    }
+    .post-action {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .post-action:hover { color: var(--text-2); }
+    .post-action .count { font-family: var(--mono); }
+
+    /* Replies */
+    .replies {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--surface-alt);
+    }
+    .reply {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .reply-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .reply-content {
+      flex: 1;
+    }
+    .reply-name {
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .reply-handle {
+      font-size: 11px;
+      color: var(--text-3);
+    }
+    .reply-text {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-2);
+      margin-top: 2px;
+    }
+    .reply-actions {
+      display: flex;
+      gap: 16px;
+      font-size: 11px;
+      color: var(--text-3);
+      margin-top: 4px;
+    }
+
+    /* SNS Sidebar Stats */
+    .sns-stat-card {
+      background: var(--surface-alt);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .sns-stat-label {
+      font-size: 11px;
+      color: var(--text-3);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .sns-stat-value {
+      font-family: var(--mono);
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .sns-stat-sub {
+      font-size: 12px;
+      color: var(--text-3);
+      margin-top: 2px;
+    }
+    .sns-trending {
+      margin-top: 8px;
+    }
+    .sns-trending-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .sns-trending-item:last-child { border-bottom: none; }
+    .sns-trending-tag {
+      font-weight: 600;
+    }
+    .sns-trending-count {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-3);
+    }
+
+    /* ════════════════════════════════════════════
+       Screen 1: Simulation View
+       ════════════════════════════════════════════ */
+    .sim-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr 340px;
+      height: 100%;
+      width: 100%;
+    }
+
+    /* Action Trace Panel */
+    .trace-panel {
+      border-right: 1px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 16px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .panel-header .count {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-3);
+      background: var(--surface-alt);
+      padding: 1px 6px;
+      border-radius: 10px;
+    }
+
+    .trace-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .trace-entry {
+      padding: 10px 12px;
+      border-radius: 6px;
+      margin-bottom: 2px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .trace-entry:hover { background: var(--surface-alt); }
+    .trace-entry.active { background: var(--blue-light); border-color: rgba(37,99,235,0.2); }
+    .trace-entry.critical { background: var(--red-light); border-color: rgba(220,38,38,0.15); }
+
+    .trace-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .trace-time {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-3);
+    }
+
+    .trace-type {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      padding: 1px 6px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    .trace-type.click { background: var(--blue-light); color: var(--blue); }
+    .trace-type.scroll { background: var(--surface-alt); color: var(--text-3); }
+    .trace-type.type { background: var(--green-light); color: var(--green); }
+    .trace-type.wait { background: var(--amber-light); color: var(--amber); }
+    .trace-type.exit { background: var(--red-light); color: var(--red); }
+
+    .trace-emotion {
+      margin-left: auto;
+      font-size: 14px;
+    }
+
+    .trace-target {
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .trace-reason {
+      font-size: 11px;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
+
+    /* Product View (center) */
+    .product-view {
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .browser-frame {
+      width: 100%;
+      max-width: 680px;
+      background: var(--surface);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    .browser-bar {
+      height: 36px;
+      background: var(--surface-alt);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 8px;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .browser-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .browser-dot.r { background: #ff5f57; }
+    .browser-dot.y { background: #ffbd2e; }
+    .browser-dot.g { background: #28ca41; }
+
+    .browser-url {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-2);
+    }
+
+    .browser-content {
+      padding: 32px 40px;
+    }
+
+    .mock-heading {
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .mock-sub {
+      font-size: 13px;
+      color: var(--text-3);
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .template-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .template-card:hover { border-color: var(--blue); }
+
+    .template-card.highlighted {
+      border-color: var(--red);
+      background: var(--red-light);
+      position: relative;
+    }
+
+    .template-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .template-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .template-desc {
+      font-size: 11px;
+      color: var(--text-3);
+    }
+
+    .highlight-annotation {
+      position: absolute;
+      top: -12px;
+      right: -8px;
+      background: var(--red);
+      color: white;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
+    .mock-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .mock-btn {
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-2);
+    }
+
+    .mock-btn.primary {
+      background: var(--text);
+      color: white;
+      border-color: var(--text);
+    }
+
+    .product-persona-bar {
+      width: 100%;
+      max-width: 680px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--surface);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .persona-mini-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #f87171;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .persona-mini-info {
+      flex: 1;
+    }
+
+    .persona-mini-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .persona-mini-desc {
+      font-size: 11px;
+      color: var(--text-3);
+    }
+
+    .persona-mini-emotion {
+      text-align: right;
+    }
+
+    .emotion-state {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .emotion-state.negative { color: var(--red); }
+    .emotion-state.neutral { color: var(--text-3); }
+    .emotion-state.positive { color: var(--green); }
+
+    .emotion-pad {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-3);
+    }
+
+    /* 5-Layer Panel (right) */
+    .layer-panel {
+      border-left: 1px solid var(--border);
+      background: var(--surface);
+      overflow-y: auto;
+    }
+
+    .layer-section {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .layer-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-3);
+      margin-bottom: 12px;
+    }
+
+    .layer-badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    .layer-badge.l2 { background: var(--blue-light); color: var(--blue); }
+    .layer-badge.l3 { background: var(--violet-light); color: var(--violet); }
+    .layer-badge.l4 { background: var(--amber-light); color: var(--amber); }
+    .layer-badge.l5 { background: var(--green-light); color: var(--green); }
+
+    .layer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .layer-row-label {
+      font-size: 12px;
+      color: var(--text-2);
+    }
+
+    .layer-row-value {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .bar-container {
+      flex: 1;
+      margin: 0 10px;
+      height: 6px;
+      background: var(--surface-alt);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    .bar-fill.blue { background: var(--blue); }
+    .bar-fill.red { background: var(--red); }
+    .bar-fill.green { background: var(--green); }
+    .bar-fill.amber { background: var(--amber); }
+    .bar-fill.violet { background: var(--violet); }
+
+    .fogg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .fogg-item {
+      padding: 8px;
+      border-radius: 6px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .fogg-item.pass { background: var(--green-light); border-color: rgba(5,150,105,0.2); }
+    .fogg-item.fail { background: var(--red-light); border-color: rgba(220,38,38,0.2); }
+
+    .fogg-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 4px;
+    }
+
+    .fogg-value {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .fogg-item.pass .fogg-value { color: var(--green); }
+    .fogg-item.fail .fogg-value { color: var(--red); }
+
+    .fogg-result {
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .fogg-result.fail { background: var(--red-light); color: var(--red); }
+
+    .bdi-block {
+      padding: 10px 12px;
+      background: var(--surface-alt);
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .bdi-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 2px;
+    }
+
+    .bdi-value {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .memory-entry {
+      padding: 10px 12px;
+      background: var(--surface-alt);
+      border-radius: 6px;
+      margin-bottom: 6px;
+      border-left: 3px solid var(--border);
+    }
+
+    .memory-entry.observation { border-left-color: var(--blue); }
+    .memory-entry.reflection { border-left-color: var(--violet); }
+
+    .memory-type {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .memory-type.obs { color: var(--blue); }
+    .memory-type.ref { color: var(--violet); }
+
+    .memory-text {
+      font-size: 12px;
+      color: var(--text-2);
+      margin: 4px 0;
+      line-height: 1.5;
+    }
+
+    .memory-score {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-3);
+    }
+
+    /* ════════════════════════════════════════════
+       Screen 2: Interview
+       ════════════════════════════════════════════ */
+    .interview-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      height: 100%;
+      width: 100%;
+    }
+
+    .interview-persona {
+      border-right: 1px solid var(--border);
+      background: var(--surface);
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .persona-avatar-lg {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #f87171;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .persona-name-lg {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .persona-desc-lg {
+      font-size: 13px;
+      color: var(--text-2);
+      margin-bottom: 16px;
+    }
+
+    .persona-field {
+      margin-bottom: 12px;
+    }
+
+    .persona-field-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .persona-field-value {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .trait-mini {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .trait-mini-label {
+      font-size: 11px;
+      color: var(--text-2);
+      width: 48px;
+    }
+
+    .trait-mini-bar {
+      flex: 1;
+      height: 4px;
+      background: var(--surface-alt);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .trait-mini-fill {
+      height: 100%;
+      background: var(--text-3);
+      border-radius: 2px;
+    }
+
+    .trait-mini-val {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-3);
+      width: 28px;
+      text-align: right;
+    }
+
+    .interview-chat {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+    }
+
+    .chat-header {
+      padding: 16px 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .chat-status {
+      font-size: 11px;
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .chat-msg {
+      max-width: 540px;
+    }
+
+    .chat-msg.user {
+      align-self: flex-end;
+    }
+
+    .chat-msg-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-3);
+      margin-bottom: 4px;
+    }
+
+    .chat-msg.user .chat-msg-label { text-align: right; }
+
+    .chat-bubble {
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .chat-msg.user .chat-bubble {
+      background: var(--text);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-msg.persona .chat-bubble {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-memory-ref {
+      font-size: 11px;
+      color: var(--text-3);
+      margin-top: 6px;
+      padding-left: 4px;
+      font-style: italic;
+    }
+
+    .chat-input-area {
+      padding: 16px 24px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 13px;
+      outline: none;
+      background: var(--surface-alt);
+    }
+
+    .chat-send {
+      padding: 10px 20px;
+      background: var(--text);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ════════════════════════════════════════════
+       Screen 3: Report Summary
+       ════════════════════════════════════════════ */
+    .report-layout {
+      padding: 32px;
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
+      overflow-y: auto;
+      height: 100%;
+    }
+
+    .verdict-card {
+      padding: 24px;
+      border-radius: 10px;
+      border: 1px solid rgba(217,119,6,0.2);
+      background: var(--amber-light);
+      margin-bottom: 24px;
+    }
+
+    .verdict-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .verdict-badge {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: var(--amber);
+      color: white;
+    }
+
+    .verdict-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--amber);
+    }
+
+    .verdict-summary {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .metric {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .metric-num {
+      font-family: var(--mono);
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--text-2);
+    }
+
+    .report-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .report-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .dropoff-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--surface-alt);
+    }
+
+    .dropoff-row:last-child { border-bottom: none; }
+
+    .dropoff-num {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-3);
+      width: 24px;
+      flex-shrink: 0;
+    }
+
+    .dropoff-content { flex: 1; }
+
+    .dropoff-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .dropoff-desc {
+      font-size: 12px;
+      color: var(--text-2);
+    }
+
+    .dropoff-stat {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .dropoff-stat.high { color: var(--red); }
+    .dropoff-stat.mid { color: var(--amber); }
+
+    .heatmap {
+      display: grid;
+      grid-template-columns: 120px repeat(5, 1fr);
+      gap: 2px;
+    }
+
+    .hm-header {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-3);
+      padding: 8px;
+      text-align: center;
+    }
+
+    .hm-header:first-child { text-align: left; }
+
+    .hm-row-label {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .hm-row-count {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-3);
+      font-weight: 400;
+    }
+
+    .hm-cell {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    .hm-cell.great { background: #d1fae5; color: #065f46; }
+    .hm-cell.good { background: #ecfdf5; color: #047857; }
+    .hm-cell.mid { background: #fef3c7; color: #92400e; }
+    .hm-cell.poor { background: #fee2e2; color: #991b1b; }
+    .hm-cell.bad { background: #fecaca; color: #991b1b; }
+    .hm-cell.na { background: var(--surface-alt); color: var(--text-3); }
+
+    /* ════════════════════════════════════════════
+       Screen 4: Emotion Trajectory
+       ════════════════════════════════════════════ */
+    .trajectory-layout {
+      padding: 32px;
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
+      overflow-y: auto;
+      height: 100%;
+    }
+
+    .chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px;
+      margin-bottom: 16px;
+    }
+
+    .chart-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .chart-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .legend {
+      display: flex;
+      gap: 20px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-2);
+    }
+
+    .legend-line {
+      width: 16px;
+      height: 3px;
+      border-radius: 2px;
+    }
+
+    .legend-line.core { background: var(--green); }
+    .legend-line.edge { background: var(--amber); }
+    .legend-line.wild { background: var(--red); }
+
+    #emo-chart { width: 100%; }
+
+    .insight-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      border-left: 3px solid var(--blue);
+    }
+
+    .insight-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .insight-text {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    .insight-text strong { color: var(--text); }
+
+    .insight-action {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--blue);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+<div class="app">
+  <!-- ══ Sidebar ══ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">S</div>
+      ShipCheck
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">워크스페이스</div>
+      <div class="sidebar-item">
+        <span class="icon">◻</span> 대시보드
+      </div>
+      <div class="sidebar-item active">
+        <span class="icon">▶</span> 시뮬레이션
+        <span class="badge">19</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="icon">◉</span> 페르소나
+        <span class="badge">19</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="icon">◧</span> 리포트
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">세그먼트</div>
+      <div class="sidebar-item">
+        <span class="icon" style="color:var(--green)">●</span> 박서연
+        <span class="badge">1</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="icon" style="color:var(--amber)">●</span> 김도현
+        <span class="badge">1</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="icon" style="color:var(--red)">●</span> 불안형
+        <span class="badge">/span>
+      </div>
+    </div>
+
+    <div class="sidebar-project">
+      <div class="project-name">tally.so</div>
+      <div class="project-meta">프로덕션 · 2026.03.15 실행</div>
+    </div>
+  </aside>
+
+  <!-- ══ Main ══ -->
+  <div class="main">
+    <div class="topbar">
+      <div class="tab active" data-screen="simulation">시뮬레이션 뷰</div>
+      <div class="tab" data-screen="interview">페르소나 인터뷰</div>
+      <div class="tab" data-screen="report">리포트 요약</div>
+      <div class="tab" data-screen="survey">설문 결과</div>
+      <div class="tab" data-screen="trajectory">감정 궤적</div>
+      <div class="tab" data-screen="sns">커뮤니티 반응</div>
+      <div class="topbar-right">
+        <span class="topbar-badge warning">조건부 출시</span>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ═══ Screen 1: Simulation View ═══ -->
+      <div class="screen active" id="simulation">
+        <div class="sim-layout">
+
+          <!-- Action Trace -->
+          <div class="trace-panel">
+            <div class="panel-header">
+              Action Trace <span class="count">6 actions</span>
+            </div>
+            <div class="trace-list">
+              <div class="trace-entry" data-step="0">
+                <div class="trace-top">
+                  <span class="trace-time">14:23:01</span>
+                  <span class="trace-type click">click</span>
+                  <span class="trace-emotion">😐</span>
+                </div>
+                <div class="trace-target">"Create a free form" 버튼</div>
+                <div class="trace-reason">전부 영어... 한국어가 하나도 없네. 이거 한국에서 쓰는 도구가 맞나?</div>
+              </div>
+
+              <div class="trace-entry" data-step="1">
+                <div class="trace-top">
+                  <span class="trace-time">14:24:18</span>
+                  <span class="trace-type click">click</span>
+                  <span class="trace-emotion">😟</span>
+                </div>
+                <div class="trace-target">"Use a template" 버튼</div>
+                <div class="trace-reason">뭘 해야 할지 모르겠다. 구글 폼은 한국어로 다 나왔고 버튼이 뭔지 알겠었는데...</div>
+              </div>
+
+              <div class="trace-entry" data-step="2">
+                <div class="trace-top">
+                  <span class="trace-time">14:25:44</span>
+                  <span class="trace-type scroll">scroll</span>
+                  <span class="trace-emotion">😰</span>
+                </div>
+                <div class="trace-target">템플릿 목록 탐색</div>
+                <div class="trace-reason">Registration form, Lead generation form... 이게 다 뭐지? 학부모 설문이랑 관련 있는 게 하나도 안 보인다.</div>
+              </div>
+
+              <div class="trace-entry" data-step="4">
+                <div class="trace-top">
+                  <span class="trace-time">14:26:32</span>
+                  <span class="trace-type click">click</span>
+                  <span class="trace-emotion">😰</span>
+                </div>
+                <div class="trace-target">Customer Satisfaction Survey</div>
+                <div class="trace-reason">"고객 만족도"가 학부모 설문이랑 같은 건지 확신이 안 드는데... 일단 눌러보자.</div>
+              </div>
+
+              <div class="trace-entry active" data-step="6">
+                <div class="trace-top">
+                  <span class="trace-time">14:28:13</span>
+                  <span class="trace-type click">click</span>
+                  <span class="trace-emotion">😕</span>
+                </div>
+                <div class="trace-target">Preview 버튼</div>
+                <div class="trace-reason">내용이 전부 이탤릭체 영어. 편집 화면인지 미리보기인지 모르겠다. Sign up이 또 보여서 불안.</div>
+              </div>
+
+              <div class="trace-entry critical" data-step="8">
+                <div class="trace-top">
+                  <span class="trace-time">14:28:41</span>
+                  <span class="trace-type exit">exit</span>
+                  <span class="trace-emotion">😠</span>
+                </div>
+                <div class="trace-target">브라우저 탭 닫음</div>
+                <div class="trace-reason">"가입하기는 싫고... 그냥 이 도구 포기하고 구글 폼으로 돌아가자."</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product View (center) -->
+          <div class="product-view">
+            <div class="browser-frame">
+              <div class="browser-bar">
+                <div class="browser-dots">
+                  <div class="browser-dot r"></div>
+                  <div class="browser-dot y"></div>
+                  <div class="browser-dot g"></div>
+                </div>
+                <div class="browser-url">tally.so/templates</div>
+              </div>
+              <div class="browser-content">
+                <div class="mock-heading">Choose a template</div>
+                <div class="mock-sub">Get started quickly with a pre-built form template</div>
+                <div class="template-grid">
+                  <div class="template-card highlighted">
+                    <div class="highlight-annotation">뭔 말인지 모름</div>
+                    <div class="template-icon">📋</div>
+                    <div class="template-name">Registration Form</div>
+                    <div class="template-desc">Collect registrations</div>
+                  </div>
+                  <div class="template-card highlighted">
+                    <div class="highlight-annotation">뭔 말인지 모름</div>
+                    <div class="template-icon">📊</div>
+                    <div class="template-name">Lead Generation</div>
+                    <div class="template-desc">Capture qualified leads</div>
+                  </div>
+                  <div class="template-card">
+                    <div class="template-icon">💬</div>
+                    <div class="template-name">Contact Form</div>
+                    <div class="template-desc">Simple contact page</div>
+                  </div>
+                  <div class="template-card" style="border-color:var(--amber);background:var(--amber-light);position:relative">
+                    <div class="highlight-annotation" style="background:var(--amber)">이거인가?</div>
+                    <div class="template-icon">⭐</div>
+                    <div class="template-name">Customer Satisfaction</div>
+                    <div class="template-desc">Measure satisfaction</div>
+                  </div>
+                  <div class="template-card">
+                    <div class="template-icon">📝</div>
+                    <div class="template-name">Feedback Form</div>
+                    <div class="template-desc">Collect user feedback</div>
+                  </div>
+                  <div class="template-card">
+                    <div class="template-icon">🎯</div>
+                    <div class="template-name">Personality Quiz</div>
+                    <div class="template-desc">Fun quiz template</div>
+                  </div>
+                </div>
+                <div class="mock-actions">
+                  <div class="mock-btn">Start from scratch</div>
+                  <div class="mock-btn primary">Use template →</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-persona-bar">
+              <div class="persona-mini-avatar">서연</div>
+              <div class="persona-mini-info">
+                <div class="persona-mini-name">박서연 · 52세 초등학교 교사</div>
+                <div class="persona-mini-desc">불안형 · 기술 숙련도 낮음</div>
+              </div>
+              <div class="persona-mini-emotion">
+                <div class="emotion-state negative">😤 좌절</div>
+                <div class="emotion-pad">전부 영어라서 불안한 상태</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Persona Mind Panel -->
+          <div class="layer-panel">
+            <div class="panel-header">페르소나의 머릿속</div>
+
+            <!-- Thought Bubble -->
+            <div class="layer-section" style="background:var(--red-light);border-bottom-color:rgba(220,38,38,0.1)">
+              <div style="font-size:28px;margin-bottom:8px">😤</div>
+              <div style="font-size:16px;font-weight:700;color:var(--red);margin-bottom:6px">좌절</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.7;font-style:italic">
+                "Registration form? Lead generation? 이게 다 뭐야... 학부모 설문이랑 비슷한 게 하나도 없잖아. 한국어가 하나도 없는데 이걸 어떻게 써."
+              </div>
+            </div>
+
+            <!-- What's happening -->
+            <div class="layer-section">
+              <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">지금 상황</div>
+              <div class="bdi-block">
+                <div class="bdi-label">혼란 원인</div>
+                <div class="bdi-value">템플릿이 전부 영어. Registration form, Lead generation 등 뭔 말인지 모르겠고, 학부모 설문과 비슷한 게 안 보임.</div>
+              </div>
+              <div class="bdi-block" style="border-left:3px solid var(--red)">
+                <div class="bdi-label">혼란 수준</div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:85%;height:100%;background:var(--red);border-radius:4px"></div></div>
+                  <span style="font-size:12px;font-weight:600;color:var(--red)">매우 높음</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Motivation vs Ability -->
+            <div class="layer-section">
+              <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">의지 vs 능력</div>
+              <div class="bdi-block" style="border-left:3px solid var(--green)">
+                <div class="bdi-label">하고 싶은 것</div>
+                <div class="bdi-value">"학부모 설문조사 양식을 5분 안에 만들고 싶다"</div>
+              </div>
+              <div class="bdi-block" style="border-left:3px solid var(--red)">
+                <div class="bdi-label">막히는 것</div>
+                <div class="bdi-value" style="color:var(--red);font-weight:500">전부 영어라서 뭘 골라야 할지 모름. Sign up 버튼이 계속 보여서 결국 가입해야 하나 불안.</div>
+              </div>
+              <div style="margin-top:12px;padding:10px 12px;background:var(--red-light);border-radius:6px;font-size:12px;font-weight:600;color:var(--red);text-align:center">
+                쓰고 싶지만 → 전부 영어 + 가입 불안 → 포기
+              </div>
+            </div>
+
+            <!-- What they concluded -->
+            <div class="layer-section">
+              <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">결론</div>
+              <div class="bdi-block">
+                <div class="bdi-label">이 사람이 내린 판단</div>
+                <div class="bdi-value" style="font-weight:600">"이 도구는 한국에서 쓰는 게 아닌 것 같다. 구글 폼이 낫다."</div>
+              </div>
+              <div class="bdi-block">
+                <div class="bdi-label">다음 행동</div>
+                <div class="bdi-value" style="color:var(--red)">브라우저 탭 닫음 → 익숙한 구글 폼으로 복귀</div>
+              </div>
+            </div>
+
+            <!-- Memories (simplified) -->
+            <div class="layer-section">
+              <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">기억에 남은 것</div>
+
+              <div class="memory-entry observation">
+                <div style="font-size:12px;font-weight:600;margin-bottom:2px">👀 발견</div>
+                <div class="memory-text">템플릿이 전부 영어. Registration, Lead generation 등 학부모 설문과 관련 없는 것들뿐.</div>
+              </div>
+
+              <div class="memory-entry reflection">
+                <div style="font-size:12px;font-weight:600;margin-bottom:2px">💭 생각</div>
+                <div class="memory-text">이 도구는 한국어 지원이 안 되고, Sign up 없이는 제대로 못 쓰는 것 같다. 구글 폼으로 돌아가자.</div>
+              </div>
+
+              <div class="memory-entry observation">
+                <div style="font-size:12px;font-weight:600;margin-bottom:2px">👀 발견</div>
+                <div class="memory-text">No signup required라고 해놓고 Sign up 버튼이 계속 보임. 모순되는 메시지.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Screen 2: Interview ═══ -->
+      <div class="screen" id="interview">
+        <div class="interview-layout">
+          <div class="interview-persona">
+            <div class="persona-avatar-lg">서연</div>
+            <div class="persona-name-lg">박서연</div>
+            <div class="persona-desc-lg">52세 · 초등학교 교사 · 서울</div>
+
+            <div class="persona-field">
+              <div class="persona-field-label">세그먼트</div>
+              <div class="persona-field-value" style="color:var(--red);font-weight:600">불안형</div>
+            </div>
+
+            <div class="persona-field">
+              <div class="persona-field-label">기술 숙련도</div>
+              <div class="persona-field-value">낮음 (웹 검색/이메일 수준, 새 프로그램에 불안감)</div>
+            </div>
+
+            <div class="persona-field">
+              <div class="persona-field-label">JTBD</div>
+              <div class="persona-field-value">학부모 설문조사 양식을 5분 안에 만들어서 배포하고 싶다</div>
+            </div>
+
+            <div class="persona-field">
+              <div class="persona-field-label">세션 결과</div>
+              <div class="persona-field-value" style="color:var(--red)">템플릿 선택 화면에서 이탈 (5분 32초)</div>
+            </div>
+
+            <div class="persona-field">
+              <div class="persona-field-label">Big Five</div>
+              <div style="margin-top:4px">
+                <div class="trait-mini">
+                  <span class="trait-mini-label">개방성</span>
+                  <div class="trait-mini-bar"><div class="trait-mini-fill" style="width:28%"></div></div>
+                  <span class="trait-mini-val">28</span>
+                </div>
+                <div class="trait-mini">
+                  <span class="trait-mini-label">성실성</span>
+                  <div class="trait-mini-bar"><div class="trait-mini-fill" style="width:82%"></div></div>
+                  <span class="trait-mini-val">82</span>
+                </div>
+                <div class="trait-mini">
+                  <span class="trait-mini-label">외향성</span>
+                  <div class="trait-mini-bar"><div class="trait-mini-fill" style="width:35%"></div></div>
+                  <span class="trait-mini-val">35</span>
+                </div>
+                <div class="trait-mini">
+                  <span class="trait-mini-label">친화성</span>
+                  <div class="trait-mini-bar"><div class="trait-mini-fill" style="width:75%"></div></div>
+                  <span class="trait-mini-val">75</span>
+                </div>
+                <div class="trait-mini">
+                  <span class="trait-mini-label">신경성</span>
+                  <div class="trait-mini-bar"><div class="trait-mini-fill" style="width:68%"></div></div>
+                  <span class="trait-mini-val">68</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="interview-chat">
+            <div class="chat-header">
+              페르소나 인터뷰 — 박서연
+              <span class="chat-status">● 체험 기억 기반 응답</span>
+            </div>
+            <div class="chat-messages">
+              <div class="chat-msg user">
+                <div class="chat-msg-label">나</div>
+                <div class="chat-bubble">Tally를 처음 열었을 때 첫인상이 어땠어요?</div>
+              </div>
+              <div class="chat-msg persona">
+                <div class="chat-msg-label">박서연</div>
+                <div class="chat-bubble">
+                  전부 영어더라고요. 'The simplest way to create forms'라고 써있었는데, 솔직히 구글 폼도 잘 쓰고 있는데 왜 이걸 써야 하나 싶었어요. 그나마 'No signup required'라는 게 보여서 들어가봤는데... 한국어가 하나도 없는 건 좀 당황스러웠어요.
+                </div>
+                <div class="chat-memory-ref">↳ 체험 기억: 랜딩 페이지 첫 진입 시점의 기억에 기반</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="chat-msg-label">나</div>
+                <div class="chat-bubble">템플릿 고르는 화면에서 어떤 점이 어려웠나요?</div>
+              </div>
+              <div class="chat-msg persona">
+                <div class="chat-msg-label">박서연</div>
+                <div class="chat-bubble">
+                  Registration form, Lead generation form, Web Project Intake Questionnaire... 이런 게 쭉 나오는데 하나도 모르겠더라고요. 학부모 설문이랑 비슷한 게 어딨는지 한참 찾다가 겨우 Customer Satisfaction Survey라는 걸 봤는데, 이게 학부모 설문이랑 같은 건지 확신이 안 들었어요. 한국어 템플릿이 하나라도 있었으면...
+                </div>
+                <div class="chat-memory-ref">↳ 체험 기억: 템플릿 탐색 과정 (step 2~5)의 혼란 경험에 기반</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="chat-msg-label">나</div>
+                <div class="chat-bubble">결국 왜 나가셨어요?</div>
+              </div>
+              <div class="chat-msg persona">
+                <div class="chat-msg-label">박서연</div>
+                <div class="chat-bubble">
+                  오른쪽 위에 Sign up이라는 파란 글씨가 계속 보이는데, 아까 No signup required라고 해놓고 결국 가입해야 쓸 수 있는 건가 싶었어요. 가입까지 해서 써야 할 정도로 필요한 건 아니고... 구글 폼이 한국어도 되고 익숙하니까 그냥 그걸로 하자 싶었어요.
+                </div>
+                <div class="chat-memory-ref">↳ 체험 기억: 이탈 직전 (step 8) "구글 폼으로 돌아가자"는 판단에 기반</div>
+              </div>
+            </div>
+            <div class="chat-input-area">
+              <input class="chat-input" type="text" placeholder="후속 질문을 입력하세요...">
+              <button class="chat-send">전송</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Screen 3: Report ═══ -->
+      <div class="screen" id="report">
+        <div class="report-layout">
+          <div class="verdict-card">
+            <div class="verdict-top">
+              <span class="verdict-badge">조건부</span>
+              <span class="verdict-title">조건부 출시</span>
+            </div>
+            <div class="verdict-summary">
+              19명 중 7명 이탈 (37%).
+              <strong>불안형·초보형 세그먼트 이탈률 67%, 기술숙련·신중형은 100% 완료. 세그먼트별 경험 격차가 심각</strong>로 심각한 마찰이 발견되었습니다.
+              기술 수준별 온보딩 분기 + 핵심 기능 발견성 개선 후 재검증을 권장합니다.
+            </div>
+          </div>
+
+          <div class="metrics-row">
+            <div class="metric">
+              <div class="metric-num" style="color:var(--amber)">63%</div>
+              <div class="metric-label">핵심 플로우 완료율</div>
+            </div>
+            <div class="metric">
+              <div class="metric-num" style="color:var(--blue)">2.6</div>
+              <div class="metric-label">평균 평점 (5점)</div>
+            </div>
+            <div class="metric">
+              <div class="metric-num">2</div>
+              <div class="metric-label">시뮬레이션 페르소나</div>
+            </div>
+            <div class="metric">
+              <div class="metric-num" style="color:var(--red)">2</div>
+              <div class="metric-label">이탈 포인트</div>
+            </div>
+          </div>
+
+          <div class="report-card">
+            <div class="report-card-title">핵심 이탈 지점 Top 3</div>
+            <div class="dropoff-row">
+              <span class="dropoff-num">#1</span>
+              <div class="dropoff-content">
+                <div class="dropoff-title">템플릿 선택 화면 — 전체 영어</div>
+                <div class="dropoff-desc">영어 전용 UI에 한국어 지원 없음. Registration, Lead generation 등 비-IT 유저가 이해 불가. 학부모 설문과 매칭되는 템플릿 없음.</div>
+              </div>
+              <span class="dropoff-stat high">67% 이탈</span>
+            </div>
+            <div class="dropoff-row">
+              <span class="dropoff-num">#2</span>
+              <div class="dropoff-content">
+                <div class="dropoff-title">블록 드롭다운 — 조건부 로직 미발견</div>
+                <div class="dropoff-desc">'/' 드롭다운에서 조건부 로직을 찾으려 스크롤+검색 반복. 검색 필터 피드백 없음. 핵심 기능이 노출되지 않아 시간 낭비 판단.</div>
+              </div>
+              <span class="dropoff-stat mid">파워유저 이탈</span>
+            </div>
+            <div class="dropoff-row">
+              <span class="dropoff-num">#3</span>
+              <div class="dropoff-content">
+                <div class="dropoff-title">Sign up 버튼 — 불안 유발</div>
+                <div class="dropoff-desc">'No signup required'라고 했지만 Sign up 버튼이 상시 노출. 가입 없이 쓸 수 있는 건지 혼란. 작업 저장 여부도 불명확.</div>
+              </div>
+              <span class="dropoff-stat mid">전원 불안</span>
+            </div>
+          </div>
+
+          <div class="report-card">
+            <div class="report-card-title">세그먼트 × 플로우 만족도</div>
+            <div class="heatmap" style="grid-template-columns:140px repeat(3,1fr)">
+              <div class="hm-header"></div>
+              <div class="hm-header">유용성</div>
+              <div class="hm-header">사용 편의성</div>
+              <div class="hm-header">추천 의향</div>
+
+              <div class="hm-row-label">불안형 <span class="hm-row-count">3명</span></div>
+              <div class="hm-cell mid">0.37</div>
+              <div class="hm-cell poor">0.27</div>
+              <div class="hm-cell bad">0%</div>
+
+              <div class="hm-row-label">직관형 <span class="hm-row-count">4명</span></div>
+              <div class="hm-cell good">0.56</div>
+              <div class="hm-cell mid">0.36</div>
+              <div class="hm-cell mid">25%</div>
+
+              <div class="hm-row-label">탐험형 <span class="hm-row-count">3명</span></div>
+              <div class="hm-cell good">0.53</div>
+              <div class="hm-cell mid">0.30</div>
+              <div class="hm-cell bad">0%</div>
+
+              <div class="hm-row-label">기술숙련 <span class="hm-row-count">1명</span></div>
+              <div class="hm-cell good">0.61</div>
+              <div class="hm-cell good">0.52</div>
+              <div class="hm-cell great">100%</div>
+
+              <div class="hm-row-label">침착형 <span class="hm-row-count">2명</span></div>
+              <div class="hm-cell good">0.52</div>
+              <div class="hm-cell mid">0.44</div>
+              <div class="hm-cell mid">50%</div>
+
+              <div class="hm-row-label">비판형 <span class="hm-row-count">3명</span></div>
+              <div class="hm-cell mid">0.40</div>
+              <div class="hm-cell mid">0.38</div>
+              <div class="hm-cell bad">0%</div>
+
+              <div class="hm-row-label">신중형 <span class="hm-row-count">1명</span></div>
+              <div class="hm-cell great">0.76</div>
+              <div class="hm-cell good">0.61</div>
+              <div class="hm-cell great">100%</div>
+
+              <div class="hm-row-label">초보형 <span class="hm-row-count">1명</span></div>
+              <div class="hm-cell bad">0.18</div>
+              <div class="hm-cell bad">0.08</div>
+              <div class="hm-cell bad">0%</div>
+              <div class="hm-cell poor">2.6</div>
+              <div class="hm-cell mid">2.1</div>
+              <div class="hm-cell mid">2.9</div>
+
+              <div class="hm-row-label">와일드 <span class="hm-row-count">6명</span></div>
+              <div class="hm-cell mid">2.5</div>
+              <div class="hm-cell poor">1.5</div>
+              <div class="hm-cell bad">0.8</div>
+              <div class="hm-cell na">—</div>
+              <div class="hm-cell na">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Screen 5: Survey Results ═══ -->
+      <div class="screen" id="survey">
+        <div class="report-layout">
+
+          <!-- SUS Summary -->
+          <div class="report-card" style="margin-bottom:24px">
+            <div class="report-card-title">SUS 점수 (System Usability Scale)</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px">
+              <div style="padding:20px;border-radius:8px;background:var(--green-light);text-align:center">
+                <div style="font-family:var(--mono);font-size:32px;font-weight:700;color:var(--green)">68</div>
+                <div style="font-size:12px;color:var(--green);font-weight:600">기술숙련+신중형 (2명)</div>
+                <div style="font-size:11px;color:var(--text-3);margin-top:2px">Acceptable</div>
+              </div>
+              <div style="padding:20px;border-radius:8px;background:var(--amber-light);text-align:center">
+                <div style="font-family:var(--mono);font-size:32px;font-weight:700;color:var(--amber)">42</div>
+                <div style="font-size:12px;color:var(--amber);font-weight:600">직관+침착+탐험형 (9명)</div>
+                <div style="font-size:11px;color:var(--text-3);margin-top:2px">Poor</div>
+              </div>
+              <div style="padding:20px;border-radius:8px;background:var(--red-light);text-align:center">
+                <div style="font-family:var(--mono);font-size:32px;font-weight:700;color:var(--red)">22</div>
+                <div style="font-size:12px;color:var(--red);font-weight:600">불안+비판+초보형 (8명)</div>
+                <div style="font-size:11px;color:var(--text-3);margin-top:2px">Worst Imaginable</div>
+              </div>
+            </div>
+            <div style="text-align:center;padding:12px;background:var(--surface-alt);border-radius:6px">
+              <span style="font-size:13px;color:var(--text-2)">전체 평균</span>
+              <span style="font-family:var(--mono);font-size:20px;font-weight:700;margin-left:8px;color:var(--amber)">41</span>
+              <span style="font-size:12px;color:var(--text-3);margin-left:4px">/ 100 (Poor — 업계 평균 68 크게 미달)</span>
+            </div>
+          </div>
+
+          <!-- Question Breakdown -->
+          <div class="report-card" style="margin-bottom:16px">
+            <div class="report-card-title">문항별 세그먼트 비교</div>
+
+            <!-- Q1 -->
+            <div style="padding:16px 0;border-bottom:1px solid var(--surface-alt)">
+              <div style="font-size:13px;font-weight:600;margin-bottom:10px">Q1. 이 시스템을 자주 사용하고 싶다</div>
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+                <span style="font-size:11px;color:var(--text-3);width:52px">박서연</span>
+                <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:82%;height:100%;background:var(--green);border-radius:4px"></div></div>
+                <span style="font-family:var(--mono);font-size:12px;width:24px;text-align:right;color:var(--green)">4.1</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+                <span style="font-size:11px;color:var(--text-3);width:52px">김도현</span>
+                <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:48%;height:100%;background:var(--amber);border-radius:4px"></div></div>
+                <span style="font-family:var(--mono);font-size:12px;width:24px;text-align:right;color:var(--amber)">2.4</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-size:11px;color:var(--text-3);width:52px">와일드</span>
+                <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:26%;height:100%;background:var(--red);border-radius:4px"></div></div>
+                <span style="font-family:var(--mono);font-size:12px;width:24px;text-align:right;color:var(--red)">1.3</span>
+              </div>
+            </div>
+
+            <!-- Q2 -->
+            <div style="padding:16px 0;border-bottom:1px solid var(--surface-alt)">
+              <div style="font-size:13px;font-weight:600;margin-bottom:10px">Q2. 시스템이 불필요하게 복잡하다고 느꼈다</div>
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+                <span style="font-size:11px;color:var(--text-3);width:52px">박서연</span>
+                <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:40%;height:100%;background:var(--green);border-radius:4px"></div></div>
+                <span style="font-family:var(--mono);font-size:12px;width:24px;text-align:right;color:var(--green)">2.0</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+                <span style="font-size:11px;color:var(--text-3);width:52px">김도현</span>
+                <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:72%;height:100%;background:var(--amber);border-radius:4px"></div></div>
+                <span style="font-family:var(--mono);font-size:12px;width:24px;text-align:right;color:var(--amber)">3.6</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-size:11px;color:var(--text-3);width:52px">와일드</span>
+                <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:92%;height:100%;background:var(--red);border-radius:4px"></div></div>
+                <span style="font-family:var(--mono);font-size:12px;width:24px;text-align:right;color:var(--red)">4.6</span>
+              </div>
+            </div>
+
+            <!-- Q3 -->
+            <div style="padding:16px 0;border-bottom:1px solid var(--surface-alt)">
+              <div style="font-size:13px;font-weight:600;margin-bottom:10px">Q3. 시스템이 사용하기 쉽다고 느꼈다</div>
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+                <span style="font-size:11px;color:var(--text-3);width:52px">박서연</span>
+                <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:76%;height:100%;background:var(--green);border-radius:4px"></div></div>
+                <span style="font-family:var(--mono);font-size:12px;width:24px;text-align:right;color:var(--green)">3.8</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+                <span style="font-size:11px;color:var(--text-3);width:52px">김도현</span>
+                <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:44%;height:100%;background:var(--amber);border-radius:4px"></div></div>
+                <span style="font-family:var(--mono);font-size:12px;width:24px;text-align:right;color:var(--amber)">2.2</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-size:11px;color:var(--text-3);width:52px">와일드</span>
+                <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:20%;height:100%;background:var(--red);border-radius:4px"></div></div>
+                <span style="font-family:var(--mono);font-size:12px;width:24px;text-align:right;color:var(--red)">1.0</span>
+              </div>
+            </div>
+
+            <!-- Q4 (collapsed hint) -->
+            <div style="padding:12px 0;color:var(--text-3);font-size:12px">
+              Q4–Q10: 7개 문항 더 보기 ↓
+            </div>
+          </div>
+
+          <!-- Expanded individual response -->
+          <div class="report-card" style="margin-bottom:16px">
+            <div class="report-card-title">개별 응답 상세 — Q1. "이 시스템을 자주 사용하고 싶다"</div>
+
+            <div style="padding:16px;background:var(--red-light);border-radius:8px;border:1px solid rgba(220,38,38,0.1);margin-bottom:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="width:28px;height:28px;border-radius:50%;background:#f87171;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">서연</div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600">박서연 · 52세 초등학교 교사</div>
+                    <div style="font-size:11px;color:var(--text-3)">불안형 · 기술 초보</div>
+                  </div>
+                </div>
+                <div style="font-family:var(--mono);font-size:24px;font-weight:700;color:var(--red)">1</div>
+              </div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.7">
+                온보딩 3단계에서 템플릿이 전부 IT 용어여서 뭘 골라야 할지 전혀 몰랐어요.
+                번역 일정 관리가 필요해서 들어왔는데, 번역하는 사람한테 맞는 건 하나도 없더라고요.
+                쓰고 싶은 마음은 있지만 방법을 모르겠어서... 그냥 익숙한 엑셀로 돌아갈 것 같아요.
+              </div>
+            </div>
+
+            <div style="padding:16px;background:var(--amber-light);border-radius:8px;border:1px solid rgba(217,119,6,0.1);margin-bottom:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="width:28px;height:28px;border-radius:50%;background:#fbbf24;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">재</div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600">b003 · 탐험형 페르소나</div>
+                    <div style="font-size:11px;color:var(--text-3)">탐험형 · 이탈자</div>
+                  </div>
+                </div>
+                <div style="font-family:var(--mono);font-size:24px;font-weight:700;color:var(--amber)">2</div>
+              </div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.7">
+                단계마다 뭘 해야 할지 불명확해서 계속 멈추게 됐어요. 12단계 중 7번이나 
+                '이게 맞나?' 싶었는데, 거의 다 왔는데 결국 못 끝냈어요. 
+                UI가 좀 더 명확했으면 끝까지 갔을 텐데 아쉽습니다.
+              </div>
+            </div>
+
+            <div style="padding:16px;background:var(--green-light);border-radius:8px;border:1px solid rgba(5,150,105,0.1)">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="width:28px;height:28px;border-radius:50%;background:#34d399;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">민</div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600">b013 · 신중형 페르소나</div>
+                    <div style="font-size:11px;color:var(--text-3)">신중형 · 최고 만족</div>
+                  </div>
+                </div>
+                <div style="font-family:var(--mono);font-size:24px;font-weight:700;color:var(--green)">5</div>
+              </div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.7">
+                조건부 로직을 직접 설정해보니 생각보다 잘 되더라고요. 꼼꼼하게 하나씩 확인하면서 진행했는데,
+                기능적으로는 충분했어요. Typeform보다 가볍고 무료인 게 큰 장점이에요. 팀에 추천할 의향이 있어요.
+              </div>
+            </div>
+          </div>
+
+          <!-- Custom Question -->
+          <div class="report-card">
+            <div class="report-card-title" style="display:flex;align-items:center;gap:8px">
+              커스텀 질문
+              <span style="font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;background:var(--violet-light);color:var(--violet)">고객 추가</span>
+            </div>
+
+            <div style="padding:16px 0;border-bottom:1px solid var(--surface-alt)">
+              <div style="font-size:13px;font-weight:600;margin-bottom:10px">C1. 이 도구를 다른 사람에게 추천하시겠습니까? (0-10, NPS)</div>
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+                <span style="font-size:11px;color:var(--text-3);width:52px">박서연</span>
+                <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:82%;height:100%;background:var(--green);border-radius:4px"></div></div>
+                <span style="font-family:var(--mono);font-size:12px;width:24px;text-align:right;color:var(--green)">8.2</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+                <span style="font-size:11px;color:var(--text-3);width:52px">김도현</span>
+                <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:42%;height:100%;background:var(--amber);border-radius:4px"></div></div>
+                <span style="font-family:var(--mono);font-size:12px;width:24px;text-align:right;color:var(--amber)">4.2</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-size:11px;color:var(--text-3);width:52px">와일드</span>
+                <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:15%;height:100%;background:var(--red);border-radius:4px"></div></div>
+                <span style="font-family:var(--mono);font-size:12px;width:24px;text-align:right;color:var(--red)">1.5</span>
+              </div>
+              <div style="margin-top:10px;padding:10px;background:var(--surface-alt);border-radius:6px;font-size:12px;color:var(--text-2)">
+                NPS = <span style="font-family:var(--mono);font-weight:600;color:var(--red)">-47</span> (Detractors 63% | Passives 16% | Promoters 21%)
+              </div>
+            </div>
+
+            <div style="padding:16px 0">
+              <div style="font-size:13px;font-weight:600;margin-bottom:10px">C2. 가장 먼저 개선했으면 하는 점은?</div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;align-items:center;gap:8px;font-size:12px">
+                  <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:65%;height:100%;background:var(--text-2);border-radius:4px"></div></div>
+                  <span style="font-family:var(--mono);font-size:11px;color:var(--text-3);width:28px">65%</span>
+                  <span style="color:var(--text-2);min-width:180px">온보딩 용어/템플릿</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:12px">
+                  <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:40%;height:100%;background:var(--text-3);border-radius:4px"></div></div>
+                  <span style="font-family:var(--mono);font-size:11px;color:var(--text-3);width:28px">40%</span>
+                  <span style="color:var(--text-2);min-width:180px">소셜 로그인 추가</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:12px">
+                  <div style="flex:1;height:8px;background:var(--surface-alt);border-radius:4px;overflow:hidden"><div style="width:30%;height:100%;background:var(--text-3);border-radius:4px"></div></div>
+                  <span style="font-family:var(--mono);font-size:11px;color:var(--text-3);width:28px">30%</span>
+                  <span style="color:var(--text-2);min-width:180px">태스크 추가 버튼 위치</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Screen 4: Emotion Trajectory ═══ -->
+      <div class="screen" id="trajectory">
+        <div class="trajectory-layout">
+          <div class="chart-card">
+            <div class="chart-top">
+              <div class="chart-title">감정 변화 — 박서연(불안형) vs 김도현(파워유저) — 전체 19명 중 대표 2명</div>
+              <div class="legend">
+                <div class="legend-item"><span class="legend-line core"></span>박서연 (불안형)</div>
+                <div class="legend-item"><span class="legend-line edge"></span>김도현 (파워유저)</div>
+                
+              </div>
+            </div>
+            <svg id="emo-chart" viewBox="0 0 900 320"></svg>
+          </div>
+          <div class="insight-card">
+            <div class="insight-title">핵심 인사이트</div>
+            <div class="insight-text">
+              <strong>step 3~5</strong>에서 두 페르소나의 감정이 크게 갈렸습니다.
+              박서연(불안형)은 템플릿을 발견하며 잠시 희망을 느꼈지만 영어 장벽에 막혀 결국 이탈.
+              <strong>김도현(파워유저)은 조건부 로직을 끝내 찾지 못해 점점 지치다가 포기</strong>했습니다.
+              19명 중 7명이 이탈했고, 이유는 세그먼트마다 달랐습니다. 불안형·초보형은 영어 장벽에, 파워유저는 기능 발견 실패에 좌절했습니다.
+            </div>
+            <div class="insight-action">→ 해결 방안: 세그먼트별 온보딩 분기, 한국어 지원, 핵심 기능 발견성 개선, Sign up 메시지 정리</div>
+          </div>
+        </div>
+      </div>
+      <!-- ═══ Screen 6: SNS Community Feed ═══ -->
+      <div class="screen" id="sns">
+        <div class="sns-layout">
+          <div class="sns-feed">
+
+            <!-- POST 1: 박서연 (불안형) — 첫 인상 포기 -->
+            <div class="post">
+              <div class="post-header">
+                <div class="post-avatar" style="background:#f87171">서</div>
+                <div>
+                  <div class="post-name">박서연</div>
+                  <div class="post-handle">@soyeon_52 · 52세 초등학교 교사</div>
+                </div>
+                <span class="post-segment seg-anxious">불안형</span>
+              </div>
+              <div class="post-product-tag">#tally_so 후기</div>
+              <div class="post-body">학부모 설문조사 양식 만들려고 tally.so 써봤는데... 화면이 전부 영어예요 😢
+한국어가 하나도 없어서 뭘 눌러야 할지 모르겠더라고요.
+
+Registration form, Lead generation... 이게 다 뭔 말인지.
+학부모 설문이랑 비슷한 게 뭔지도 모르겠고, 결국 구글 폼으로 돌아왔어요.
+
+괜히 시간 낭비한 기분... 😮‍💨</div>
+              <div class="post-actions">
+                <span class="post-action">❤️ <span class="count">24</span></span>
+                <span class="post-action">💬 <span class="count">8</span></span>
+                <span class="post-action">🔄 <span class="count">5</span></span>
+              </div>
+
+              <div class="replies">
+                <!-- Reply 1: 공감 -->
+                <div class="reply">
+                  <div class="reply-avatar" style="background:#f87171">b12</div>
+                  <div class="reply-content">
+                    <div><span class="reply-name">b012</span> <span class="reply-handle">불안형 · 기술 초보</span></div>
+                    <div class="reply-text">저도요ㅠㅠ 8단계까지 갔는데 포기했어요. 뭘 누르면 뭐가 되는지 하나도 안 알려줘서 불안하더라고요. 저장이 되는 건지도 모르겠고...</div>
+                    <div class="reply-actions"><span>❤️ 12</span> <span>💬 답글</span></div>
+                  </div>
+                </div>
+
+                <!-- Reply 2: 신중형이 도움 -->
+                <div class="reply">
+                  <div class="reply-avatar" style="background:#34d399">b13</div>
+                  <div class="reply-content">
+                    <div><span class="reply-name">b013</span> <span class="reply-handle">신중형 · 꼼꼼파</span></div>
+                    <div class="reply-text">저는 하나씩 천천히 눌러봤더니 되긴 했어요! 템플릿 안 쓰고 "Start from scratch" 누르면 빈 폼이 나오는데, 거기서 "/" 치면 블록 메뉴가 떠요. 근데 확실히 한국어가 없으면 처음 쓰는 분은 힘들겠다...</div>
+                    <div class="reply-actions"><span>❤️ 31</span> <span>💬 답글</span></div>
+                  </div>
+                </div>
+
+                <!-- Reply 3: 박서연 반응 -->
+                <div class="reply">
+                  <div class="reply-avatar" style="background:#f87171">서</div>
+                  <div class="reply-content">
+                    <div><span class="reply-name">박서연</span> <span class="reply-handle">@soyeon_52</span></div>
+                    <div class="reply-text">진짜요?? "/"를 치면 되는 거예요? 그런 설명이 어디에도 없었는데... 다시 한번 해볼게요. 감사합니다!</div>
+                    <div class="reply-actions"><span>❤️ 8</span> <span>💬 답글</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- POST 2: 김도현 (파워유저) — 기능 평가 -->
+            <div class="post">
+              <div class="post-header">
+                <div class="post-avatar" style="background:#2563eb">도</div>
+                <div>
+                  <div class="post-name">김도현</div>
+                  <div class="post-handle">@dohyun_pm · 29세 스타트업 PM</div>
+                </div>
+                <span class="post-segment seg-power">파워유저</span>
+              </div>
+              <div class="post-product-tag">#tally_so 후기</div>
+              <div class="post-body">Typeform 대안으로 tally.so 10분 평가해봤는데, 좀 아쉽다.
+
+무료인 건 진짜 좋고, Notion 스타일 에디터도 나쁘지 않은데
+핵심인 조건부 로직을 찾을 수가 없었음. "/" 눌러서 블록 메뉴 열어봤는데 안 보여서 3번 시도하다 포기.
+
+이게 진짜 무료면 엄청난 건데, 기능을 왜 이렇게 숨겨놓는 거지? 🤔</div>
+              <div class="post-actions">
+                <span class="post-action">❤️ <span class="count">47</span></span>
+                <span class="post-action">💬 <span class="count">12</span></span>
+                <span class="post-action">🔄 <span class="count">18</span></span>
+              </div>
+
+              <div class="replies">
+                <div class="reply">
+                  <div class="reply-avatar" style="background:#059669">b04</div>
+                  <div class="reply-content">
+                    <div><span class="reply-name">b004</span> <span class="reply-handle">기술숙련 · 개발자</span></div>
+                    <div class="reply-text">조건부 로직은 블록 추가 후에 설정할 수 있어요. "/" 메뉴에서 바로 보이는 건 아니고, 블록 만든 다음에 옵션에서 설정하는 구조. Typeform이랑 UI 설계가 다른 거예요.</div>
+                    <div class="reply-actions"><span>❤️ 28</span> <span>💬 답글</span></div>
+                  </div>
+                </div>
+
+                <div class="reply">
+                  <div class="reply-avatar" style="background:#d97706">b06</div>
+                  <div class="reply-content">
+                    <div><span class="reply-name">b006</span> <span class="reply-handle">비판형</span></div>
+                    <div class="reply-text">솔직히 10분 안에 핵심 기능을 못 찾게 만드는 건 UX 문제 아닌가요? 무료인 건 좋은데 처음 쓰는 사람이 이해할 수 있는 UI는 아니라고 봅니다.</div>
+                    <div class="reply-actions"><span>❤️ 35</span> <span>💬 답글</span></div>
+                  </div>
+                </div>
+
+                <div class="reply">
+                  <div class="reply-avatar" style="background:#2563eb">도</div>
+                  <div class="reply-content">
+                    <div><span class="reply-name">김도현</span> <span class="reply-handle">@dohyun_pm</span></div>
+                    <div class="reply-text">@b004 아 블록 만든 다음에 설정하는 거였어? 그러면 UI에 그 플로우가 가이드돼야 하는 거 아닌지... 어쨌든 정보 감사합니다. 다시 해봐야겠네.</div>
+                    <div class="reply-actions"><span>❤️ 14</span> <span>💬 답글</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- POST 3: b002 (직관형) — 긍정 리뷰 -->
+            <div class="post">
+              <div class="post-header">
+                <div class="post-avatar" style="background:#7c3aed">b02</div>
+                <div>
+                  <div class="post-name">b002</div>
+                  <div class="post-handle">직관형 · 디자이너</div>
+                </div>
+                <span class="post-segment seg-intuitive">직관형</span>
+              </div>
+              <div class="post-product-tag">#tally_so 후기</div>
+              <div class="post-body">막상 써보니까 폼 만드는 게 생각보다 됐어요!
+
+처음엔 "또 폼 빌더?" 싶었는데, 드래그 없이 타이핑으로 폼을 만드는 방식이 신선했고요.
+완성하고 나니까 꽤 쓸만하다는 느낌. 무료로 이 정도면 충분하지 않나요?
+
+Notion 쓰는 분들은 적응 빠를 것 같아요 👍</div>
+              <div class="post-actions">
+                <span class="post-action">❤️ <span class="count">38</span></span>
+                <span class="post-action">💬 <span class="count">6</span></span>
+                <span class="post-action">🔄 <span class="count">11</span></span>
+              </div>
+
+              <div class="replies">
+                <div class="reply">
+                  <div class="reply-avatar" style="background:#f87171">서</div>
+                  <div class="reply-content">
+                    <div><span class="reply-name">박서연</span> <span class="reply-handle">@soyeon_52</span></div>
+                    <div class="reply-text">Notion을 안 써봐서... 타이핑으로 만든다는 게 무슨 말인지 잘 모르겠어요 😅 저 같은 사람한테는 구글 폼처럼 눈에 보이는 버튼이 있어야 할 것 같은데...</div>
+                    <div class="reply-actions"><span>❤️ 15</span> <span>💬 답글</span></div>
+                  </div>
+                </div>
+
+                <div class="reply">
+                  <div class="reply-avatar" style="background:#6b7280">b08</div>
+                  <div class="reply-content">
+                    <div><span class="reply-name">b008</span> <span class="reply-handle">침착형</span></div>
+                    <div class="reply-text">동의해요. 저도 Notion 쓰는데 "/" 명령어가 익숙해서 금방 적응했어요. 근데 Notion 안 쓰는 분한테는 진입장벽이 있을 수 있겠네요.</div>
+                    <div class="reply-actions"><span>❤️ 21</span> <span>💬 답글</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- POST 4: b019 (초보형) — 가장 부정적 -->
+            <div class="post">
+              <div class="post-header">
+                <div class="post-avatar" style="background:#6b7280">b19</div>
+                <div>
+                  <div class="post-name">b019</div>
+                  <div class="post-handle">초보형 · 기술 숙련도 최저</div>
+                </div>
+                <span class="post-segment seg-novice">초보형</span>
+              </div>
+              <div class="post-product-tag">#tally_so 후기</div>
+              <div class="post-body">처음부터 끝까지 이 UI가 뭘 하는 건지 모르겠어요.
+
+뭘 누르면 뭐가 되는지, 내가 지금 뭘 만들고 있는 건지, 어디에 저장되는 건지.
+아무것도 안 알려주는데 어떻게 쓰라는 건가요?
+
+평점 1.5점이요. 솔직히 이건 저 같은 사람을 위한 도구가 아닌 것 같아요.</div>
+              <div class="post-actions">
+                <span class="post-action">❤️ <span class="count">19</span></span>
+                <span class="post-action">💬 <span class="count">5</span></span>
+                <span class="post-action">🔄 <span class="count">3</span></span>
+              </div>
+
+              <div class="replies">
+                <div class="reply">
+                  <div class="reply-avatar" style="background:#d97706">b17</div>
+                  <div class="reply-content">
+                    <div><span class="reply-name">b017</span> <span class="reply-handle">비판형</span></div>
+                    <div class="reply-text">이건 사용자 탓이 아니라 제품 탓이에요. "No signup required"라고 해놓고 막상 쓰려면 가입하라고 하는 것도 웃기고, 온보딩 가이드가 하나도 없는 건 진짜 문제.</div>
+                    <div class="reply-actions"><span>❤️ 27</span> <span>💬 답글</span></div>
+                  </div>
+                </div>
+
+                <div class="reply">
+                  <div class="reply-avatar" style="background:#059669">b04</div>
+                  <div class="reply-content">
+                    <div><span class="reply-name">b004</span> <span class="reply-handle">기술숙련</span></div>
+                    <div class="reply-text">솔직히 tally.so는 어느 정도 기술적 배경이 있는 사람 타겟인 것 같긴 해요. 근데 그러면 마케팅에서 "가장 쉬운 폼 빌더"라고 하면 안 되지 않나...</div>
+                    <div class="reply-actions"><span>❤️ 33</span> <span>💬 답글</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- POST 5: b013 (신중형) — 가장 긍정적 -->
+            <div class="post">
+              <div class="post-header">
+                <div class="post-avatar" style="background:#34d399">b13</div>
+                <div>
+                  <div class="post-name">b013</div>
+                  <div class="post-handle">신중형 · 꼼꼼하게 기능 탐색</div>
+                </div>
+                <span class="post-segment seg-methodical">신중형</span>
+              </div>
+              <div class="post-product-tag">#tally_so 후기</div>
+              <div class="post-body">저는 하나씩 꼼꼼하게 써봤는데, 조건부 로직까지 설정하고 폼 완성했어요.
+
+핵심은 "/" 명령어를 아는 것. 이걸 알면 블록 추가가 진짜 빠르고,
+조건부 로직도 블록 설정에서 찾으면 돼요.
+Typeform에서 유료인 기능이 여기선 무료라는 게 제일 큰 장점.
+
+팀에 추천할 의향 있습니다. ⭐ 3.5/5</div>
+              <div class="post-actions">
+                <span class="post-action">❤️ <span class="count">52</span></span>
+                <span class="post-action">💬 <span class="count">9</span></span>
+                <span class="post-action">🔄 <span class="count">14</span></span>
+              </div>
+
+              <div class="replies">
+                <div class="reply">
+                  <div class="reply-avatar" style="background:#2563eb">도</div>
+                  <div class="reply-content">
+                    <div><span class="reply-name">김도현</span> <span class="reply-handle">@dohyun_pm</span></div>
+                    <div class="reply-text">블록 설정에서 조건부 로직을 찾는 거였군요... 저는 "/" 메뉴에서만 찾다가 포기했는데. 이 정보 하나로 평가가 완전 달라질 뻔했네요.</div>
+                    <div class="reply-actions"><span>❤️ 22</span> <span>💬 답글</span></div>
+                  </div>
+                </div>
+
+                <div class="reply">
+                  <div class="reply-avatar" style="background:#d97706">b06</div>
+                  <div class="reply-content">
+                    <div><span class="reply-name">b006</span> <span class="reply-handle">비판형</span></div>
+                    <div class="reply-text">근데 그 "/"를 아는 사람만 쓸 수 있다는 게 문제 아닌가요? 19명 중에 이걸 자연스럽게 찾은 사람이 몇 명이나 됩니까?</div>
+                    <div class="reply-actions"><span>❤️ 41</span> <span>💬 답글</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- SNS 사이드바: 커뮤니티 분석 -->
+          <div class="sns-sidebar">
+            <div style="font-size:15px;font-weight:700;margin-bottom:16px">커뮤니티 인사이트</div>
+
+            <div class="sns-stat-card">
+              <div class="sns-stat-label">전체 감성</div>
+              <div class="sns-stat-value" style="color:var(--red)">부정 68%</div>
+              <div class="sns-stat-sub">긍정 21% · 중립 11%</div>
+            </div>
+
+            <div class="sns-stat-card">
+              <div class="sns-stat-label">추천 의향 (NPS)</div>
+              <div class="sns-stat-value" style="color:var(--red)">-47</div>
+              <div class="sns-stat-sub">추천 21% · 비추천 63%</div>
+            </div>
+
+            <div class="sns-stat-card">
+              <div class="sns-stat-label">입소문 예측</div>
+              <div class="sns-stat-value" style="color:var(--amber)">약함</div>
+              <div class="sns-stat-sub">파워유저만 제한적 공유 예상</div>
+            </div>
+
+            <div class="sns-stat-card">
+              <div class="sns-stat-label">가장 많이 언급된 키워드</div>
+              <div class="sns-trending">
+                <div class="sns-trending-item">
+                  <span class="sns-trending-tag">#영어_장벽</span>
+                  <span class="sns-trending-count">14회</span>
+                </div>
+                <div class="sns-trending-item">
+                  <span class="sns-trending-tag">#조건부_로직</span>
+                  <span class="sns-trending-count">11회</span>
+                </div>
+                <div class="sns-trending-item">
+                  <span class="sns-trending-tag">#무료</span>
+                  <span class="sns-trending-count">9회</span>
+                </div>
+                <div class="sns-trending-item">
+                  <span class="sns-trending-tag">#온보딩_없음</span>
+                  <span class="sns-trending-count">8회</span>
+                </div>
+                <div class="sns-trending-item">
+                  <span class="sns-trending-tag">#Notion_스타일</span>
+                  <span class="sns-trending-count">6회</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="sns-stat-card" style="background:var(--amber-light)">
+              <div class="sns-stat-label" style="color:var(--amber)">핵심 발견</div>
+              <div style="font-size:13px;color:var(--text);line-height:1.6;margin-top:4px">
+                <strong>신중형(b013)의 팁 공유</strong>가 가장 높은 반응(❤️52)을 얻었지만,
+                <strong>이 정보 없이 스스로 발견한 사람은 19명 중 4명</strong>에 불과.
+                → 제품이 아닌 커뮤니티에 의존하는 사용법 전파 구조.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.screen).classList.add('active');
+    });
+  });
+
+  // Emotion chart
+  (function() {
+    const svg = document.getElementById('emo-chart');
+    const W = 900, H = 320;
+    const pad = { top: 30, right: 30, bottom: 50, left: 55 };
+    const plotW = W - pad.left - pad.right;
+    const plotH = H - pad.top - pad.bottom;
+
+    const labels = ['step 0', 'step 1', 'step 2', 'step 3', 'step 4', 'step 5', 'step 6', 'step 7', 'step 8', 'step 9'];
+    const core = [0.11, 0.06, 0.13, 0.46, 0.49, 0.55, 0.54, 0.77, 0.86];
+    const edge = [0.09, 0.15, -0.02, 0.15, 0.26, 0.32, 0.06, 0.15, 0.19, 0.01];
+    // wild removed - only 2 personas
+
+    function toX(i) { return pad.left + (i / (labels.length - 1)) * plotW; }
+    function toY(v) { return pad.top + plotH / 2 - (v * plotH / 2); }
+
+    function catmullRom(pts) {
+      if (pts.length < 2) return '';
+      let d = `M ${pts[0].x} ${pts[0].y}`;
+      for (let i = 0; i < pts.length - 1; i++) {
+        const p0 = pts[Math.max(0, i - 1)];
+        const p1 = pts[i];
+        const p2 = pts[i + 1];
+        const p3 = pts[Math.min(pts.length - 1, i + 2)];
+        d += ` C ${(p1.x + (p2.x - p0.x) / 6).toFixed(1)} ${(p1.y + (p2.y - p0.y) / 6).toFixed(1)}, ${(p2.x - (p3.x - p1.x) / 6).toFixed(1)} ${(p2.y - (p3.y - p1.y) / 6).toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+      }
+      return d;
+    }
+
+    let html = '';
+
+    // Grid
+    [-1, -0.5, 0, 0.5, 1].forEach(v => {
+      const y = toY(v);
+      html += `<line x1="${pad.left}" y1="${y}" x2="${W - pad.right}" y2="${y}" stroke="#e5e7eb" stroke-width="1"/>`;
+      const t = v === 1 ? '만족' : v === 0 ? '중립' : v === -1 ? '좌절' : (v > 0 ? `+${v}` : v);
+      html += `<text x="${pad.left - 10}" y="${y + 4}" text-anchor="end" fill="#9ca3af" font-family="'DM Mono',monospace" font-size="11">${t}</text>`;
+    });
+
+    labels.forEach((l, i) => {
+      const x = toX(i);
+      html += `<line x1="${x}" y1="${pad.top}" x2="${x}" y2="${H - pad.bottom}" stroke="#f3f4f6" stroke-width="1"/>`;
+      html += `<text x="${x}" y="${H - pad.bottom + 20}" text-anchor="middle" fill="#6b7280" font-family="'Noto Sans KR',sans-serif" font-size="11">${l}</text>`;
+    });
+
+    const cp = core.map((v, i) => ({ x: toX(i), y: toY(v) }));
+    const ep = edge.map((v, i) => ({ x: toX(i), y: toY(v) }));
+    
+
+    html += `<path d="${catmullRom(cp)}" fill="none" stroke="#059669" stroke-width="2.5"/>`;
+    html += `<path d="${catmullRom(ep)}" fill="none" stroke="#d97706" stroke-width="2.5"/>`;
+    
+
+    cp.forEach(p => html += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="white" stroke="#059669" stroke-width="2"/>`);
+    ep.forEach(p => html += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="white" stroke="#d97706" stroke-width="2"/>`);
+    
+    // Exit marker
+    
+    
+
+    // Gap annotation
+    html += `<line x1="${ex + 16}" y1="${toY(0.5)}" x2="${ex + 16}" y2="${ey}" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4,3"/>`;
+    html += `<rect x="${ex + 24}" y="${(toY(0.5) + ey) / 2 - 12}" width="110" height="24" rx="4" fill="white" stroke="#2563eb" stroke-width="1"/>`;
+    html += `<text x="${ex + 79}" y="${(toY(0.5) + ey) / 2 + 3}" text-anchor="middle" fill="#2563eb" font-family="'DM Mono',monospace" font-size="11" font-weight="600">격차 1.6</text>`;
+
+    svg.innerHTML = html;
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+# ShipCheck 실험 1: 분화 검증
+# "Big Five 기반 50명 페르소나가 동일 제품에서 유의미하게 다른 행동을 보이는가?"
+
+experiment_id: "exp1_differentiation"
+
+# 페르소나 설정
+persona_dir: "configs/personas/generated"
+personas_per_segment: 5  # 10 세그먼트 × 5명 = 50명
+seed: 42
+product_context: "웹 기반 SaaS/생산성 도구"
+
+# 테스트 대상 제품
+products:
+  - name: "tally"
+    url: "https://tally.so"
+  - name: "calcom"
+    url: "https://cal.com"
+  - name: "notion"
+    url: "https://www.notion.so"
+
+# 실행 설정
+max_steps: 25
+headless: true
+llm_model: "sonnet"  # Claude Code CLI -p 모드에서 사용할 모델
