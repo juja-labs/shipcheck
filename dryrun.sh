@@ -11,7 +11,7 @@ MAX_TURNS=50
 MODEL="sonnet"
 
 echo "=== 세션 초기화 ==="
-python3 -m shipcheck.tools.session_init \
+python3 -m src.tools.session_init \
   --persona "$PERSONA" \
   --product-url "$PRODUCT_URL" \
   --product-name "$PRODUCT_NAME" \
@@ -21,7 +21,7 @@ echo ""
 echo "=== 프롬프트 생성 ==="
 PROMPT_FILE="/tmp/shipcheck_${SESSION_ID}_prompt.txt"
 python3 -c "
-from shipcheck.prompt_builder import build_system_prompt
+from src.prompt_builder import build_system_prompt
 import os
 prompt = build_system_prompt(
     persona_yaml_path='$PERSONA',

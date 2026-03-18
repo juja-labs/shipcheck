@@ -6,7 +6,7 @@ Claude(페르소나)가 playwright-cli로 행동한 후 호출.
 행동 로그(action-type, url, reasoning 등)는 Claude 트랜스크립트에 이미 있으므로 받지 않음.
 
 사용법:
-    python3 -m shipcheck.tools.step_update \
+    python3 -m src.tools.step_update \
         --session-id abc123 \
         --action-succeeded true \
         --url-changed false \
@@ -34,9 +34,9 @@ from pathlib import Path
 
 import numpy as np
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from shipcheck.core.types import PADVector
-from shipcheck.layer3_emotion.engine import (
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))  # repo root
+from src.core.types import PADVector
+from src.layer3_emotion.engine import (
     classify_event,
     compute_pad_delta,
     update_pad,

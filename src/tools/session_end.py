@@ -4,7 +4,7 @@
 세션이 끝났을 때 (이탈, 목표 달성, max_steps) Claude가 호출.
 
 사용법:
-    python3 -m shipcheck.tools.session_end \
+    python3 -m src.tools.session_end \
         --session-id abc123 \
         --terminated-by abandoned \
         --output-dir runs/exp_001
@@ -30,12 +30,12 @@ from pathlib import Path
 
 import yaml
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))  # repo root
 
-from shipcheck.core.types import SessionLog, StepLog
-from shipcheck.layer1_persona.models import PersonaProfile
-from shipcheck.review.generator import generate_review
-from shipcheck.llm.claude_cli import ClaudeCli
+from src.core.types import SessionLog, StepLog
+from src.layer1_persona.models import PersonaProfile
+from src.review.generator import generate_review
+from src.llm.claude_cli import ClaudeCli
 
 logger = logging.getLogger(__name__)
 

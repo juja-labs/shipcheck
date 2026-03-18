@@ -23,7 +23,7 @@ from ..prompt_builder import build_system_prompt
 
 logger = logging.getLogger(__name__)
 
-ENGINE_DIR = Path(__file__).resolve().parent.parent.parent  # engine/
+ENGINE_DIR = Path(__file__).resolve().parent.parent.parent  # repo root
 
 
 def load_personas(persona_dir: Path) -> list[Path]:
@@ -40,7 +40,7 @@ async def _run_session_init(
 ) -> dict:
     """session_init 도구 실행."""
     cmd = [
-        "python3", "-m", "shipcheck.tools.session_init",
+        "python3", "-m", "src.tools.session_init",
         "--persona", str(persona_yaml),
         "--product-url", product_url,
         "--product-name", product_name,

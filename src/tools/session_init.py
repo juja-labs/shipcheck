@@ -2,7 +2,7 @@
 """세션 초기화 — 페르소나 YAML을 로드하고 세션 상태 파일을 생성.
 
 사용법:
-    python3 -m shipcheck.tools.session_init \
+    python3 -m src.tools.session_init \
         --persona configs/personas/benchmark/b005.yaml \
         --product-url "https://tally.so" \
         --session-id abc123
@@ -32,8 +32,8 @@ from pathlib import Path
 import yaml
 
 # 엔진 모듈 임포트
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from shipcheck.layer1_persona.models import PersonaProfile
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))  # repo root
+from src.layer1_persona.models import PersonaProfile
 
 
 def main():

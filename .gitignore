@@ -1,2 +1,21 @@
-engine/.playwright-cli/
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Playwright CLI 캐시
 .playwright-cli/
+
+# 실험 결과
+runs/
+
+# Next.js
+landing/.next/
+landing/node_modules/
+
+# OS
+.DS_Store
+Thumbs.db

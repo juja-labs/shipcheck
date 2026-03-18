@@ -32,7 +32,7 @@ def main():
 
     # 2. 프롬프트 생성
     print("\n=== 프롬프트 생성 ===")
-    from shipcheck.prompt_builder import build_system_prompt
+    from src.prompt_builder import build_system_prompt
     system_prompt = build_system_prompt(
         persona_yaml_path=PERSONA,
         session_id=SESSION_ID,

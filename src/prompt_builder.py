@@ -171,7 +171,7 @@ def build_system_prompt(
   - 존재하지 않는 ref를 추측하지 말 것
 
 ## step_update — 매 행동 후 감정 업데이트
-  cd {engine_dir} && python3 -m shipcheck.tools.step_update \\
+  cd {engine_dir} && python3 -m src.tools.step_update \\
     --session-id {session_id} \\
     --state-dir {state_dir} \\
     --action-succeeded <true|false> \\
@@ -192,7 +192,7 @@ def build_system_prompt(
   출력에서 should_abandon=true이면 즉시 사용을 포기하고 session_end를 호출하십시오.
 
 ## session_end — 세션 종료
-  cd {engine_dir} && python3 -m shipcheck.tools.session_end \\
+  cd {engine_dir} && python3 -m src.tools.session_end \\
     --session-id {session_id} \\
     --terminated-by <abandoned|goal_achieved|max_steps> \\
     --state-dir {state_dir} \\
