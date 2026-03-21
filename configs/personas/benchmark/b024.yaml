@@ -25,12 +25,12 @@ jtbd:
   success_criterion: ① 폼이 클라이언트 Webflow 페이지에 깨짐 없이 정상 렌더링되고, ② 테스트 제출 1건이 클라이언트 이메일함에
     즉시 수신되며, ③ 추가 도구 학습에 소요된 시간이 1시간 이내일 것. 디자인 수정 요청 없이 클라이언트 1차 승인이 나면 완료로 판단.
   willingness_to_pay: 0.26
-name: Sandra K.
+name: 황정아
 persona_id: b024
 prior_tools_detail:
 - Canva
 - Typeform
 - Google Forms
 role_id: creative_freelancer
-segment: cautious_methodical
+segment: 체계형
 use_context: 클라이언트 프로젝트 브리프

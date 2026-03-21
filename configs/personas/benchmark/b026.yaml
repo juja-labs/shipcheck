@@ -22,11 +22,11 @@ jtbd:
   success_criterion: 신규 고객 온보딩 1건당 수동 개입 시간이 현재 45분에서 10분 이하로 줄고, 첫 응답 수집까지 24시간 내
     완료되는 것을 3개 고객 연속으로 확인
   willingness_to_pay: 0.2
-name: Marcus T.
+name: 남기훈
 persona_id: b026
 prior_tools_detail:
 - SurveyMonkey
 - Typeform
 role_id: startup_founder
-segment: tech_savvy
+segment: 기술능숙형
 use_context: 투자자/파트너 데이터 수집

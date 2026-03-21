@@ -23,11 +23,11 @@ jtbd:
   success_criterion: 코딩 없이 1~2시간 내에 폼 완성 후 웹사이트에 삽입, 이후 신규 문의의 대부분이 예산·일정 정보를 사전 제출해서
     '예산이 얼마예요?' 질문 없이 콜을 시작할 수 있는 상태
   willingness_to_pay: 0.16
-name: Jade M.
+name: 최유진
 persona_id: b006
 prior_tools_detail:
 - Google Forms
 - Canva
 role_id: creative_freelancer
-segment: critical_vocal
+segment: 비평형
 use_context: 클라이언트 프로젝트 브리프

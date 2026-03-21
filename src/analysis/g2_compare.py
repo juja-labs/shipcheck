@@ -74,8 +74,13 @@ def load_synthetic_reviews(run_dir: Path) -> list[dict[str, Any]]:
 
     reviews = []
     for path in sorted(reviews_dir.glob("*.json")):
+        if path.name == "all_reviews.json":
+            continue  # 집계 파일 스킵
         data = json.loads(path.read_text(encoding="utf-8"))
-        reviews.append(data)
+        if isinstance(data, list):
+            reviews.extend(data)
+        else:
+            reviews.append(data)
 
     # JSONL 형태도 지원
     jsonl_path = reviews_dir / "synthetic_reviews.jsonl"

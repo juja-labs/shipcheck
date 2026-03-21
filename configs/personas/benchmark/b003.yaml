@@ -25,12 +25,12 @@ jtbd:
   success_criterion: 별도 개발자 없이 48시간 안에 폼이 포트폴리오 사이트에 라이브 배포되고, 폼 색상·폰트가 자신의 브랜드 팔레트와
     일치하며, 첫 4주 안에 이메일 리스트 40명 이상을 확보하는 것.
   willingness_to_pay: 0.29
-name: Camille D.
+name: 이예린
 persona_id: b003
 prior_tools_detail:
 - Canva
 - Google Forms
 - Typeform
 role_id: creative_freelancer
-segment: explorer
+segment: 탐색형
 use_context: 뉴스레터 구독 및 브랜딩 폼

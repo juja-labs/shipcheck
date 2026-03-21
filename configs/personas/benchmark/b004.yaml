@@ -22,11 +22,11 @@ jtbd:
   success_criterion: 폼 빌드 → 임베드 코드 삽입 → 웹훅 연동 → Airtable 자동 기록까지 전 과정을 1시간 내 완료하고,
     팀원이 별도 교육 없이 폼을 편집할 수 있는 상태
   willingness_to_pay: 0.79
-name: Daniel S.
+name: 서동현
 persona_id: b004
 prior_tools_detail:
 - Typeform
 - Airtable
 role_id: tech_professional
-segment: tech_savvy
+segment: 기술능숙형
 use_context: 서포트 티켓 수집 및 웹훅 연동

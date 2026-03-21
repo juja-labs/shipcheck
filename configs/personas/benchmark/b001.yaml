@@ -22,10 +22,10 @@ jtbd:
   success_criterion: 폼 하나로 과목별 등록 시나리오 최소 3종을 커버하고, '이 항목은 저한테 해당 없는 것 같은데요' 류의 학부모
     문의가 사라지며, 매 학기 반복되는 등록 관련 전화가 절반 이하로 줄어드는 것
   willingness_to_pay: 0.05
-name: Mina J.
+name: 정민아
 persona_id: b001
 prior_tools_detail:
 - 네이버 폼
 role_id: educator_nonprofit
-segment: anxious
+segment: 신중형
 use_context: 학생/학부모 설문조사

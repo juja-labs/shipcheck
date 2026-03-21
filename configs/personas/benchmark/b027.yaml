@@ -23,10 +23,10 @@ jtbd:
   success_criterion: 신규 클라이언트가 예약 후 24시간 이내에 폼을 완료하고, '이 질문은 무슨 뜻인가요?' 같은 추가 이메일 없이
     응답이 들어오며, 첫 세션 전에 날것의 스프레드시트를 다시 파싱하지 않고도 바로 참고할 수 있는 정리된 형태로 수신된다
   willingness_to_pay: 0.08
-name: Renata B.
+name: 피유리
 persona_id: b027
 prior_tools_detail:
 - Google Forms
 role_id: small_biz_operator
-segment: anxious
+segment: 신중형
 use_context: 클라이언트 인테이크 설문

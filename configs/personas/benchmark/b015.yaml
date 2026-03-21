@@ -22,10 +22,10 @@ jtbd:
   success_criterion: 폼 만들겠다고 마음먹은 날 당일 20분 안에 링크를 완성해서 단체방에 뿌릴 수 있어야 하고, 첫 세션 전날까지
     10명 이상의 확정 응답이 들어오면 성공으로 본다.
   willingness_to_pay: 0.01
-name: Marcus T.
+name: 조현우
 persona_id: b015
 prior_tools_detail:
 - Google Forms
 role_id: small_biz_operator
-segment: intuitive
+segment: 직감형
 use_context: 내부 피드백 수집

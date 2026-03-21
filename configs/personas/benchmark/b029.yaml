@@ -23,10 +23,10 @@ jtbd:
   success_criterion: 신규 고객 온보딩 정보 수집에 걸리는 팀 리소스가 현재 대비 70% 이상 줄고, 폼 제출 후 Notion/HubSpot에
     자동 반영까지 3분 이내 완료되는 것을 확인했을 때. 첫 주에 파일럿 고객 3명으로 테스트해서 이탈 없이 완료율 80% 이상이면 성공으로 판단.
   willingness_to_pay: 0.43
-name: Marcus T.
+name: 도경민
 persona_id: b029
 prior_tools_detail:
 - Typeform
 role_id: startup_founder
-segment: critical_vocal
+segment: 비평형
 use_context: 리드 캡처 및 고객 피드백 수집

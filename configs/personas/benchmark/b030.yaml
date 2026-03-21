@@ -32,11 +32,11 @@ jtbd:
     기대 스키마와 일치, (3) Airtable 동기화 시 필드가 1:1 매핑되어 수동 컬럼
     리매핑 불필요. 세 가지 모두 통과하면 같은 주에 팀에 마이그레이션 제안.'
   willingness_to_pay: 0.79
-name: Derek V.
+name: 차동혁
 persona_id: b030
 prior_tools_detail:
 - JotForm
 - Airtable
 role_id: tech_professional
-segment: critical_vocal
+segment: 비평형
 use_context: 서포트 티켓 수집 및 웹훅 연동

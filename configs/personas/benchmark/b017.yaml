@@ -22,10 +22,10 @@ jtbd:
   success_criterion: 폼 첫 화면 접속부터 공유 가능한 링크 생성까지 30분 이내 완료, 챌린지 시작 전까지 최소 20건 신청 접수
     확인
   willingness_to_pay: 0.18
-name: Tariq B.
+name: 배진호
 persona_id: b017
 prior_tools_detail:
 - Google Forms
 role_id: small_biz_operator
-segment: critical_vocal
+segment: 비평형
 use_context: 예약/등록 폼

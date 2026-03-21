@@ -24,12 +24,12 @@ jtbd:
   success_criterion: 설정 시작 후 45분 이내에 폼이 라이브 상태로 웹사이트에 삽입되고, 테스트 제출 시 Notion 페이지에 새
     row가 자동 생성되는 것을 확인. 첫 주 안에 유효 리드 20건 이상 수집.
   willingness_to_pay: 0.43
-name: Rafael S.
+name: 신재원
 persona_id: b018
 prior_tools_detail:
 - Google Forms
 - Typeform
 - SurveyMonkey
 role_id: startup_founder
-segment: power_user
+segment: 파워유저형
 use_context: 온보딩 설문 및 제품 검증

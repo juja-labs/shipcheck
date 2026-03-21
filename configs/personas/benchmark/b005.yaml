@@ -27,12 +27,12 @@ jtbd:
   success_criterion: 설정을 시작한 날 안에 폼이 웹사이트에 실제로 떠 있고, 누군가 제출하면 이메일 알림이 오는 것을 직접 확인.
     제출 데이터가 어디 있는지 10초 안에 찾을 수 있으면 성공.
   willingness_to_pay: 0.23
-name: Camila R.
+name: 박하은
 persona_id: b005
 prior_tools_detail:
 - SurveyMonkey
 - Google Forms
 - Typeform
 role_id: startup_founder
-segment: intuitive
+segment: 직감형
 use_context: 리드 캡처 및 고객 피드백 수집

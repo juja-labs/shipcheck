@@ -24,12 +24,12 @@ jtbd:
   success_criterion: 설문 링크를 카카오톡으로 공유한 날 10분 안에 첫 응답이 들어오고 3일 내 응답률 60% 이상 확보. 결과를
     엑셀로 내려받아 보고서 표에 붙이는 전체 과정이 30분 이내에 끝나야 '잘 됐다'고 느낀다
   willingness_to_pay: 0.19
-name: Sandra Y.
+name: 안소희
 persona_id: b021
 prior_tools_detail:
 - 네이버 폼
 - Google Forms
 - Microsoft Forms
 role_id: educator_nonprofit
-segment: intuitive
+segment: 직감형
 use_context: 이벤트 참가 등록

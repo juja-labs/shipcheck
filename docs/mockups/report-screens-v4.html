@@ -6,32 +6,36 @@
   <title>ShipCheck</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #f4f5f7;
-      --surface: #ffffff;
-      --surface-alt: #f9fafb;
-      --border: #e5e7eb;
-      --border-focus: #d1d5db;
-      --text: #111827;
-      --text-2: #4b5563;
-      --text-3: #9ca3af;
-      --blue: #2563eb;
-      --blue-light: #eff6ff;
-      --green: #059669;
-      --green-light: #ecfdf5;
-      --amber: #d97706;
-      --amber-light: #fffbeb;
-      --red: #dc2626;
-      --red-light: #fef2f2;
-      --violet: #7c3aed;
-      --violet-light: #f5f3ff;
-      --font: 'Noto Sans KR', 'DM Sans', sans-serif;
-      --mono: 'DM Mono', monospace;
-      --radius: 8px;
+      --bg: #F5F4EF;
+      --surface: #FEFEFE;
+      --surface-alt: #F9F8F4;
+      --border: #E6E3DB;
+      --border-focus: #D4D0C8;
+      --text: #1A1816;
+      --text-2: #5C5650;
+      --text-3: #9C958C;
+      --blue: #3B6CE7;
+      --blue-light: #EDF2FE;
+      --green: #2D7A4F;
+      --green-light: #EEF7F1;
+      --amber: #C27918;
+      --amber-light: #FDF5E8;
+      --red: #BF3333;
+      --red-light: #FBEFEF;
+      --violet: #6C4FC9;
+      --violet-light: #F3F0FB;
+      --font: 'IBM Plex Sans KR', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+      --serif: 'Instrument Serif', serif;
+      --radius: 6px;
+      --shadow-sm: 0 1px 2px rgba(26,24,22,0.04);
+      --shadow-md: 0 4px 12px rgba(26,24,22,0.06);
+      --shadow-lg: 0 8px 30px rgba(26,24,22,0.08);
     }
 
     html { scroll-behavior: smooth; }
@@ -53,36 +57,40 @@
 
     /* ── Sidebar ── */
     .sidebar {
-      width: 220px;
-      background: var(--surface);
-      border-right: 1px solid var(--border);
+      width: 200px;
+      background: var(--text);
       display: flex;
       flex-direction: column;
       flex-shrink: 0;
+      color: rgba(255,255,255,0.7);
     }
 
     .sidebar-logo {
-      padding: 20px 20px 16px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 700;
-      font-size: 17px;
+      padding: 18px 16px 14px;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 19px;
+      font-style: italic;
       display: flex;
       align-items: center;
       gap: 10px;
-      border-bottom: 1px solid var(--border);
+      color: white;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     .logo-icon {
-      width: 28px;
-      height: 28px;
-      background: var(--text);
-      border-radius: 7px;
+      width: 26px;
+      height: 26px;
+      background: var(--amber);
+      border-radius: 5px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 14px;
+      font-family: var(--font);
+      font-size: 12px;
       font-weight: 700;
+      font-style: normal;
     }
 
     .sidebar-section {
@@ -90,11 +98,11 @@
     }
 
     .sidebar-section-label {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
-      color: var(--text-3);
+      color: rgba(255,255,255,0.35);
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 1px;
       padding: 0 8px;
       margin-bottom: 4px;
     }
@@ -102,51 +110,52 @@
     .sidebar-item {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-2);
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
       cursor: pointer;
-      transition: background 0.15s;
+      transition: all 0.15s;
     }
 
-    .sidebar-item:hover { background: var(--surface-alt); }
-    .sidebar-item.active { background: var(--blue-light); color: var(--blue); font-weight: 600; }
+    .sidebar-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.85); }
+    .sidebar-item.active { background: rgba(255,255,255,0.1); color: white; font-weight: 500; }
 
     .sidebar-item .icon {
-      width: 18px;
+      width: 16px;
       text-align: center;
-      font-size: 14px;
+      font-size: 12px;
       opacity: 0.7;
     }
 
     .sidebar-item .badge {
       margin-left: auto;
       font-family: var(--mono);
-      font-size: 11px;
-      background: var(--surface-alt);
+      font-size: 10px;
+      background: rgba(255,255,255,0.08);
       padding: 1px 6px;
-      border-radius: 10px;
-      color: var(--text-3);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.4);
     }
 
     .sidebar-project {
       margin-top: auto;
-      padding: 16px;
-      border-top: 1px solid var(--border);
+      padding: 14px 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
     .project-name {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       margin-bottom: 2px;
+      color: white;
     }
 
     .project-meta {
-      font-size: 11px;
-      color: var(--text-3);
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
     }
 
     /* ── Main Area ── */
@@ -158,46 +167,56 @@
     }
 
     .topbar {
-      height: 48px;
+      height: 44px;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
       display: flex;
-      align-items: center;
-      padding: 0 24px;
-      gap: 8px;
+      align-items: stretch;
+      padding: 0;
       flex-shrink: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
     }
+    .topbar::-webkit-scrollbar { display: none; }
 
     .tab {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
       color: var(--text-3);
-      padding: 12px 16px;
+      padding: 0 14px;
       border-bottom: 2px solid transparent;
       cursor: pointer;
       transition: all 0.15s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
     }
 
     .tab:hover { color: var(--text-2); }
-    .tab.active { color: var(--text); border-bottom-color: var(--text); font-weight: 600; }
+    .tab.active { color: var(--text); border-bottom-color: var(--amber); font-weight: 600; }
 
     .topbar-right {
       margin-left: auto;
       display: flex;
       align-items: center;
       gap: 12px;
+      padding: 0 16px;
+      flex-shrink: 0;
     }
 
     .topbar-badge {
-      font-size: 12px;
-      font-weight: 500;
+      font-size: 11px;
+      font-weight: 600;
       padding: 3px 10px;
-      border-radius: 12px;
+      border-radius: 4px;
+      letter-spacing: 0.3px;
     }
 
     .topbar-badge.warning {
-      background: var(--amber-light);
-      color: var(--amber);
+      background: var(--amber);
+      color: white;
     }
 
     .content {
@@ -211,6 +230,108 @@
     }
 
     .screen.active { display: flex; }
+
+    /* ════════════════════════════════════════════
+       Screen 7-10: New Features
+       ════════════════════════════════════════════ */
+
+    /* ── Benchmark ── */
+    .bench-layout { display: grid; grid-template-columns: 1fr 1fr; height: 100%; overflow: hidden; }
+    .bench-col { overflow-y: auto; padding: 24px; }
+    .bench-col + .bench-col { border-left: 1px solid var(--border); }
+    .bench-col-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border);
+    }
+    .bench-col-header .logo { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: white; }
+    .bench-col-header .name { font-size: 16px; font-weight: 700; }
+    .bench-col-header .verdict { margin-left: auto; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 12px; }
+    .bench-metric-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--surface-alt); }
+    .bench-metric-label { font-size: 13px; color: var(--text-2); }
+    .bench-metric-value { font-family: var(--mono); font-size: 16px; font-weight: 700; }
+    .bench-bar { flex: 1; height: 8px; background: var(--surface-alt); border-radius: 4px; margin: 0 16px; overflow: hidden; }
+    .bench-bar-fill { height: 100%; border-radius: 4px; }
+    .bench-quote { padding: 12px 16px; margin: 8px 0; border-left: 3px solid var(--border); font-size: 13px; color: var(--text-2); line-height: 1.6; font-style: italic; }
+    .bench-winner { background: var(--green-light); padding: 16px; border-radius: 8px; margin-top: 16px; }
+    .bench-loser { background: var(--red-light); padding: 16px; border-radius: 8px; margin-top: 16px; }
+    .bench-vs { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--text); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; z-index: 2; }
+
+    /* ── Replay ── */
+    .replay-layout { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+    .replay-player { flex: 1; display: flex; align-items: center; justify-content: center; background: #1a1a2e; position: relative; overflow: hidden; }
+    .replay-screen { width: 70%; max-width: 800px; background: white; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); overflow: hidden; position: relative; }
+    .replay-screen-bar { height: 28px; background: #f0f0f0; display: flex; align-items: center; padding: 0 10px; gap: 6px; }
+    .replay-screen-bar .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .replay-screen-content { height: 380px; display: flex; align-items: center; justify-content: center; background: #fafafa; font-size: 13px; color: var(--text-3); padding: 20px; text-align: center; }
+    .replay-bubble {
+      position: absolute; top: 20px; right: 20px;
+      background: rgba(0,0,0,0.85); color: white; padding: 14px 18px;
+      border-radius: 12px; max-width: 300px; font-size: 13px; line-height: 1.6;
+    }
+    .replay-bubble::before { content: '💭'; position: absolute; top: -8px; left: 12px; font-size: 18px; }
+    .replay-emotion {
+      position: absolute; bottom: 20px; left: 20px;
+      background: rgba(0,0,0,0.75); color: white; padding: 8px 16px;
+      border-radius: 20px; font-size: 13px; display: flex; align-items: center; gap: 8px;
+    }
+    .replay-emotion-bar { width: 120px; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; overflow: hidden; }
+    .replay-emotion-bar-fill { height: 100%; border-radius: 3px; }
+    .replay-controls {
+      height: 64px; background: var(--surface); border-top: 1px solid var(--border);
+      display: flex; align-items: center; padding: 0 24px; gap: 16px;
+    }
+    .replay-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--text); color: white; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; }
+    .replay-timeline { flex: 1; height: 6px; background: var(--surface-alt); border-radius: 3px; position: relative; overflow: hidden; }
+    .replay-timeline-fill { width: 35%; height: 100%; background: var(--blue); border-radius: 3px; }
+    .replay-time { font-family: var(--mono); font-size: 12px; color: var(--text-3); }
+    .replay-persona-badge { display: flex; align-items: center; gap: 8px; margin-left: auto; font-size: 13px; }
+    .replay-markers { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+    .replay-marker { position: absolute; top: -3px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; }
+
+    /* ── AB Test ── */
+    .ab-layout { display: grid; grid-template-columns: 1fr 48px 1fr; height: 100%; overflow: hidden; }
+    .ab-col { overflow-y: auto; padding: 24px; }
+    .ab-divider { display: flex; align-items: center; justify-content: center; background: var(--surface-alt); border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+    .ab-divider span { writing-mode: vertical-rl; font-weight: 800; font-size: 14px; color: var(--text-3); letter-spacing: 2px; }
+    .ab-version-badge { display: inline-block; font-size: 14px; font-weight: 800; padding: 4px 14px; border-radius: 6px; margin-bottom: 16px; }
+    .ab-a .ab-version-badge { background: var(--red-light); color: var(--red); }
+    .ab-b .ab-version-badge { background: var(--green-light); color: var(--green); }
+    .ab-metric { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--surface-alt); }
+    .ab-metric-label { font-size: 13px; color: var(--text-2); }
+    .ab-metric-value { font-family: var(--mono); font-size: 18px; font-weight: 700; }
+    .ab-delta { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-left: 8px; }
+    .ab-delta.positive { background: var(--green-light); color: var(--green); }
+    .ab-delta.negative { background: var(--red-light); color: var(--red); }
+    .ab-segment-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .ab-segment-label { font-size: 12px; width: 60px; color: var(--text-3); }
+    .ab-segment-bars { flex: 1; display: flex; gap: 4px; }
+    .ab-segment-bar { height: 8px; border-radius: 4px; }
+
+    /* ── Heatmap ── */
+    .hm-overlay-layout { display: grid; grid-template-columns: 1fr 320px; height: 100%; overflow: hidden; }
+    .hm-overlay-main { overflow-y: auto; padding: 24px; display: flex; flex-direction: column; align-items: center; }
+    .hm-overlay-sidebar { border-left: 1px solid var(--border); padding: 24px; overflow-y: auto; background: var(--surface); }
+    .hm-overlay-screen { position: relative; width: 100%; max-width: 700px; background: white; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+    .hm-overlay-screen-bar { height: 28px; background: #f0f0f0; display: flex; align-items: center; padding: 0 10px; gap: 6px; }
+    .hm-overlay-screen-bar .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .hm-overlay-screen-content { position: relative; padding: 20px; min-height: 500px; }
+    .hm-spot {
+      position: absolute; border-radius: 8px; padding: 8px 12px;
+      font-size: 11px; font-weight: 600; cursor: pointer;
+      transition: transform 0.15s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .hm-spot:hover { transform: scale(1.05); z-index: 10; }
+    .hm-spot.frustration { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); color: var(--red); }
+    .hm-spot.confusion { background: rgba(217,119,6,0.15); border: 1px solid rgba(217,119,6,0.3); color: var(--amber); }
+    .hm-spot.relief { background: rgba(5,150,105,0.15); border: 1px solid rgba(5,150,105,0.3); color: var(--green); }
+    .hm-spot.hesitation { background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.3); color: var(--violet); }
+    .hm-spot-count { font-family: var(--mono); font-size: 13px; font-weight: 700; }
+    .hm-legend-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 13px; }
+    .hm-legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+    .hm-detail-card { background: var(--surface-alt); border-radius: 8px; padding: 14px; margin-top: 12px; }
+    .hm-detail-title { font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+    .hm-detail-quote { font-size: 12px; color: var(--text-2); line-height: 1.6; font-style: italic; }
 
     /* ════════════════════════════════════════════
        Screen 6: SNS Feed
@@ -1415,7 +1536,7 @@
       </div>
       <div class="sidebar-item">
         <span class="icon" style="color:var(--red)">●</span> 불안형
-        <span class="badge">/span>
+        <span class="badge">3</span>
       </div>
     </div>
 
@@ -1434,6 +1555,10 @@
       <div class="tab" data-screen="survey">설문 결과</div>
       <div class="tab" data-screen="trajectory">감정 궤적</div>
       <div class="tab" data-screen="sns">커뮤니티 반응</div>
+      <div class="tab" data-screen="benchmark">경쟁사 비교</div>
+      <div class="tab" data-screen="replay">세션 리플레이</div>
+      <div class="tab" data-screen="abtest">A/B 시뮬레이션</div>
+      <div class="tab" data-screen="heatmap">감정 히트맵</div>
       <div class="topbar-right">
         <span class="topbar-badge warning">조건부 출시</span>
       </div>
@@ -2442,6 +2567,414 @@ Typeform에서 유료인 기능이 여기선 무료라는 게 제일 큰 장점.
           </div>
         </div>
       </div>
+
+      <!-- ═══ Screen 7: Competitor Benchmark ═══ -->
+      <div class="screen" id="benchmark">
+        <div class="bench-layout" style="position:relative">
+          <!-- 우리 제품 -->
+          <div class="bench-col">
+            <div class="bench-col-header">
+              <div class="logo" style="background:var(--blue)">T</div>
+              <div>
+                <div class="name">tally.so</div>
+                <div style="font-size:11px;color:var(--text-3)">고객 제품</div>
+              </div>
+              <span class="verdict" style="background:var(--amber-light);color:var(--amber)">조건부</span>
+            </div>
+
+            <div class="bench-metric-row">
+              <span class="bench-metric-label">핵심 플로우 완료율</span>
+              <span class="bench-metric-value" style="color:var(--amber)">63%</span>
+            </div>
+            <div class="bench-metric-row">
+              <span class="bench-metric-label">평균 만족도</span>
+              <span class="bench-metric-value" style="color:var(--amber)">2.6 / 5</span>
+            </div>
+            <div class="bench-metric-row">
+              <span class="bench-metric-label">추천 의향 (NPS)</span>
+              <span class="bench-metric-value" style="color:var(--red)">-47</span>
+            </div>
+            <div class="bench-metric-row">
+              <span class="bench-metric-label">이탈 페르소나</span>
+              <span class="bench-metric-value" style="color:var(--red)">7 / 19</span>
+            </div>
+            <div class="bench-metric-row">
+              <span class="bench-metric-label">평균 사용 편의성</span>
+              <span class="bench-metric-value" style="color:var(--red)">0.36</span>
+            </div>
+
+            <div class="bench-loser">
+              <div style="font-size:12px;font-weight:600;color:var(--red);margin-bottom:6px">약점 Top 3</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.7">
+                1. 한국어 미지원 — 불안형/초보형 즉시 이탈<br>
+                2. 조건부 로직 발견 불가 — 파워유저 핵심 기능 접근 실패<br>
+                3. "Sign up" 메시지 혼란 — 무료인데 가입 필요?
+              </div>
+            </div>
+
+            <div class="bench-quote">"전부 영어라 포기했어요. 구글 폼이 그냥 편한 것 같아요..." — 박서연, 불안형</div>
+            <div class="bench-quote">"조건부 로직을 찾을 수가 없었음. 3번 시도하다 포기." — 김도현, 파워유저</div>
+          </div>
+
+          <div class="bench-vs">VS</div>
+
+          <!-- 경쟁사 -->
+          <div class="bench-col">
+            <div class="bench-col-header">
+              <div class="logo" style="background:#9333ea">Ty</div>
+              <div>
+                <div class="name">Typeform</div>
+                <div style="font-size:11px;color:var(--text-3)">경쟁사</div>
+              </div>
+              <span class="verdict" style="background:var(--green-light);color:var(--green)">양호</span>
+            </div>
+
+            <div class="bench-metric-row">
+              <span class="bench-metric-label">핵심 플로우 완료율</span>
+              <span class="bench-metric-value" style="color:var(--green)">89%</span>
+            </div>
+            <div class="bench-metric-row">
+              <span class="bench-metric-label">평균 만족도</span>
+              <span class="bench-metric-value" style="color:var(--green)">3.8 / 5</span>
+            </div>
+            <div class="bench-metric-row">
+              <span class="bench-metric-label">추천 의향 (NPS)</span>
+              <span class="bench-metric-value" style="color:var(--green)">+24</span>
+            </div>
+            <div class="bench-metric-row">
+              <span class="bench-metric-label">이탈 페르소나</span>
+              <span class="bench-metric-value" style="color:var(--green)">3 / 19</span>
+            </div>
+            <div class="bench-metric-row">
+              <span class="bench-metric-label">평균 사용 편의성</span>
+              <span class="bench-metric-value" style="color:var(--green)">0.72</span>
+            </div>
+
+            <div class="bench-winner">
+              <div style="font-size:12px;font-weight:600;color:var(--green);margin-bottom:6px">강점 Top 3</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.7">
+                1. 다국어 지원 — 한국어 포함<br>
+                2. 시각적 온보딩 — 단계별 가이드 제공<br>
+                3. 조건부 로직 쉽게 접근 — 블록 옵션에서 즉시 발견
+              </div>
+            </div>
+
+            <div class="bench-quote">"한국어가 되니까 바로 이해됐어요. tally보다 훨씬 편해요." — 박서연, 불안형</div>
+            <div class="bench-quote">"조건부 로직 바로 찾음. 근데 무료 플랜 제한이 문제." — 김도현, 파워유저</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Screen 8: Session Replay ═══ -->
+      <div class="screen" id="replay">
+        <div class="replay-layout">
+          <div class="replay-player">
+            <!-- 화면 -->
+            <div class="replay-screen">
+              <div class="replay-screen-bar">
+                <div class="dot" style="background:#ff5f56"></div>
+                <div class="dot" style="background:#ffbd2e"></div>
+                <div class="dot" style="background:#27c93f"></div>
+                <span style="margin-left:8px;font-size:11px;color:#888">tally.so/templates</span>
+              </div>
+              <div class="replay-screen-content">
+                <div style="text-align:left;width:100%">
+                  <div style="font-size:22px;font-weight:700;margin-bottom:8px">Choose a template</div>
+                  <div style="font-size:13px;color:var(--text-3);margin-bottom:24px">Get started quickly with a pre-built form template</div>
+                  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+                    <div style="padding:16px;border:2px solid var(--red);border-radius:8px;background:var(--red-light)">
+                      <div style="font-size:13px;font-weight:600">Registration Form</div>
+                      <div style="font-size:11px;color:var(--text-3)">Collect registrations</div>
+                      <div style="margin-top:8px;font-size:10px;color:var(--red);font-weight:600">😤 좌절 14명</div>
+                    </div>
+                    <div style="padding:16px;border:2px solid var(--amber);border-radius:8px;background:var(--amber-light)">
+                      <div style="font-size:13px;font-weight:600">Lead Generation</div>
+                      <div style="font-size:11px;color:var(--text-3)">Capture qualified leads</div>
+                      <div style="margin-top:8px;font-size:10px;color:var(--amber);font-weight:600">😟 혼란 16명</div>
+                    </div>
+                    <div style="padding:16px;border:1px solid var(--border);border-radius:8px">
+                      <div style="font-size:13px;font-weight:600">Contact Form</div>
+                      <div style="font-size:11px;color:var(--text-3)">Simple contact page</div>
+                    </div>
+                    <div style="padding:16px;border:2px solid var(--amber);border-radius:8px;background:var(--amber-light)">
+                      <div style="font-size:13px;font-weight:600">Customer Satisfaction</div>
+                      <div style="font-size:11px;color:var(--text-3)">Measure satisfaction</div>
+                      <div style="margin-top:8px;font-size:10px;color:var(--amber);font-weight:600">😟 망설임 9명</div>
+                    </div>
+                    <div style="padding:16px;border:1px solid var(--border);border-radius:8px">
+                      <div style="font-size:13px;font-weight:600">Feedback Form</div>
+                      <div style="font-size:11px;color:var(--text-3)">Collect user feedback</div>
+                    </div>
+                    <div style="padding:16px;border:1px solid var(--border);border-radius:8px">
+                      <div style="font-size:13px;font-weight:600">Personality Quiz</div>
+                      <div style="font-size:11px;color:var(--text-3)">Fun quiz template</div>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:12px;margin-top:16px">
+                    <div style="padding:10px 20px;border:2px solid var(--green);border-radius:6px;font-size:13px;background:var(--green-light)">
+                      <span style="color:var(--green);font-weight:600">Start from scratch</span>
+                      <span style="font-size:10px;color:var(--green);margin-left:4px">🟢 안도 4명</span>
+                    </div>
+                    <div style="padding:10px 20px;border:1px solid var(--border);border-radius:6px;font-size:13px">Use template →</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 사고 버블 -->
+            <div class="replay-bubble">
+              "Registration form? Lead generation? 이게 다 뭔 말인지 하나도 모르겠다. 학부모 설문이랑 비슷한 게 하나도 안 보여..."
+            </div>
+
+            <!-- 감정 표시 -->
+            <div class="replay-emotion">
+              <span>😤 좌절</span>
+              <div class="replay-emotion-bar">
+                <div class="replay-emotion-bar-fill" style="width:78%;background:var(--red)"></div>
+              </div>
+              <span style="font-family:var(--mono);font-size:11px">PAD -0.6</span>
+            </div>
+          </div>
+
+          <!-- 컨트롤바 -->
+          <div class="replay-controls">
+            <button class="replay-btn">▶</button>
+            <span class="replay-time">0:32</span>
+            <div class="replay-timeline">
+              <div class="replay-timeline-fill"></div>
+              <div class="replay-markers">
+                <div class="replay-marker" style="left:12%;background:var(--amber)" title="망설임"></div>
+                <div class="replay-marker" style="left:35%;background:var(--red)" title="좌절"></div>
+                <div class="replay-marker" style="left:62%;background:var(--red)" title="좌절"></div>
+                <div class="replay-marker" style="left:88%;background:var(--red)" title="이탈"></div>
+              </div>
+            </div>
+            <span class="replay-time">1:28</span>
+            <div class="replay-persona-badge">
+              <div style="width:24px;height:24px;border-radius:50%;background:#f87171;color:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">서</div>
+              <span style="font-size:13px;font-weight:600">박서연</span>
+              <span style="font-size:11px;color:var(--text-3)">불안형</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Screen 9: A/B Simulation ═══ -->
+      <div class="screen" id="abtest">
+        <div class="ab-layout">
+          <!-- Version A -->
+          <div class="ab-col ab-a">
+            <div class="ab-version-badge">A — 현재 (영어 전용)</div>
+
+            <div class="ab-metric">
+              <span class="ab-metric-label">핵심 플로우 완료율</span>
+              <span class="ab-metric-value" style="color:var(--red)">63%</span>
+            </div>
+            <div class="ab-metric">
+              <span class="ab-metric-label">평균 만족도</span>
+              <span class="ab-metric-value" style="color:var(--amber)">2.6</span>
+            </div>
+            <div class="ab-metric">
+              <span class="ab-metric-label">이탈률</span>
+              <span class="ab-metric-value" style="color:var(--red)">37%</span>
+            </div>
+            <div class="ab-metric">
+              <span class="ab-metric-label">NPS</span>
+              <span class="ab-metric-value" style="color:var(--red)">-47</span>
+            </div>
+            <div class="ab-metric">
+              <span class="ab-metric-label">평균 완료 시간</span>
+              <span class="ab-metric-value">4:32</span>
+            </div>
+
+            <div style="margin-top:20px;font-size:13px;font-weight:600;margin-bottom:12px">세그먼트별 완료율</div>
+            <div class="ab-segment-row">
+              <span class="ab-segment-label">불안형</span>
+              <div class="ab-segment-bars" style="flex:1"><div class="ab-segment-bar" style="width:33%;background:var(--red)"></div></div>
+              <span style="font-family:var(--mono);font-size:12px;color:var(--red)">33%</span>
+            </div>
+            <div class="ab-segment-row">
+              <span class="ab-segment-label">직관형</span>
+              <div class="ab-segment-bars" style="flex:1"><div class="ab-segment-bar" style="width:75%;background:var(--amber)"></div></div>
+              <span style="font-family:var(--mono);font-size:12px;color:var(--amber)">75%</span>
+            </div>
+            <div class="ab-segment-row">
+              <span class="ab-segment-label">기술숙련</span>
+              <div class="ab-segment-bars" style="flex:1"><div class="ab-segment-bar" style="width:100%;background:var(--green)"></div></div>
+              <span style="font-family:var(--mono);font-size:12px;color:var(--green)">100%</span>
+            </div>
+            <div class="ab-segment-row">
+              <span class="ab-segment-label">초보형</span>
+              <div class="ab-segment-bars" style="flex:1"><div class="ab-segment-bar" style="width:0%;background:var(--red)"></div></div>
+              <span style="font-family:var(--mono);font-size:12px;color:var(--red)">0%</span>
+            </div>
+
+            <div style="margin-top:20px;padding:14px;background:var(--red-light);border-radius:8px">
+              <div style="font-size:12px;font-weight:600;color:var(--red);margin-bottom:4px">핵심 문제</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.6">영어 전용 UI로 인해 불안형·초보형 세그먼트에서 대량 이탈. 조건부 로직 발견 실패.</div>
+            </div>
+          </div>
+
+          <!-- 가운데 VS 디바이더 -->
+          <div class="ab-divider"><span>VS</span></div>
+
+          <!-- Version B -->
+          <div class="ab-col ab-b">
+            <div class="ab-version-badge">B — 개선안 (한국어 + 온보딩)</div>
+
+            <div class="ab-metric">
+              <span class="ab-metric-label">핵심 플로우 완료율</span>
+              <div>
+                <span class="ab-metric-value" style="color:var(--green)">89%</span>
+                <span class="ab-delta positive">+26%p</span>
+              </div>
+            </div>
+            <div class="ab-metric">
+              <span class="ab-metric-label">평균 만족도</span>
+              <div>
+                <span class="ab-metric-value" style="color:var(--green)">3.9</span>
+                <span class="ab-delta positive">+1.3</span>
+              </div>
+            </div>
+            <div class="ab-metric">
+              <span class="ab-metric-label">이탈률</span>
+              <div>
+                <span class="ab-metric-value" style="color:var(--green)">11%</span>
+                <span class="ab-delta positive">-26%p</span>
+              </div>
+            </div>
+            <div class="ab-metric">
+              <span class="ab-metric-label">NPS</span>
+              <div>
+                <span class="ab-metric-value" style="color:var(--green)">+31</span>
+                <span class="ab-delta positive">+78</span>
+              </div>
+            </div>
+            <div class="ab-metric">
+              <span class="ab-metric-label">평균 완료 시간</span>
+              <div>
+                <span class="ab-metric-value" style="color:var(--green)">2:48</span>
+                <span class="ab-delta positive">-1:44</span>
+              </div>
+            </div>
+
+            <div style="margin-top:20px;font-size:13px;font-weight:600;margin-bottom:12px">세그먼트별 완료율</div>
+            <div class="ab-segment-row">
+              <span class="ab-segment-label">불안형</span>
+              <div class="ab-segment-bars" style="flex:1"><div class="ab-segment-bar" style="width:80%;background:var(--green)"></div></div>
+              <span style="font-family:var(--mono);font-size:12px;color:var(--green)">80%</span>
+            </div>
+            <div class="ab-segment-row">
+              <span class="ab-segment-label">직관형</span>
+              <div class="ab-segment-bars" style="flex:1"><div class="ab-segment-bar" style="width:100%;background:var(--green)"></div></div>
+              <span style="font-family:var(--mono);font-size:12px;color:var(--green)">100%</span>
+            </div>
+            <div class="ab-segment-row">
+              <span class="ab-segment-label">기술숙련</span>
+              <div class="ab-segment-bars" style="flex:1"><div class="ab-segment-bar" style="width:100%;background:var(--green)"></div></div>
+              <span style="font-family:var(--mono);font-size:12px;color:var(--green)">100%</span>
+            </div>
+            <div class="ab-segment-row">
+              <span class="ab-segment-label">초보형</span>
+              <div class="ab-segment-bars" style="flex:1"><div class="ab-segment-bar" style="width:60%;background:var(--amber)"></div></div>
+              <span style="font-family:var(--mono);font-size:12px;color:var(--amber)">60%</span>
+            </div>
+
+            <div style="margin-top:20px;padding:14px;background:var(--green-light);border-radius:8px">
+              <div style="font-size:12px;font-weight:600;color:var(--green);margin-bottom:4px">✅ 결론: Version B를 출시하세요</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.6">한국어 지원 + 단계별 온보딩 추가로 불안형 이탈률 67%→20% 감소. 초보형만 추가 개선 필요.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Screen 10: Emotion Heatmap ═══ -->
+      <div class="screen" id="heatmap">
+        <div class="hm-overlay-layout">
+          <div class="hm-overlay-main">
+            <div style="font-size:15px;font-weight:700;margin-bottom:16px;align-self:flex-start">tally.so/templates — 감정 히트맵 (19명 집계)</div>
+            <div class="hm-overlay-screen">
+              <div class="hm-overlay-screen-bar">
+                <div class="dot" style="background:#ff5f56"></div>
+                <div class="dot" style="background:#ffbd2e"></div>
+                <div class="dot" style="background:#27c93f"></div>
+                <span style="margin-left:8px;font-size:11px;color:#888">tally.so/templates</span>
+              </div>
+              <div class="hm-overlay-screen-content">
+                <!-- 모의 화면 -->
+                <div style="text-align:center;margin-bottom:24px">
+                  <div style="font-size:20px;font-weight:700">Choose a template</div>
+                  <div style="font-size:12px;color:var(--text-3)">Get started quickly with a pre-built form template</div>
+                </div>
+
+                <!-- 히트맵 스팟들 -->
+                <div class="hm-spot frustration" style="top:90px;left:30px;right:230px">
+                  <span class="hm-spot-count">😤 14명</span> "Registration Form" — 뭔 말인지 모름
+                </div>
+
+                <div class="hm-spot confusion" style="top:130px;left:30px;right:230px">
+                  <span class="hm-spot-count">😟 16명</span> "Lead Generation" — 학부모 설문이랑 다름
+                </div>
+
+                <div class="hm-spot hesitation" style="top:190px;left:30px;width:280px">
+                  <span class="hm-spot-count">🤔 9명</span> "Customer Satisfaction" — 이건가?
+                </div>
+
+                <div class="hm-spot frustration" style="top:240px;right:30px;width:300px">
+                  <span class="hm-spot-count">😤 11명</span> "Use template →" — 누르면 뭐가 되는지 불안
+                </div>
+
+                <div class="hm-spot relief" style="top:310px;left:30px;width:260px">
+                  <span class="hm-spot-count">😌 4명</span> "Start from scratch" — 이걸 누르면 되겠다
+                </div>
+
+                <div class="hm-spot frustration" style="top:360px;right:30px;width:250px">
+                  <span class="hm-spot-count">😤 8명</span> 스크롤해도 원하는 카테고리 없음
+                </div>
+
+                <div class="hm-spot confusion" style="top:30px;right:30px;width:200px">
+                  <span class="hm-spot-count">😟 19명</span> 전체 화면 영어
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 우측 사이드바 -->
+          <div class="hm-overlay-sidebar">
+            <div style="font-size:15px;font-weight:700;margin-bottom:16px">감정 범례</div>
+            <div class="hm-legend-item"><div class="hm-legend-dot" style="background:var(--red)"></div> 좌절 — 뭔지 모르겠음, 포기하고 싶음</div>
+            <div class="hm-legend-item"><div class="hm-legend-dot" style="background:var(--amber)"></div> 혼란 — 이게 맞나? 불확실</div>
+            <div class="hm-legend-item"><div class="hm-legend-dot" style="background:var(--violet)"></div> 망설임 — 해볼까 말까 고민</div>
+            <div class="hm-legend-item"><div class="hm-legend-dot" style="background:var(--green)"></div> 안도 — 이해됨, 괜찮겠다</div>
+
+            <div style="margin-top:20px;font-size:15px;font-weight:700;margin-bottom:12px">이 화면의 요약</div>
+            <div class="hm-detail-card">
+              <div class="hm-detail-title" style="color:var(--red)">가장 큰 문제</div>
+              <div class="hm-detail-quote">"영어 전용 UI" — 19명 전원이 첫 화면에서 영어에 대한 부정적 반응. 불안형/초보형은 이 시점에서 이미 이탈 결심.</div>
+            </div>
+
+            <div class="hm-detail-card">
+              <div class="hm-detail-title" style="color:var(--amber)">두 번째 문제</div>
+              <div class="hm-detail-quote">"Lead Generation" 등 전문 용어 — 16명이 자기 목적에 맞는 템플릿을 식별하지 못함. "학부모 설문"과 매칭되는 레이블 부재.</div>
+            </div>
+
+            <div class="hm-detail-card">
+              <div class="hm-detail-title" style="color:var(--green)">유일한 탈출구</div>
+              <div class="hm-detail-quote">"Start from scratch" — 템플릿 혼란을 회피할 수 있는 유일한 경로. 하지만 19명 중 4명만 발견.</div>
+            </div>
+
+            <div style="margin-top:20px;padding:14px;background:var(--amber-light);border-radius:8px">
+              <div style="font-size:12px;font-weight:600;color:var(--amber);margin-bottom:4px">개선 제안</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.6">
+                1. 한국어 템플릿명 + 설명 추가<br>
+                2. 카테고리 필터 추가 (교육/비즈니스/개인)<br>
+                3. "빈 폼으로 시작"을 상단에 더 크게 배치
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

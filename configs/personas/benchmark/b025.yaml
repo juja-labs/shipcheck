@@ -26,12 +26,12 @@ jtbd:
     완성 (로고·색상 적용 포함), ② 조건부 질문(독일어·아랍어 언어 선택 → 해당 언어 문항 표시) 무료로 구현, ③ 혼자서 30분 이내에
     설문 초안 완성 — 도중에 막혀서 YouTube 튜토리얼을 찾아야 하면 실패로 간주
   willingness_to_pay: 0.01
-name: Elena K.
+name: 구하늘
 persona_id: b025
 prior_tools_detail:
 - Microsoft Forms
 - Google Forms
 - 네이버 폼
 role_id: educator_nonprofit
-segment: anxious
+segment: 신중형
 use_context: 학생/학부모 설문조사

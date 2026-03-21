@@ -22,12 +22,17 @@ PERSONA_DIRS = [
     ROOT / "configs" / "personas" / "benchmark",
 ]
 
-DEFAULT_PERSONAS = ["p001", "p002"]
+DEFAULT_PERSONAS = [
+    "b001","b002","b003","b004","b005","b006","b007","b008","b009","b010",
+    "b011","b012","b013","b014","b015","b016","b017","b018","b019","b020",
+    "b021","b022","b023","b024","b025","b026","b027","b028","b029","b030",
+]
 PRODUCT_URL = "https://tally.so"
 PRODUCT_NAME = "Tally"
-MAX_TURNS = 50
-MODEL = "sonnet"
-MAX_STEPS = 15
+MAX_TURNS = 0
+MODEL = "claude-opus-4-6[1m]"
+MAX_STEPS = 999
+MAX_DURATION_SEC = 3600  # 1시간 타임아웃
 
 
 def parse_args():
@@ -282,13 +287,30 @@ class Handler(SimpleHTTPRequestHandler):
 # ──────────────────────────────────────────────
 # 메인
 # ──────────────────────────────────────────────
+def kill_all_subprocesses():
+    """실행 중인 claude CLI 프로세스 모두 종료."""
+    import signal
+    for s in status.values():
+        proc = s.get("proc")
+        if proc and proc.poll() is None:
+            try:
+                proc.send_signal(signal.SIGTERM)
+            except Exception:
+                pass
+
+
 def main():
+    import signal
     args = parse_args()
     persona_ids = [p.strip() for p in args.personas.split(",")]
 
+    start_time = time.time()
+
     print(f"ShipCheck 실험 — {len(persona_ids)}명 × {PRODUCT_NAME}")
-    print(f"  페르소나: {', '.join(persona_ids)}")
+    print(f"  페르소나: {', '.join(persona_ids[:5])}{'...' if len(persona_ids) > 5 else ''}")
     print(f"  max_steps: {args.max_steps}")
+    print(f"  타임아웃: {MAX_DURATION_SEC//60}분")
+    print(f"  Ctrl+C로 언제든 중단 가능 (로그는 보존)")
 
     # 대시보드
     if not args.no_dashboard:
@@ -299,20 +321,52 @@ def main():
 
     print()
 
+    # Ctrl+C 핸들러
+    shutdown_flag = threading.Event()
+
+    def signal_handler(sig, frame):
+        print(f"\n⚠ 강제 종료 요청 — 프로세스 정리 중...")
+        shutdown_flag.set()
+        kill_all_subprocesses()
+
+    signal.signal(signal.SIGINT, signal_handler)
+
     # 병렬 실행
     threads = []
     for pid in persona_ids:
+        if shutdown_flag.is_set():
+            break
         t = threading.Thread(target=run_persona, args=(pid, args.max_steps))
         t.start()
         threads.append(t)
         time.sleep(2)  # CLI 초기화 겹침 방지
 
-    for t in threads:
-        t.join()
+    # 1시간 타임아웃 또는 모든 스레드 완료 대기
+    while True:
+        elapsed = time.time() - start_time
+        alive = [t for t in threads if t.is_alive()]
+
+        if not alive:
+            break
+        if elapsed >= MAX_DURATION_SEC:
+            print(f"\n⏰ {MAX_DURATION_SEC//60}분 타임아웃 — 프로세스 정리 중...")
+            shutdown_flag.set()
+            kill_all_subprocesses()
+            for t in alive:
+                t.join(timeout=10)
+            break
+        if shutdown_flag.is_set():
+            for t in alive:
+                t.join(timeout=10)
+            break
+
+        time.sleep(5)
 
     # 요약
+    elapsed = time.time() - start_time
+    completed = sum(1 for s in status.values() if s.get("done"))
     print(f"\n{'='*60}")
-    print(f"실험 완료 — {len(persona_ids)}명")
+    print(f"실험 {'완료' if not shutdown_flag.is_set() else '중단'} — {completed}/{len(persona_ids)}명 완료, {elapsed/60:.1f}분 소요")
     print(f"{'='*60}")
     print(f"  {'이름':12s} {'세그먼트':18s} {'스텝':>4s} {'Pleasure':>9s} {'감정':12s} {'비용':>6s}")
     print(f"  {'-'*12} {'-'*18} {'-'*4} {'-'*9} {'-'*12} {'-'*6}")
@@ -321,9 +375,11 @@ def main():
         p = s.get("current_pleasure", 0)
         print(f"  {s['name']:12s} {s['segment']:18s} {steps:4d} {p:+9.2f} {s.get('current_emotion',''):12s} ${s.get('cost',0):.2f}")
 
-    # 대시보드 유지
-    if not args.no_dashboard:
-        print(f"\n대시보드: http://localhost:{args.port} (Ctrl+C로 종료)")
+    print(f"\n📁 로그: runs/experiment/")
+
+    # 대시보드 유지 (강제종료 아닌 경우)
+    if not args.no_dashboard and not shutdown_flag.is_set():
+        print(f"대시보드: http://localhost:{args.port} (Ctrl+C로 종료)")
         try:
             while True:
                 time.sleep(1)

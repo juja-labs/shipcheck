@@ -21,10 +21,10 @@ jtbd:
   success_criterion: 신규 고객이 계약 후 24시간 이내에 팀 개입 없이 온보딩을 완료하고, 주당 3시간 이상 쓰이던 데이터 입력
     및 후속 이메일 작업이 사라지는 것
   willingness_to_pay: 0.32
-name: Rafael C.
+name: 하준서
 persona_id: b028
 prior_tools_detail:
 - Typeform
 role_id: startup_founder
-segment: power_user
+segment: 파워유저형
 use_context: 리드 캡처 및 고객 피드백 수집

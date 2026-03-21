@@ -31,12 +31,12 @@ jtbd:
     of starting, looks clean and on-brand on mobile without extra CSS work, and stays
     fully functional on a free plan past the first 100 responses.
   willingness_to_pay: 0.16
-name: Simone V.
+name: 권시은
 persona_id: b023
 prior_tools_detail:
 - Google Forms
 - Typeform
 - Canva
 role_id: creative_freelancer
-segment: critical_vocal
+segment: 비평형
 use_context: 뉴스레터 구독 및 브랜딩 폼

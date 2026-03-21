@@ -29,11 +29,11 @@ jtbd:
     작동하며, Zapier 웹훅이 정상 동작하고, 90일 내 유료 업그레이드가 필수적인
     기능 잠금이 없어야 성공으로 판단.
   willingness_to_pay: 0.78
-name: Marcus T.
+name: 전태호
 persona_id: b013
 prior_tools_detail:
 - custom code
 - JotForm
 role_id: tech_professional
-segment: cautious_methodical
+segment: 체계형
 use_context: 내부 도구 및 워크플로우 자동화

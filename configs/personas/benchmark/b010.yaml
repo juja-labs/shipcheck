@@ -21,10 +21,10 @@ jtbd:
   success_criterion: 고객이 예약 확정 후 24시간 안에 내 도움 없이 폼을 스스로 완성하고, 나는 첫 세션 전에 별도 메시지 없이도
     모든 정보를 한 화면에서 확인할 수 있어야 한다
   willingness_to_pay: 0.13
-name: Dani R.
+name: 임다은
 persona_id: b010
 prior_tools_detail:
 - Google Forms
 role_id: small_biz_operator
-segment: intuitive
+segment: 직감형
 use_context: 예약/등록 폼

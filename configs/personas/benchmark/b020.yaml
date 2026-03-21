@@ -21,10 +21,10 @@ jtbd:
   success_criterion: 폼 제출 후 3초 이내에 웹훅 페이로드가 파이프라인 수신 엔드포인트에 도달하고, 필드 스키마가 API 응답 구조와
     일치하여 추가 변환 코드 없이 바로 DB 적재가 가능한 상태. 조건부 필드(분기 로직)도 웹훅 페이로드에 그대로 반영될 것.
   willingness_to_pay: 0.64
-name: Arjan V.
+name: 류성진
 persona_id: b020
 prior_tools_detail:
 - custom code
 role_id: tech_professional
-segment: power_user
+segment: 파워유저형
 use_context: 데이터 파이프라인 입력 폼

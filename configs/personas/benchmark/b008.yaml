@@ -25,12 +25,12 @@ jtbd:
   success_criterion: 폼 제작 소요 시간 2시간 이내, 조건 분기 경로 최소 3개 정상 작동, 다음 학기 파일럿 접수에서 참가자 15명이
     혼동 없이 완료하고 별도 스프레드시트 수동 분류 작업 없이 결과를 바로 강좌 배정에 활용 가능한 상태
   willingness_to_pay: 0.16
-name: Elena M.
+name: 한미래
 persona_id: b008
 prior_tools_detail:
 - Google Forms
 - Microsoft Forms
 - 네이버 폼
 role_id: educator_nonprofit
-segment: calm
+segment: 차분형
 use_context: 이벤트 참가 등록

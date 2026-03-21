@@ -24,10 +24,10 @@ jtbd:
   success_criterion: 지금 앉은 자리에서 30분 안에 폼 링크를 만들어 인스타그램 바이오에 붙여넣고, 첫 응답 1건이 들어오는 것을
     확인하는 것. 결제 정보를 입력하는 단계가 생기면 즉시 이탈.
   willingness_to_pay: 0.12
-name: Dara F.
+name: 송지현
 persona_id: b011
 prior_tools_detail:
 - Google Forms
 role_id: small_biz_operator
-segment: explorer
+segment: 탐색형
 use_context: 클라이언트 인테이크 설문

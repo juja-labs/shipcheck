@@ -22,10 +22,10 @@ jtbd:
   success_criterion: 퀴즈를 3일 안에 단독으로 완성하고, 2주 내 이메일 구독자 50명 이상이 결과 페이지까지 완료하며, 지인에게
     링크를 보냈을 때 '전문 디자이너가 만든 것 같다'는 반응이 나오는 것
   willingness_to_pay: 0.29
-name: Nadia R.
+name: 양나래
 persona_id: b012
 prior_tools_detail:
 - Typeform
 role_id: creative_freelancer
-segment: anxious
+segment: 신중형
 use_context: 리드 마그넷 (퀴즈, 스코어카드)

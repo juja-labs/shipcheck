@@ -32,10 +32,10 @@ jtbd:
     total reviewing submissions — down from the 3+ hours he currently loses untangling
     Google Forms responses in a spreadsheet
   willingness_to_pay: 0.13
-name: Derek O.
+name: 강동우
 persona_id: b014
 prior_tools_detail:
 - Google Forms
 role_id: educator_nonprofit
-segment: critical_vocal
+segment: 비평형
 use_context: 학생/학부모 설문조사

@@ -27,12 +27,12 @@ jtbd:
   success_criterion: 폼 1개를 처음부터 완성까지 30분 이내에 만들 수 있고, 제출 데이터가 HubSpot 딜/컨택트에 자동 매핑되며,
     캠페인별 전환율을 추가 설정 없이 대시보드에서 확인할 수 있는 상태
   willingness_to_pay: 0.59
-name: Camille D.
+name: 장세훈
 persona_id: b022
 prior_tools_detail:
 - HubSpot Forms
 - Typeform
 - Google Forms
 role_id: marketing_pro
-segment: tech_savvy
+segment: 기술능숙형
 use_context: 리드 퀄리피케이션 폼

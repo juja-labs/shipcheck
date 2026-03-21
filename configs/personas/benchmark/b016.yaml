@@ -24,10 +24,10 @@ jtbd:
     붙어 Notion 또는 Google Sheets로 바로 내보낼 수 있으며, 첫 웨비나 등록자 50명 중 영업팀이 '분류가 맞다'고 판단하는
     비율이 70% 이상이면 성공으로 간주한다.
   willingness_to_pay: 0.48
-name: Camille D.
+name: 문채원
 persona_id: b016
 prior_tools_detail:
 - Google Forms
 role_id: marketing_pro
-segment: explorer
+segment: 탐색형
 use_context: 이벤트 등록 및 뉴스레터 구독
