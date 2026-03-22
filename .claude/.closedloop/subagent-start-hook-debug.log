@@ -129,3 +129,7 @@ Sun Mar 22 15:56:00 KST 2026: SubagentStart hook fired — agent_type=general-pu
 Sun Mar 22 15:56:12 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=a9d3fa4e7a4862647 session_id=7545a694-7be8-4244-a965-4a608f037dd3
 Sun Mar 22 16:13:32 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=af9a7b94f0d6b1741 session_id=7545a694-7be8-4244-a965-4a608f037dd3
 Sun Mar 22 16:23:03 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=a612cdb5334d9f3b5 session_id=f2ec87af-43d7-4fd9-b017-40c67d45d282
+Sun Mar 22 19:08:12 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=a3b466b590b03b469 session_id=3b39bd4c-3d6e-4114-ba0b-ee15e17bb877
+Sun Mar 22 19:18:46 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=afd1809403ce0214b session_id=2070e8da-3a30-4bbb-b91b-b4f3686bdccb
+Sun Mar 22 19:19:17 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=a8716063204b52218 session_id=2070e8da-3a30-4bbb-b91b-b4f3686bdccb
+Sun Mar 22 19:31:07 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=a0135f1a3d42b692c session_id=3b39bd4c-3d6e-4114-ba0b-ee15e17bb877
