@@ -85,6 +85,17 @@ Step 3: 분석 및 리포트
 - **QA 도구가 아님**: Personica는 기능 정상 동작 여부를 테스트하는 도구가 아님. "사용자가 어떻게 느끼고 반응하는가"를 시뮬레이션하는 도구.
 - **Playwright는 인터페이스, 엔진이 핵심**: 브라우저 자동화는 "제품 체험" 모드에서 쓰는 하나의 인터페이스일 뿐. 전체 제품을 이것에만 묶지 말 것.
 
+## 사업계획서 SOT (Source of Truth)
+예비창업패키지 사업계획서 작성 시 아래 문서를 각 영역의 정본(SOT)으로 사용할 것. 수치·구조가 충돌하면 SOT가 우선.
+
+| 영역 | SOT 문서 |
+|------|----------|
+| Unit Economics (원가·마진·가격) | `docs/scale/unit-economics.md` |
+| 팀 구성 및 예산 | `docs/scale/team-budget-plan.md` |
+| TAM / SAM / SOM 시장규모 | `docs/market-sizeing/market-sizing-yechangpae-appendix-software-first.md` |
+| 수익 모델 | `docs/scale/revenue-model.md` |
+| 시장진입 전략 | `docs/scale/market-entry-strategy.md` |
+
 ## Conventions
 - 한국어 코멘트 사용
 - 커밋 메시지는 영어 conventional commits (feat:, fix:, chore: 등)
