@@ -1,0 +1,12 @@
+{
+  "name": "personica-agent-architecture-slides",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Editable 2-slide deck for Personica agent architecture",
+  "scripts": {
+    "build": "node personica-agent-architecture.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}

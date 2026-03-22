@@ -645,3 +645,7 @@ Sun Mar 22 10:15:52 KST 2026: Session end hook started, session=405c48d0-36fd-42
 Sun Mar 22 10:15:52 KST 2026: Session cleanup complete
 Sun Mar 22 10:15:52 KST 2026: Session end hook started, session=a89486b2-73d5-4b9f-963c-d42f14dc6247, reason=other
 Sun Mar 22 10:15:52 KST 2026: Session cleanup complete
+Sun Mar 22 10:51:42 KST 2026: Session end hook started, session=14fdda77-d11a-41d2-90da-087fb1e78754, reason=other
+Sun Mar 22 10:51:42 KST 2026: Removing stale PID mapping (PID 80470 no longer exists): /home/work/Source/shipcheck/.claude/.closedloop/pid-80470.session
+Sun Mar 22 15:58:53 KST 2026: Session end hook started, session=c1191fb9-e167-4acd-8d46-7eee8bccd1fc, reason=other
+Sun Mar 22 15:58:53 KST 2026: Removing stale PID mapping (PID 247697 no longer exists): /home/work/Source/shipcheck/.claude/.closedloop/pid-247697.session

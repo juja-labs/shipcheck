@@ -122,3 +122,10 @@ Sat Mar 21 23:58:29 KST 2026: SubagentStart hook fired — agent_type=general-pu
 Sat Mar 21 23:58:34 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=a39b2d60d37563e09 session_id=1c982da4-e9b2-4f57-a077-42906e8f3a40
 Sat Mar 21 23:58:41 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=a577e4b23eb26a597 session_id=1c982da4-e9b2-4f57-a077-42906e8f3a40
 Sun Mar 22 01:06:08 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=a5aa6f3029cacc01f session_id=8d6f1a03-bb94-4281-a62f-4ca64bfd7494
+Sun Mar 22 10:56:35 KST 2026: SubagentStart hook fired — agent_type=Explore agent_id=a0ec5a6cef76ef2ae session_id=118c3678-3809-409c-a3d1-36d73799835b
+Sun Mar 22 15:35:57 KST 2026: SubagentStart hook fired — agent_type=Explore agent_id=af85cfdcd654f8c68 session_id=7545a694-7be8-4244-a965-4a608f037dd3
+Sun Mar 22 15:42:56 KST 2026: SubagentStart hook fired — agent_type=Explore agent_id=a45b742cd4e5e34cc session_id=7545a694-7be8-4244-a965-4a608f037dd3
+Sun Mar 22 15:56:00 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=a2049267dda275e88 session_id=7545a694-7be8-4244-a965-4a608f037dd3
+Sun Mar 22 15:56:12 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=a9d3fa4e7a4862647 session_id=7545a694-7be8-4244-a965-4a608f037dd3
+Sun Mar 22 16:13:32 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=af9a7b94f0d6b1741 session_id=7545a694-7be8-4244-a965-4a608f037dd3
+Sun Mar 22 16:23:03 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=a612cdb5334d9f3b5 session_id=f2ec87af-43d7-4fd9-b017-40c67d45d282
