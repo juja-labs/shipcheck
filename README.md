@@ -1,176 +1,94 @@
-# ShipCheck
+# Personica (페르소니카)
 
-> 만드는 건 끝났어. 이거 사람들이 원할까?
->
-> 100명의 AI 유저가 당신의 MVP를 실제로 써보고, 소셜 미디어에서 토론하고, 구조화된 시장 검증 보고서를 돌려줍니다.
+> AI 합성 페르소나가 사람처럼 생각·느끼·행동하며, 모든 사용자 리서치를 시뮬레이션하는 플랫폼
 
 ## Problem
 
-바이브 코딩 시대, **만드는 건 더 이상 병목이 아닙니다.**
+제품·서비스·마케팅에 대한 사용자 반응을 검증하고 싶지만, 기존 방법은 한계가 있습니다:
 
-- YC W25 배치의 25%가 코드의 95% 이상이 AI 생성
-- 2025년 앱스토어 신규 앱 55.7만개 (+24% YoY)
-- 미국 개발자 92%가 AI 코딩 도구를 매일 사용
-
-하지만 **스타트업 실패 원인 1위는 여전히 "시장 수요 부재" (42%)** 입니다.
-
-전통적 시장 검증은 건당 $25,000~$65,000, 6~12주 소요. 바이브 코딩으로 하루 만에 MVP를 만들 수 있는 시대에, 검증에 6주를 기다리는 건 말이 안 됩니다.
+- **설문/FGI**: 비용·시간·규모 제약 (건당 $25,000~$65,000, 6~12주)
+- **베타테스터**: 모집 2주+, 다양성 부족
+- **AI 합성 페르소나 (기존)**: 단순 LLM 프롬프팅으로 실제 인간의 감정·인지·의사결정 과정을 시뮬레이션하지 못함
 
 ## Solution
 
-ShipCheck은 **AI 에이전트 기반 가상 시장 검증 플랫폼**입니다.
+Personica는 **5-Layer 시뮬레이션 엔진**으로 감정·인지·의사결정을 구조적으로 시뮬레이션하는 합성 페르소나 플랫폼입니다.
+
+### 핵심 해자: 페르소나 리얼리티
+
+다른 합성 페르소나 제품들이 단순한 LLM 프롬프팅인 반면, Personica는 실제 사람과 유사한 반응을 생성합니다:
 
 ```
-MVP URL 입력 → AI 에이전트 100명이 실제로 사용 → 소셜 토론 → 구조화된 보고서
+Layer 1: Persona Profile — Big Five → 행동 파라미터 수학적 매핑 (PRISM)
+Layer 2: Cognitive — Information Foraging, Cognitive Load, Mental Model, TAM
+Layer 3: Emotion — OCC Appraisal + PAD 연속 상태 + SDE 확률적 감정 진화
+Layer 4: Decision — BDI-E 모델 + Fogg Check + Satisficing Gate
+Layer 5: Memory — Memory Stream + Reflection + Habit Strength + Drift Monitor
 ```
+
+### 적용 범위
+
+5-Layer 엔진은 특정 use case에 묶이지 않는 범용 플랫폼:
+
+| 모드 | 설명 | 단계 |
+|------|------|------|
+| **제품 체험 시뮬레이션** | Playwright로 실제 제품을 사용하고 UX 피드백 | Phase 1 (beachhead) |
+| **UI/UX 디자인 피드백** | Figma/프로토타입 기반 디자인 리뷰 | Phase 1 |
+| **합성 서베이/인터뷰** | 설문, FGI, 인터뷰 시뮬레이션 | Phase 2 |
+| **A/B 테스트** | 변형 간 선호도/행동 차이 시뮬레이션 | Phase 2 |
+| **광고/마케팅 리서치** | 광고 크리에이티브, 메시지, 카피 테스트 | Phase 2 |
+| **퍼널 분석** | 전환 퍼널 각 단계별 이탈/전환 시뮬레이션 | Phase 2 |
+| **전문가 리뷰** | 도메인 전문가 페르소나의 제품/서비스 평가 | Phase 3 |
 
 ### 기존 도구와의 차이
 
-| | Aaru / Synthetic Users | Blok | UXAgent (학술) | **ShipCheck** |
-|---|---|---|---|---|
-| 입력 | 설문/컨셉 설명 | Figma 디자인 | 실제 웹사이트 | **실제 MVP URL** |
-| 에이전트 행동 | 설문 응답 | UI 시뮬레이션 | 웹 탐색 | **제품 사용 + 소셜 토론** |
-| 사회적 역학 | 여론 전파 모델 | 없음 | 없음 | **집단 토론/여론 형성** |
-| 지식 그래프 | 없음 | 없음 | 없음 | **피드백 온톨로지** |
-| 출력 | 설문 결과 | UX 리포트 | 유저빌리티 이슈 | **시장 반응 종합 분석** |
+| | Aaru / Synthetic Users | Blok | **Personica** |
+|---|---|---|---|
+| 시뮬레이션 깊이 | LLM 프롬프팅 | 인지 모델 일부 | **5-Layer 감정·인지·의사결정** |
+| 입력 | 설문/컨셉 설명 | Figma + 분석 데이터 | **실제 제품 URL + 서베이 + 디자인** |
+| 적용 범위 | 설문/인터뷰 | UX 예측 | **제품 체험 + 서베이 + A/B + 전문가** |
+| 기존 데이터 필요 | 부분적 | Amplitude 등 필수 | **불필요** |
 
-## How It Works
+## Validated Results
 
-### Phase 1: 자동 분석
+Tally.so(웹 폼 빌더) 대상 초기 검증 (2명 페르소나):
 
-1. **제품 크롤링** — Playwright로 MVP의 페이지 구조, 기능, 사용자 플로우를 자동 파악
-2. **Feature 온톨로지 생성** — LLM이 제품 기능을 구조화된 스키마로 정리
-3. **페르소나 생성** — 타겟 유저 설명을 기반으로 다양한 가상 유저 20~100명 생성
-4. **Knowledge Graph 초기화** — Zep Cloud에 온톨로지 + 페르소나 그래프 구축
-
-### Phase 2: 제품 체험 + 소셜 시뮬레이션
-
-매 라운드:
-1. **에이전트가 실제 제품 사용** — Playwright로 페이지 방문, 버튼 클릭, 폼 입력, 회원가입 시도
-2. **OASIS 소셜 플랫폼에서 토론** — 사용 경험을 게시, 댓글, 좋아요, 팔로우 등 자연스러운 소셜 행동
-3. **Knowledge Graph 실시간 업데이트** — 행동 데이터가 Zep 그래프에 즉시 반영
-
-### Phase 3: 분석 및 보고서
-
-- **Feature별 사용성 점수** — 어떤 기능이 잘 작동하고 어디서 이탈하는지
-- **세그먼트별 반응 매트릭스** — 20대 직장인 vs 40대 주부의 반응 차이
-- **핵심 이탈 지점 + 개선 제안** — 구체적으로 무엇을 바꿔야 하는지
-- **에이전트 인터뷰** — 특정 에이전트에게 "왜 그렇게 행동했어?" 추가 질문 가능
-
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                     ShipCheck Platform                  │
-│                                                         │
-│  ┌──────────────┐                  ┌────────────────┐   │
-│  │  Playwright   │  제품 체험       │  Zep Cloud     │   │
-│  │  Browser      │─────────────────│  Knowledge     │   │
-│  │  Automation   │                 │  Graph         │   │
-│  └──────────────┘                  └────────────────┘   │
-│         │                                  │            │
-│         ▼                                  ▼            │
-│  ┌──────────────────────────────────────────────────┐   │
-│  │              OASIS Social Simulation              │   │
-│  │                                                   │   │
-│  │  Agent ← LLM → create_post, like, comment, ...  │   │
-│  │  Agent ← LLM → use_product, rate_feature, ...   │   │
-│  │  Agent ← LLM → recommend, compare_product, ...  │   │
-│  │                                                   │   │
-│  │  Platform (SQLite) ← RecSys ← Channel (IPC)     │   │
-│  └──────────────────────────────────────────────────┘   │
-│         │                                               │
-│         ▼                                               │
-│  ┌──────────────┐                                       │
-│  │ ReportAgent  │  Graph 검색 → 구조화된 보고서          │
-│  └──────────────┘                                       │
-└─────────────────────────────────────────────────────────┘
-```
-
-## Knowledge Graph 활용
-
-MiroFish의 접근 방식을 차용하되, 제품 검증에 맞게 재설계:
-
-```
-[UserSegment] ──사용한다──► [Feature]
-     │                        │
-  속한다                   발생시킨다
-     │                        │
-[Persona]  ──느꼈다──► [Sentiment]
-     │                        │
-  게시했다                  관련된다
-     │                        │
-[SocialPost] ──언급한다──► [PainPoint]
-                              │
-                        해결된다/미해결
-                              │
-                       [Competitor]
-```
-
-**왜 Knowledge Graph가 필요한가:**
-- 기존 도구: "55%가 긍정적 반응" (숫자만)
-- ShipCheck: **"왜 45%가 부정적이었는지"를 구조적으로 추론** 가능
-- 반복 검증 시 이전 그래프와 비교하여 **개선 효과 추적**
-
-## Market
-
-| 지표 | 데이터 |
-|------|--------|
-| 글로벌 UX 리서치 시장 | $427M (2024) → $1B (2032) |
-| Synthetic Data 시장 | $450~580M (2025) → $2.1B (2028) |
-| 한국 연간 기술 창업 | 214,917건 (2024) |
-| 스타트업 실패 #1 원인 | "시장 수요 부재" 42% |
-| 전통 시장 조사 비용 | 건당 $25,000~$65,000 |
-| Aaru (경쟁사) 밸류에이션 | $1B (Series A, 2025.12) |
-
-### 경쟁 환경
-
-"멀티 에이전트 + 실제 제품 사용 + 소셜 토론" 조합의 상용 제품은 **전무**합니다.
-
-- **Aaru** ($1B) — 설문/여론 시뮬레이션 (제품 사용 안 함)
-- **Artificial Societies** (YC W25) — 소셜 역학 시뮬레이션 (제품 사용 안 함)
-- **Blok** ($7.5M seed) — Figma 디자인 시뮬레이션 (실제 제품 아님)
-- **UXAgent** (CHI 2025, 학술) — 브라우저 사용 있으나 소셜 시뮬레이션 없음
-
-## Roadmap
-
-### Phase 1 (0~6개월): MVP
-- 제품 URL 입력 → 에이전트 20명이 사용 + 토론
-- 간단한 보고서 (감정 분석 + 핵심 피드백)
-- 타겟: 예비창업자, 사이드 프로젝트 빌더
-- 가격: 무료 / 건당 5만원
-
-### Phase 2 (6~12개월): Knowledge Graph 통합
-- Feature 온톨로지 자동 생성
-- 구조화된 심층 보고서
-- 반복 검증 + 변화 추적
-- 가격: 월 구독 20~50만원
-
-### Phase 3 (12~18개월): B2B 확장
-- 액셀러레이터/VC 대상 포트폴리오 검증 도구
-- 대기업 R&D 신제품 사전 검증
-- API 제공 (CI/CD 파이프라인에 통합)
-- 가격: 엔터프라이즈 연간 계약
+- **52세 교사 박서연** vs **31세 PM 김도현**: 동일 제품에서 이탈 시점 5스텝 차이
+- 이탈 이유 완전히 다름 (심리적 불안 vs 기능 부족)
+- 감정 파이프라인 on/off 시 행동 패턴이 유의미하게 달라짐
 
 ## Tech Stack
 
 | 레이어 | 기술 |
 |--------|------|
-| Multi-Agent Simulation | [OASIS](https://github.com/camel-ai/oasis) (Apache 2.0) |
-| Knowledge Graph | [Zep Cloud](https://www.getzep.com/) (GraphRAG) |
-| Browser Automation | [Playwright](https://playwright.dev/) |
-| LLM | OpenAI / Anthropic API |
+| Simulation Engine | 5-Layer (Profile → Cognitive → Emotion → Decision → Memory) |
+| Browser Automation | Playwright (제품 체험 모드) |
+| LLM | OpenAI / Anthropic / Google API |
 | Backend | Python + FastAPI |
 | Frontend | Next.js + TypeScript + Tailwind CSS |
-| Database | SQLite (시뮬레이션) + PostgreSQL (서비스) |
+| Database | PostgreSQL |
+
+## Project Structure
+
+```
+src/
+├── layer1_persona/    # Big Five → 행동 파라미터 매핑
+├── layer3_emotion/    # OCC + PAD + SDE 감정 시뮬레이션
+├── analysis/          # G2 리뷰 비교 분석
+├── data/              # 벤치마크 데이터 크롤러
+└── cli.py             # CLI 진입점
+
+configs/               # 실험 설정 + 페르소나 YAML
+docs/                  # 제품 비전, 엔진 설계, 전략, 시장 조사
+```
 
 ## References
 
-- [OASIS: Open Agent Social Interaction Simulations](https://github.com/camel-ai/oasis)
-- [MiroFish: GraphRAG + OASIS 통합 참고 구현](https://github.com/666ghj/MiroFish)
-- [UXAgent: LLM Agents for Usability Testing (CHI 2025)](https://arxiv.org/abs/2504.09407)
-- [AgentA/B: 1,000 LLM Agents on Live Amazon.com](https://arxiv.org/abs/2504.09723)
-- [Harvard: Using LLMs for Market Research](https://www.hbs.edu/faculty/Pages/item.aspx?num=63859)
+- [PRISM](https://arxiv.org/abs/2512.19933) — SDE 감정 진화, Big Five→행동 파라미터 매핑
+- [UXAgent](https://github.com/neuhai/UXAgent) — 브라우저 자동화 기반 UX 테스팅 (CHI 2025)
+- [Concordia](https://github.com/google-deepmind/concordia) — GM-Player 아키텍처
+- [Generative Agents](https://arxiv.org/abs/2304.03442) — Memory Stream + Reflection
+- 전체 레퍼런스: `docs/foundation/research-references.md` (논문 30+편)
 
 ## License
 

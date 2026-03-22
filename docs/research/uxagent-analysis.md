@@ -168,20 +168,22 @@ scores = (similarities + recencies + importance) * kind_weights
 - `memory_trace.json` — 직렬화된 메모리 상태
 - `survey_result.json` — SUS 설문 답변 + 근거 + 신뢰도
 
-## ShipCheck 관점 — 가져올 것 vs 새로 만들 것
+## Personica 관점 — 가져올 것 vs 새로 만들 것
 
-### 가져올 것
+> Personica는 합성 페르소나 시뮬레이션 플랫폼으로, 5-Layer 페르소나 리얼리티(감정·인지·의사결정 시뮬레이션의 깊이)가 핵심 해자. 제품 체험(Playwright), 서베이, A/B 테스트, 전문가 리뷰, 광고/퍼널 리서치 등 다양한 적용 모드를 지원.
+
+### 가져올 것 (주로 "제품 체험" 모드용)
 | 컴포넌트 | 품질 | 이유 |
 |----------|------|------|
-| parser.js (Universal Web Connector) | 우수 | 임의 웹사이트 DOM 파싱, semantic-id 부여 |
-| initscript.js (네트워크/호버 감지) | 우수 | idle 감지, 인터랙티브 요소 자동 탐지 |
-| env.py (Playwright 래퍼) | 우수 | 1296줄, 잘 구조화된 브라우저 자동화 |
-| 메모리 검색 공식 | 좋음 | 3-score weighted retrieval 검증됨 |
-| 듀얼 프로세스 패턴 | 좋음 | fast/slow loop 비동기 아키텍처 |
-| 트레이싱 구조 | 좋음 | 스텝별 스크린샷/HTML/LLM콜 저장 |
+| parser.js (Universal Web Connector) | 우수 | 임의 웹사이트 DOM 파싱, semantic-id 부여 (제품 체험 모드에서 활용) |
+| initscript.js (네트워크/호버 감지) | 우수 | idle 감지, 인터랙티브 요소 자동 탐지 (제품 체험 모드에서 활용) |
+| env.py (Playwright 래퍼) | 우수 | 1296줄, 잘 구조화된 브라우저 자동화 (Playwright는 제품 체험 모드의 인터페이스) |
+| 메모리 검색 공식 | 좋음 | 3-score weighted retrieval 검증됨 (전 모드 공통) |
+| 듀얼 프로세스 패턴 | 좋음 | fast/slow loop 비동기 아키텍처 (전 모드 공통) |
+| 트레이싱 구조 | 좋음 | 스텝별 스크린샷/HTML/LLM콜 저장 (전 모드 공통) |
 
-### 새로 만들어야 할 것 (ShipCheck 핵심 IP)
-| 컴포넌트 | UXAgent 상태 | ShipCheck 필요 |
+### 새로 만들어야 할 것 (Personica 핵심 IP — 페르소나 리얼리티)
+| 컴포넌트 | UXAgent 상태 | Personica 필요 |
 |----------|-------------|---------------|
 | 감정 시뮬레이션 | 없음 | OCC + PAD + Chain-of-Emotion |
 | 인지 모델 | 없음 | Information Foraging + Cognitive Load |
@@ -192,6 +194,7 @@ scores = (similarities + recencies + importance) * kind_weights
 | 교차 분석 | raw 트레이스만 | KG 기반 세그먼트/기능별 분석 |
 | 도메인 범용성 | 쇼핑 전용 (shop_prompts/) | 도메인 무관 프롬프트 |
 | 제품 자동 탐색 | 사람이 URL+intent 지정 | Phase 1 자동 크롤링/기능 발견 |
+| 다중 적용 모드 | 브라우저 자동화 전용 | 서베이, A/B 테스트, 전문가 리뷰, 광고/퍼널 리서치 모드 |
 
 ### 코드에서 발견된 기술적 이슈
 1. `add_thought()` 메서드가 생각을 **6번 중복 저장** — 메모리 검색 가중치 해킹

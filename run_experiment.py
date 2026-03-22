@@ -36,7 +36,7 @@ MAX_DURATION_SEC = 3600  # 1시간 타임아웃
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description="ShipCheck 실험 실행")
+    p = argparse.ArgumentParser(description="Personica 실험 실행")
     p.add_argument("--personas", default=",".join(DEFAULT_PERSONAS),
                    help="콤마로 구분된 페르소나 ID (기본: b001,b002,b004,b020,b023)")
     p.add_argument("--max-steps", type=int, default=MAX_STEPS)
@@ -306,7 +306,7 @@ def main():
 
     start_time = time.time()
 
-    print(f"ShipCheck 실험 — {len(persona_ids)}명 × {PRODUCT_NAME}")
+    print(f"Personica 실험 — {len(persona_ids)}명 × {PRODUCT_NAME}")
     print(f"  페르소나: {', '.join(persona_ids[:5])}{'...' if len(persona_ids) > 5 else ''}")
     print(f"  max_steps: {args.max_steps}")
     print(f"  타임아웃: {MAX_DURATION_SEC//60}분")

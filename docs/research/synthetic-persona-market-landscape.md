@@ -3,7 +3,7 @@
 **Date**: 2026-03-20
 **Version**: 1.0
 **Scope**: 30+ 제품/스타트업/학술 프로젝트 조사 — 시장 포지셔닝 + 페르소나 생성 방법론 심층 비교
-**Purpose**: ShipCheck 경쟁 환경 이해 + 기술적 차별점 근거 확보
+**Purpose**: Personica 경쟁 환경 이해 + 기술적 차별점 근거 확보
 
 ---
 
@@ -23,7 +23,7 @@
 ```
 얕음 ◄─────────────────────────────────────────────────────────► 깊음
 
-[LLM-native]          [Data-grounded]        [Model-structured]       [ShipCheck]
+[LLM-native]          [Data-grounded]        [Model-structured]       [Personica]
 Helpfull              Qualtrics Edge          Synthetic Users          5-Layer
 QA Panel              Simile                  UXAgent(DPT)            Architecture
 Evidenza              Artificial Societies    Simsurveys
@@ -65,11 +65,11 @@ LLM에 프롬프트 주입      으로 응답 생성"                           
   - 예: "John Lin은 커뮤니티를 중시하는 약국 주인이고..."
 - **검증**: 85%+ 정확도 (인간 응답 대비)
 
-**ShipCheck 대비 차이점:**
+**Personica 대비 차이점:**
 - 실제 인터뷰 필수 (완전 합성 불가)
 - 심리 모델 없이 서사 기반 → 구조적 행동 차이 보장 어려움
-- 브라우저 기반 제품 사용 없음
-- 매크로 사회 시뮬레이션 포커스 (선거, 정책, 시장)
+- 적용 범위가 매크로 사회 시뮬레이션(선거, 정책, 시장)에 한정
+- Personica는 같은 설문/인터뷰 영역도 커버하면서 5-Layer 페르소나 리얼리티로 시뮬레이션 깊이에서 차별화 + 제품 체험 모드 추가 보유
 
 ---
 
@@ -102,20 +102,20 @@ LLM에 프롬프트 주입      으로 응답 생성"                           
 | **펀딩** | Seed (Comcast LIFT Labs, Urban Innovation Fund) |
 | **가격** | 3 tier, 7일 무료 |
 
-**페르소나 생성 방법론 (업계에서 가장 ShipCheck과 유사한 철학):**
+**페르소나 생성 방법론 (업계에서 가장 Personica와 유사한 철학):**
 - **심리 모델**: 명시적으로 **OCEAN (Big Five)** 사용하여 성격 특성 할당
 - **Chain-of-feeling**: 응답 생성 전 감정/태도 상태를 중간 추론 단계로 생성
   - Chain-of-Thought의 감정 버전 — 감정 상태 → 응답 순서로 생성
-  - ShipCheck Layer 3 (OCC + PAD + SDE)과 유사한 목적이나, 단일 추론 단계 vs 연속 상태
+  - Personica Layer 3 (OCC + PAD + SDE)과 유사한 목적이나, 단일 추론 단계 vs 연속 상태
 - **Shuffle v2**: 페르소나 유형별로 **다른 LLM에 라우팅** — 단일 모델 편향 방지
   - 라우팅 에이전트가 페르소나 특성에 맞는 최적 LLM 선택
 - **핵심 불명확점**: OCEAN → 행동 파라미터 매핑의 구체적 수학적 방법론 미공개
   - "high openness"를 프롬프트에 주입하는 수준인지, PRISM처럼 수학적 매핑인지 불분명
 
-**ShipCheck 대비 차이점:**
-- 설문/인터뷰 시뮬레이션만 — 실제 제품 사용 없음
-- 감정 모델이 단일 추론 단계 (연속적 PAD 상태 아님)
-- 인지/의사결정 모델 레이어 없음
+**Personica 대비 차이점:**
+- 설문/인터뷰 시뮬레이션만 — Personica는 같은 영역을 커버하면서 제품 체험·A/B 테스트·전문가 리뷰·광고/퍼널 리서치 등 추가 모드도 지원
+- 감정 모델이 단일 추론 단계 (Personica는 OCC + PAD + SDE 연속적 감정 상태)
+- 인지/의사결정 모델 레이어 없음 (Personica 5-Layer 페르소나 리얼리티의 핵심 차별점)
 - 메모리 아키텍처 불분명
 
 ---
@@ -269,7 +269,7 @@ LLM에 프롬프트 주입      으로 응답 생성"                           
 - **기존 제품 분석 데이터에서 파생** — Google Analytics, CRM, 소셜 리스닝 데이터
 - 실제 유저 행동 데이터를 클러스터링 → 페르소나 아키타입 생성
 - "전통적 UX 의미의 데이터 기반 페르소나"에 가장 가까움
-- 기존 데이터 필수 → ShipCheck의 "기존 데이터 불필요" 접근과 정반대
+- 기존 데이터 필수 → Personica의 "기존 데이터 불필요" 접근과 정반대
 
 ---
 
@@ -351,7 +351,7 @@ LLM에 프롬프트 주입      으로 응답 생성"                           
 
 ---
 
-### 카테고리 4: 브라우저 자동화 기반 AI UX 테스팅 (ShipCheck 직접 경쟁)
+### 카테고리 4: 브라우저 자동화 기반 AI UX 테스팅 (Personica 제품 체험 모드와 영역 중첩)
 
 #### 2.16 Uxia (uxia.app)
 
@@ -445,11 +445,12 @@ LLM에 프롬프트 주입      으로 응답 생성"                           
 - **검증**: UX 리서처 16명이 20개 시뮬레이션 세션 평가 (정성적)
   - 에이전트 행동 vs 실제 인간 행동 정량 비교 없음 (저자가 명시적 한계로 인정)
 
-**ShipCheck 대비 차이점:**
-1. 인구통계만, 심리 모델 없음
-2. 감정 상태 모델링 없음
+**Personica 대비 차이점:**
+1. 인구통계만, 심리 모델 없음 — Personica는 Big Five → PRISM 수학적 매핑 + 5-Layer 페르소나 리얼리티
+2. 감정 상태 모델링 없음 — Personica 핵심 해자 (OCC + PAD + SDE)
 3. 세션 간 메모리 지속 없음
 4. 연구 도구, 상용 제품 아님
+5. 브라우저 자동화만 — Personica는 제품 체험 외에 서베이·A/B 테스트·전문가 리뷰·광고/퍼널 리서치 등 다양한 모드 지원
 
 ---
 
@@ -530,24 +531,29 @@ LLM에 프롬프트 주입      으로 응답 생성"                           
 
 **핵심 투자 트렌드:**
 - 디지털 트윈 충실도 + 엔터프라이즈 스케일에 대형 자본 집중
-- SMB/스타트업 세그먼트 (ShipCheck 비치헤드)는 아직 자본 미투입
+- SMB/스타트업 세그먼트 (Personica 비치헤드)는 아직 자본 미투입
 
 ---
 
-## 6. ShipCheck 포지셔닝 근거
+## 6. Personica 포지셔닝 근거
 
-### 아무도 결합하지 않는 3가지를 동시에 보유
+> **Personica는 합성 페르소나 시뮬레이션 플랫폼이다.** 핵심 해자는 5-Layer 페르소나 리얼리티(감정·인지·의사결정 시뮬레이션의 깊이)이며, 제품 체험(Playwright), 서베이, A/B 테스트, 전문가 리뷰, 광고/퍼널 리서치 등 다양한 적용 모드를 지원한다.
 
-| 요소 | 가장 가까운 경쟁자 | ShipCheck |
+### 핵심 해자: 페르소나 리얼리티 — 아무도 결합하지 않는 시뮬레이션 깊이
+
+| 요소 | 가장 가까운 경쟁자 | Personica |
 |------|-------------------|-----------|
-| 실제 제품 브라우저 사용 | UXAgent (학술), Blok (미검증) | Playwright 기반 스테이징 URL |
+| 실제 제품 브라우저 사용 | UXAgent (학술), Blok (미검증) | 제품 체험 모드에서 Playwright 기반 스테이징 URL |
 | 명시적 심리 모델 | Synthetic Users (OCEAN, 깊이 불명) | Big Five → PRISM 수학적 매핑 |
 | 연속적 감정 상태 | 없음 (Chain-of-feeling이 가장 가까움) | OCC Appraisal + PAD 공간 + SDE 확률적 진화 |
 | 인지 모델 | UXAgent (Dual Process, 단순) | Information Foraging + Cognitive Load + TAM |
 | 의사결정 모델 | 없음 | BDI-E + Fogg Check + Satisficing Gate |
 | 지속적 메모리 | Simile (Memory Stream) | Memory Stream + Reflection + Habit Strength + Drift |
+| 적용 범위 | 각각 한 가지 모드에 특화 | 제품 체험 + 서베이 + A/B 테스트 + 전문가 리뷰 + 광고/퍼널 리서치 |
 
-### 업계가 두 진영으로 분리되어 있고, ShipCheck이 그 교집합
+### 경쟁사 대비 Personica의 위치: 교집합 + 추가 차별화
+
+Personica는 다른 합성 페르소나 제품들(Synthetic Users, Aaru, Simile 등)이 커버하는 설문/인터뷰 영역도 포함하면서, 5-Layer 페르소나 리얼리티와 실제 제품 체험 모드에서 추가 차별화된다. Playwright는 "제품 체험" 모드에서 쓰는 하나의 인터페이스일 뿐이다.
 
 ```
 [설문/인터뷰 시뮬레이션]          [브라우저 자동화]
@@ -560,11 +566,17 @@ Simile                           Synthetic Society
 Evidenza                         QA Panel
 Ditto                            Uxia
 
-              ┌─────────────────┐
-              │   ShipCheck     │
-              │ 5-Layer 모델 +  │
-              │ Playwright 자동화│
-              └─────────────────┘
+       ┌──────────────────────────────────┐
+       │          Personica               │
+       │  5-Layer 페르소나 리얼리티 엔진   │
+       │  (감정·인지·의사결정 깊이)        │
+       │                                  │
+       │  적용 모드:                       │
+       │  · 제품 체험 (Playwright)         │
+       │  · 서베이 / A/B 테스트            │
+       │  · 전문가 리뷰                    │
+       │  · 광고/퍼널 리서치               │
+       └──────────────────────────────────┘
 ```
 
 ---

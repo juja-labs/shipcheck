@@ -1,6 +1,6 @@
-# ShipCheck 유저 스토리
+# Personica 유저 스토리
 
-**Product**: ShipCheck
+**Product**: Personica — 합성 페르소나 시뮬레이션 플랫폼
 **Primary User**: 제품 책임자 (PM/Founder) — MVP 출시를 앞둔 시드~시리즈A 스타트업
 **Date**: 2026-03-17
 
@@ -33,7 +33,7 @@ Story 1 ──▶ Story 2 ──▶ Story 3 ──▶ Story 4 ──▶ Story 5 
 
 **Title:** 검증 프로젝트 생성
 
-**Description:** As a 제품 책임자, I want to 스테이징 URL과 테스트 계정, 타겟 유저 설명을 입력해서 검증 프로젝트를 만들고 싶다, so that ShipCheck이 내 제품을 분석하고 시뮬레이션을 준비할 수 있다.
+**Description:** As a 제품 책임자, I want to 스테이징 URL과 테스트 계정, 타겟 유저 설명을 입력해서 검증 프로젝트를 만들고 싶다, so that Personica가 내 제품을 분석하고 시뮬레이션을 준비할 수 있다.
 
 **Acceptance Criteria:**
 1. 스테이징 URL 입력 시 시스템이 접속 가능 여부를 즉시 확인한다.
@@ -50,7 +50,7 @@ Story 1 ──▶ Story 2 ──▶ Story 3 ──▶ Story 4 ──▶ Story 5 
 
 **Title:** 자동 제품 분석 결과 확인
 
-**Description:** As a 제품 책임자, I want to ShipCheck이 분석한 제품 구조(페이지, 기능, 플로우)를 확인하고 보정하고 싶다, so that 시스템이 내 제품을 정확히 이해한 상태에서 시뮬레이션이 진행된다.
+**Description:** As a 제품 책임자, I want to Personica가 분석한 제품 구조(페이지, 기능, 플로우)를 확인하고 보정하고 싶다, so that 시스템이 내 제품을 정확히 이해한 상태에서 시뮬레이션이 진행된다.
 
 **Acceptance Criteria:**
 1. 분석 진행 상황을 실시간으로 볼 수 있다. (크롤링 중 → 기능 파악 중 → 플로우 매핑 중)

@@ -1,6 +1,6 @@
 # 페르소나 시뮬레이션 엔진 — 기술 설계
 
-ShipCheck의 핵심 IP. "다양한 배경의 AI 페르소나가 사람처럼 제품을 사용하고 반응하는 것"의 기술적 구현.
+Personica(이전 ShipCheck)의 핵심 IP. "다양한 배경의 AI 페르소나가 사람처럼 생각하고 반응하는 것"의 기술적 구현. 이 엔진은 제품 체험(Playwright), 서베이 응답, A/B 테스트, 광고/퍼널 리서치, 전문가 리뷰 등 다양한 리서치 모드에 범용 적용되는 **합성 페르소나 시뮬레이션 플랫폼**의 핵심이다.
 
 ## 5-Layer 아키텍처
 
@@ -155,7 +155,7 @@ class BrowsingProfile:
 - 매 상호작용마다 **별도 LLM 콜**로 감정 평가 후 행동 결정
 - 프롬프트 구성: system instruction + message history + **emotion history** + current input
 - STEU(Situational Test of Emotional Understanding)에서 검증됨
-- **ShipCheck 핵심 패턴**: 행동 결정 전에 항상 감정 평가 선행
+- **Personica 핵심 패턴**: 행동 결정 전에 항상 감정 평가 선행
 
 ### Emotion Decay (감정 감쇠)
 - 실제 인간 감정의 반감기 < 1시간
@@ -240,9 +240,9 @@ class BrowsingProfile:
 
 ## 소셜 시뮬레이션 프레임워크에서 차용한 구현 방법론
 
-소셜 미디어 시뮬레이션 프레임워크(PRISM, Concordia, GenSim, Truman 등)는 "소셜 네트워크를 시뮬레이션하는 것"이 목적이지만, 그 안에 들어 있는 **개별 에이전트 모델링 기법**은 ShipCheck의 페르소나 시뮬레이션 충실도를 끌어올리는 데 직접 활용 가능함.
+소셜 미디어 시뮬레이션 프레임워크(PRISM, Concordia, GenSim, Truman 등)는 "소셜 네트워크를 시뮬레이션하는 것"이 목적이지만, 그 안에 들어 있는 **개별 에이전트 모델링 기법**은 Personica의 페르소나 시뮬레이션 충실도를 끌어올리는 데 직접 활용 가능함.
 
-소셜 레이어(피드 추천, 팔로우 그래프, 바이럴 메트릭 등)는 ShipCheck의 문제와 맞지 않으므로 전부 제외하고, **개별 에이전트의 감정·성격·의사결정·안정성 모델링 기법만** 선별 차용함.
+소셜 레이어(피드 추천, 팔로우 그래프, 바이럴 메트릭 등)는 Personica의 문제와 맞지 않으므로 전부 제외하고, **개별 에이전트의 감정·성격·의사결정·안정성 모델링 기법만** 선별 차용함.
 
 ### 1. SDE 기반 감정 진화 — PRISM (Fudan, 2025)
 
@@ -258,7 +258,7 @@ dE(t) = μ(E, t) dt + σ(E, t) dW(t)
 - `σ(E, t)`: 확산 항 — 감정의 **확률적 변동폭** (성격에 따라 다름)
 - `dW(t)`: Wiener process — 무작위 노이즈
 
-**ShipCheck 적용 (Layer 3 업그레이드)**:
+**Personica 적용 (Layer 3 업그레이드)**:
 
 ```python
 # 기존 (결정론적)
@@ -292,7 +292,7 @@ pad_state.pleasure = (
 
 **PRISM의 접근**: MBTI 16유형을 **수치 파라미터 벡터로 변환**. 각 유형이 고유한 감정 반응 함수를 가짐.
 
-**ShipCheck 적용 (Layer 1 업그레이드)**: Big Five를 행동 파라미터로 매핑:
+**Personica 적용 (Layer 1 업그레이드)**: Big Five를 행동 파라미터로 매핑:
 
 ```python
 class PersonalityParameters:
@@ -352,7 +352,7 @@ class PersonalityParameters:
 - 관찰한 정보로 belief state(신념 상태)를 업데이트
 - 성격 파라미터가 **탐색 vs 활용 트레이드오프**에 영향
 
-**ShipCheck 적용 (Layer 4 업그레이드)**:
+**Personica 적용 (Layer 4 업그레이드)**:
 
 ```
 상태 공간 S: 제품의 모든 페이지/기능/플로우
@@ -379,7 +379,7 @@ class PersonalityParameters:
 - **Player**: 자기 성격/목표/기억에 기반해 행동 결정
 - 각 Player는 **다른 컴포넌트 조합**을 가질 수 있음
 
-**ShipCheck 적용 (전체 아키텍처)**:
+**Personica 적용 (전체 아키텍처)**:
 
 ```
 ┌──────────────────────────────────┐
@@ -422,7 +422,7 @@ class PersonalityParameters:
 - 에이전트 행동이 설정된 페르소나 프로필에서 벗어나면 자동 감지
 - 보정 트리거 시 페르소나 원본을 re-injection하여 drift 복구
 
-**ShipCheck 적용 (Layer 5 + 전체 시스템)**:
+**Personica 적용 (Layer 5 + 전체 시스템)**:
 
 ```python
 class PersonaDriftMonitor:
@@ -471,7 +471,7 @@ class PersonaDriftMonitor:
 - **체류 시간** (요소별, 영역별)
 - 이 데이터로 "사용자가 어디를 보고 있었는지" 추론 가능
 
-**ShipCheck 적용 (데이터 수집 레이어)**:
+**Personica 적용 (데이터 수집 레이어)**:
 
 에이전트가 브라우저를 조작할 때 마이크로 행동을 **시뮬레이션하고 기록**:
 
@@ -517,7 +517,7 @@ class MicroBehaviorLog:
 
 | 기술 | 출처 | 제외 이유 |
 |------|------|----------|
-| 추천 알고리즘 (RecSys) | OASIS | ShipCheck의 문제와 무관 — 피드 추천이 없음 |
+| 추천 알고리즘 (RecSys) | OASIS | Personica의 문제와 무관 — 피드 추천이 없음 |
 | 팔로우/팔로워 소셜 그래프 | OASIS, S³ | 개인 체험 시뮬레이션에 불필요 |
 | 리포스트/좋아요 역학 | MOSAIC | 소셜 미디어 특화 행동 |
 | 콘텐츠 바이럴리티 메트릭 | OASIS | 시장 동역학 시뮬레이션은 MVP 범위 밖 |

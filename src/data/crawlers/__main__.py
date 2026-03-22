@@ -36,7 +36,7 @@ DEFAULT_OUTPUT = Path(__file__).resolve().parents[3] / "data" / "benchmarks"
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="shipcheck.data.crawlers",
-        description="ShipCheck 벤치마크 데이터 크롤러",
+        description="Personica 벤치마크 데이터 크롤러",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 

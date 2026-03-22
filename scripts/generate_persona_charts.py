@@ -195,7 +195,7 @@ def chart_persona_comparison(personas, out):
 
     # 하단
     fig.text(0.5, 0.01,
-             "ShipCheck은 30명의 다양한 AI 페르소나가 제품을 직접 사용하고 리뷰합니다  ·  6개 직업군 · 10가지 성격유형",
+             "Personica은 30명의 다양한 AI 페르소나가 제품을 직접 사용하고 리뷰합니다  ·  6개 직업군 · 10가지 성격유형",
              ha="center", fontsize=11, color=C_SUB, style="italic")
 
     plt.subplots_adjust(left=0.02, right=0.98, top=0.90, bottom=0.04, wspace=0.08)

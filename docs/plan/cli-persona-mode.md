@@ -3,7 +3,7 @@
 ## 배경
 
 ### 문제
-ShipCheck의 브라우저 자동화 계층을 4번 교체했지만 (parser.js → 접근성 스냅샷 → CDP+Playwright 하이브리드 → PlaywrightCliEnv), 여전히 엣지 케이스가 남아있다:
+Personica의 브라우저 자동화 계층을 4번 교체했지만 (parser.js → 접근성 스냅샷 → CDP+Playwright 하이브리드 → PlaywrightCliEnv), 여전히 엣지 케이스가 남아있다:
 - "/" 커맨드 메뉴 트리거 실패 (Input.insertText vs 키보드 이벤트)
 - contenteditable 타이핑 불안정
 - SPA 페이지 전환 후 상태 인식 지연
@@ -16,7 +16,7 @@ Claude Code CLI의 `-p` 모드 + `playwright-cli` 스킬 조합이 위 문제를
 - 실제 테스트에서 "52세 여교사" 롤플레이 + playwright-cli 조합으로 Tally 정상 사용 확인
 
 ### 핵심 결정
-**브라우저 자동화는 해자가 아니다.** playwright-cli에 위임하고, ShipCheck의 진짜 해자(5-Layer 감정 파이프라인 + 페르소나 합성 방법론 + 정량 분석)에 집중한다.
+**브라우저 자동화는 해자가 아니다.** playwright-cli에 위임하고, Personica의 진짜 해자인 **페르소나 리얼리티**(5-Layer 감정·인지·의사결정 시뮬레이션의 깊이 + 페르소나 합성 방법론 + 정량 분석)에 집중한다. Playwright는 "제품 체험" 모드에서 쓰는 하나의 인터페이스일 뿐이다.
 
 ---
 
@@ -302,14 +302,15 @@ playwright-cli screenshot --filename=s.png # 스크린샷
 playwright-cli close
 ```
 
-### 해자 정리
+### 해자 정리 — 핵심: 페르소나 리얼리티
 | 계층 | 해자? | 설명 |
 |---|---|---|
-| 브라우저 자동화 | ❌ | playwright-cli에 위임. 인프라일 뿐 |
-| 5-Layer 감정 파이프라인 | ✅ | OCC+SDE → PAD → LLM 제약. sycophancy 억제 증명됨 |
+| 브라우저 자동화 | ❌ | playwright-cli에 위임. "제품 체험" 모드의 인프라일 뿐 |
+| **5-Layer 엔진 (페르소나 리얼리티)** | **✅** | **OCC+SDE → PAD → LLM 제약. 감정·인지·의사결정 시뮬레이션의 깊이가 핵심 해자** |
 | 페르소나 합성 방법론 | ✅ | Big Five → 15+ 파라미터, NNGroup 캘리브레이션 |
 | 규모 + 자동화 | ✅ | 30명 병렬 실행 → 구조화된 데이터 |
 | 정량 분석 | ✅ | G2 비교 (Jaccard, Kendall Tau, 감정 분포) |
+| 적용 범위 확장성 | ✅ | 동일 엔진으로 서베이, A/B 테스트, 전문가 리뷰, 퍼널 분석 등 다양한 리서치 수행 |
 
 ### ablation 결과 요약
 | 지표 | Full pipeline | Naive (단일 콜) |

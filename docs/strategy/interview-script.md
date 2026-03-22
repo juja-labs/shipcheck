@@ -1,11 +1,11 @@
-# Customer Interview Script: ShipCheck
+# Customer Interview Script: Personica (합성 페르소나 시뮬레이션 플랫폼)
 
 **Date**: 2026-03-17
 **Version**: v2.0 — Wave 0 심층 재작성 반영
 **Target**: 솔로 빌더 (비치헤드) + 리서치-없는-PM (2차)
 **Duration**: 35-40분
 **Principles**: The Mom Test — 과거 행동에 대해 묻고, 아이디어를 피칭하지 않는다
-**Input**: docs/34-user-research.md (v2.0), docs/36-value-proposition.md, docs/33-lean-canvas.md, docs/31-competitive-analysis.md, docs/35-pre-mortem.md
+**Input**: user-research.md, value-proposition.md, lean-canvas.md, competitive-analysis.md, pre-mortem.md
 
 ---
 
@@ -92,7 +92,7 @@
 ### Concept Reaction + 샘플 리포트 프로토콜 (7분) `H5, H6, H3`
 
 > (주의) Mom Test 원칙: 피칭하지 않는다. 단, 구체적 컨셉에 대한 반응은 유효한 데이터.
-> **프로토콜**: 아래 샘플 리포트를 화면 공유(대면) 또는 링크(비동기)로 보여주되, ShipCheck이라는 이름이나 "우리 제품"은 언급하지 않는다. "이런 형태의 리포트가 있다면"으로 중립적으로 제시.
+> **프로토콜**: 아래 샘플 리포트를 화면 공유(대면) 또는 링크(비동기)로 보여주되, Personica라는 이름이나 "우리 제품"은 언급하지 않는다. "이런 형태의 리포트가 있다면"으로 중립적으로 제시.
 
 #### Step 1: 컨셉 제시 (피칭 아님)
 
@@ -184,7 +184,7 @@
 7. **"Hotjar, FullStory, Amplitude 같은 분석 도구 쓰시나요?"** `H4`
    - "그 도구로 '왜 이탈하는지'까지 알 수 있었나요?"
    - **"히트맵에서 이탈률이 높은 곳은 보이는데, '왜'인지 모르겠다는 경험이 있나요?"** `H4`
-   - (이것이 ShipCheck VP의 핵심: "어디서"가 아닌 "왜"를 알려준다)
+   - (이것이 Personica VP의 핵심: "어디서"가 아닌 "왜"를 알려준다)
    - "그 '왜'를 알기 위해 뭘 하셨나요?"
 
 8. **"유저 인터뷰를 하시나요? 한다면 얼마나 자주?"** `H4`
@@ -309,7 +309,7 @@
 
 docs/35의 Elephant 3개를 직접 묻지 않되, 인터뷰 데이터에서 간접적으로 신호를 포착한다.
 
-### E1: "실험이 실패하면 ShipCheck 자체를 접어야 한다"
+### E1: "실험이 실패하면 Personica 자체를 접어야 한다"
 - **검증 로직**: 인터뷰에서 H1+H5+H6이 모두 Fail이면, 실험 전에 이미 시장 신호가 부정적. Go/No-Go 기준의 "시장 측 사전 검증"으로 활용.
 - **관찰 포인트**: 10명 인터뷰 후 Red Flag 비율이 60%+이면 실험 투자 자체를 재검토.
 - **질문**: 별도 질문 없음. Core 1-3 + Concept Reaction 종합으로 판단.
@@ -537,7 +537,7 @@ $49      /10       /10           /10       %
 | **목표 인원** | 솔로 빌더 6-8명, PM 4-5명 (총 10-13명) |
 | **모집 채널** | Indie Hackers, Twitter/X, Product Hunt 커뮤니티, Lenny's Newsletter Slack |
 | **스크리닝 기준** | 솔로 빌더: 6개월 내 웹 제품 런칭 경험. PM: 시드~A 스타트업, UX 리서처 없음 |
-| **인센티브** | ShipCheck 얼리 액세스 (무료 1회 시뮬레이션) |
+| **인센티브** | Personica 얼리 액세스 (무료 1회 시뮬레이션) |
 | **소요 기간** | 2주 (모집 1주 + 인터뷰 1주) |
 | **분석** | 인터뷰 완료 후 패턴 코딩 → 가설 매트릭스 → Red/Green 집계 → Go/No-Go 판단 |
 | **산출물** | 가설별 Pass/Fail 판정, 최적 가격점, 비치헤드 Go/No-Go 결론 |
@@ -558,9 +558,9 @@ $49      /10       /10           /10       %
 
 ## Sources
 
-- docs/34-user-research.md v2.0 — 페르소나 정의, 저니맵, 이탈 퍼널, Open Questions H1-H6
-- docs/36-value-proposition.md — 세그먼트별 JTBD, 대안 비교, VP Statements
-- docs/33-lean-canvas.md — 3-Tier 가격 모델 ($49/$99/$199), COGS, 유닛 이코노믹스
-- docs/31-competitive-analysis.md — 경쟁사 가격 (Synthetic Users $2-27/명, UserTesting ~$46K/년, Artificial Societies $40/월)
-- docs/35-pre-mortem.md — Elephant 3개 (E1: Go/No-Go, E2: 5-Layer 과도?, E3: 사업계획서 시간 배분)
+- docs/strategy/user-research.md — 페르소나 정의, 저니맵, 이탈 퍼널, Open Questions H1-H6
+- docs/strategy/value-proposition.md — 세그먼트별 JTBD, 대안 비교, VP Statements
+- docs/strategy/lean-canvas.md — 3-Tier 가격 모델 ($49/$99/$199), COGS, 유닛 이코노믹스
+- docs/strategy/competitive-analysis.md — 경쟁사 가격 (Synthetic Users $2-27/명, UserTesting ~$46K/년, Artificial Societies $40/월)
+- docs/strategy/pre-mortem.md — Elephant 3개 (E1: Go/No-Go, E2: 5-Layer 과도?, E3: 사업계획서 시간 배분)
 - The Mom Test (Rob Fitzpatrick) — 인터뷰 원칙

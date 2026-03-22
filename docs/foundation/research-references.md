@@ -1,6 +1,6 @@
 # Research References
 
-ShipCheck 페르소나 시뮬레이션 엔진 설계에 참고한 논문, 프레임워크, 데이터셋, 제품.
+Personica(이전 ShipCheck) 페르소나 시뮬레이션 엔진 설계에 참고한 논문, 프레임워크, 데이터셋, 제품.
 
 ## 핵심 논문
 
@@ -31,7 +31,7 @@ ShipCheck 페르소나 시뮬레이션 엔진 설계에 참고한 논문, 프레
 | [BDIPrompting](https://dl.acm.org/doi/10.1145/3623809.3623930) | BDI + LLM → 목표 지향적 계획 | 의사결정 아키텍처 |
 
 ### Social Simulation → 개별 에이전트 모델링 기법 차용
-| 프레임워크 | 핵심 기여 | ShipCheck 차용 |
+| 프레임워크 | 핵심 기여 | Personica 차용 |
 |-----------|----------|---------------|
 | [PRISM](https://arxiv.org/abs/2512.19933) (Fudan, 2025) | MBTI→행동 파라미터 매핑, SDE 감정 진화, PC-POMDP 의사결정 | Layer 1 성격 파라미터화, Layer 3 확률적 감정 모델, Layer 4 불완전 정보 의사결정 |
 | [Concordia](https://github.com/google-deepmind/concordia) (Google DeepMind) | GM-Player 아키텍처, 조합형 컴포넌트 시스템 | 환경-에이전트 분리, 페르소나별 인지 사이클 분화 |
@@ -53,7 +53,7 @@ ShipCheck 페르소나 시뮬레이션 엔진 설계에 참고한 논문, 프레
 
 ## 행동 이론 프레임워크
 
-| 이론 | 핵심 | ShipCheck 적용 |
+| 이론 | 핵심 | Personica 적용 |
 |------|------|---------------|
 | Information Foraging (Pirolli & Card) | 사용자는 "정보 냄새"를 따라 UI 탐색 | Layer 2: UI 요소 평가 |
 | Cognitive Load Theory (Sweller, 1988) | 인지 부하 초과 → 에러, 이탈 | Layer 2: 누적 부하 추적 |

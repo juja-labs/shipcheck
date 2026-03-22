@@ -1,4 +1,4 @@
-"""ShipCheck 실험 엔진 CLI 진입점.
+"""Personica 실험 엔진 CLI 진입점.
 
 사용법:
   python -m shipcheck.cli run configs/experiment_1.yaml
@@ -52,7 +52,7 @@ def cmd_compare_g2(args: argparse.Namespace) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(
         prog="shipcheck",
-        description="ShipCheck 페르소나 시뮬레이션 실험 엔진",
+        description="Personica 페르소나 시뮬레이션 실험 엔진",
     )
     parser.add_argument("-v", "--verbose", action="store_true")
     sub = parser.add_subparsers(dest="command")

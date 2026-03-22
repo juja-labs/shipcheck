@@ -1,6 +1,6 @@
 """Layer 1: Big Five → 수치 파라미터 매핑.
 
-ShipCheck의 핵심 IP. LLM이 성격을 "해석"하는 게 아니라,
+Personica의 핵심 IP. LLM이 성격을 "해석"하는 게 아니라,
 미리 계산된 파라미터가 행동을 제어한다.
 
 PRISM (Fudan, 2025) 방식 차용:
