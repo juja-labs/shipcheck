@@ -159,3 +159,5 @@ Mon Mar 23 14:59:07 KST 2026: SubagentStart hook fired — agent_type=Explore ag
 Mon Mar 23 15:15:40 KST 2026: SubagentStart hook fired — agent_type=Explore agent_id=affc3261dd39dbb7e session_id=65a9a4a6-867e-41fa-81ff-076058932f45
 Mon Mar 23 15:20:08 KST 2026: SubagentStart hook fired — agent_type=Explore agent_id=a8a428f9234e40003 session_id=65a9a4a6-867e-41fa-81ff-076058932f45
 Mon Mar 23 15:43:13 KST 2026: SubagentStart hook fired — agent_type=general-purpose agent_id=ae573f6c33f1abcc2 session_id=15d8c3cd-9e81-44ad-b6d9-2d848aacf877
+Mon Mar 23 16:09:59 KST 2026: SubagentStart hook fired — agent_type=Explore agent_id=a26a35509cf226033 session_id=ef8b78b3-f2e5-4646-ae0a-baee67f89f8f
+Mon Mar 23 22:35:48 KST 2026: SubagentStart hook fired — agent_type=Explore agent_id=adb5342dfbe83f628 session_id=a7850285-0b8f-48be-8298-1bd63fa91adb
