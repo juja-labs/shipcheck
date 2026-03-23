@@ -143,7 +143,7 @@ cdp.send("Input.dispatchMouseEvent", {"x": node.center_x, "y": node.center_y, ..
 
 ## 현재 완료된 것 (이 세션)
 
-- [x] 5-Layer 감정 파이프라인 (OCC + SDE + PAD)
+- [x] 페르소나 리얼리티 엔진 감정 파이프라인 (OCC + SDE + PAD)
 - [x] parser.js → Playwright 접근성 스냅샷 전환
 - [x] 스크린샷 VLM (페르소나: 스크린샷, 실행기: 스냅샷+스크린샷)
 - [x] Ablation 테스트 (Full vs Naive — 파이프라인 가치 증명)

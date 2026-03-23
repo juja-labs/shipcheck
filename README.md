@@ -12,7 +12,7 @@
 
 ## Solution
 
-Personica는 **5-Layer 시뮬레이션 엔진**으로 감정·인지·의사결정을 구조적으로 시뮬레이션하는 합성 페르소나 플랫폼입니다.
+Personica는 **페르소나 리얼리티 엔진**으로 감정·인지·의사결정을 구조적으로 시뮬레이션하는 합성 페르소나 플랫폼입니다.
 
 ### 핵심 해자: 페르소나 리얼리티
 
@@ -28,7 +28,7 @@ Layer 5: Memory — Memory Stream + Reflection + Habit Strength + Drift Monitor
 
 ### 적용 범위
 
-5-Layer 엔진은 특정 use case에 묶이지 않는 범용 플랫폼:
+페르소나 리얼리티 엔진은 특정 use case에 묶이지 않는 범용 플랫폼:
 
 | 모드 | 설명 | 단계 |
 |------|------|------|
@@ -44,7 +44,7 @@ Layer 5: Memory — Memory Stream + Reflection + Habit Strength + Drift Monitor
 
 | | Aaru / Synthetic Users | Blok | **Personica** |
 |---|---|---|---|
-| 시뮬레이션 깊이 | LLM 프롬프팅 | 인지 모델 일부 | **5-Layer 감정·인지·의사결정** |
+| 시뮬레이션 깊이 | LLM 프롬프팅 | 인지 모델 일부 | **페르소나 리얼리티 엔진의 감정·인지·의사결정** |
 | 입력 | 설문/컨셉 설명 | Figma + 분석 데이터 | **실제 제품 URL + 서베이 + 디자인** |
 | 적용 범위 | 설문/인터뷰 | UX 예측 | **제품 체험 + 서베이 + A/B + 전문가** |
 | 기존 데이터 필요 | 부분적 | Amplitude 등 필수 | **불필요** |
@@ -61,7 +61,7 @@ Tally.so(웹 폼 빌더) 대상 초기 검증 (2명 페르소나):
 
 | 레이어 | 기술 |
 |--------|------|
-| Simulation Engine | 5-Layer (Profile → Cognitive → Emotion → Decision → Memory) |
+| Simulation Engine | 페르소나 리얼리티 엔진 — 5개 레이어(Profile → Cognitive → Emotion → Decision → Memory) |
 | Browser Automation | Playwright (제품 체험 모드) |
 | LLM | OpenAI / Anthropic / Google API |
 | Backend | Python + FastAPI |

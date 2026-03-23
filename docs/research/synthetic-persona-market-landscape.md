@@ -24,8 +24,8 @@
 얕음 ◄─────────────────────────────────────────────────────────► 깊음
 
 [LLM-native]          [Data-grounded]        [Model-structured]       [Personica]
-Helpfull              Qualtrics Edge          Synthetic Users          5-Layer
-QA Panel              Simile                  UXAgent(DPT)            Architecture
+Helpfull              Qualtrics Edge          Synthetic Users          페르소나 리얼리티
+QA Panel              Simile                  UXAgent(DPT)            엔진
 Evidenza              Artificial Societies    Simsurveys
 Uxia                  Ditto                   (Lakmoos)
 C5i                   Aaru
@@ -69,7 +69,7 @@ LLM에 프롬프트 주입      으로 응답 생성"                           
 - 실제 인터뷰 필수 (완전 합성 불가)
 - 심리 모델 없이 서사 기반 → 구조적 행동 차이 보장 어려움
 - 적용 범위가 매크로 사회 시뮬레이션(선거, 정책, 시장)에 한정
-- Personica는 같은 설문/인터뷰 영역도 커버하면서 5-Layer 페르소나 리얼리티로 시뮬레이션 깊이에서 차별화 + 제품 체험 모드 추가 보유
+- Personica는 같은 설문/인터뷰 영역도 커버하면서 페르소나 리얼리티 엔진으로 시뮬레이션 깊이에서 차별화 + 제품 체험 모드 추가 보유
 
 ---
 
@@ -115,7 +115,7 @@ LLM에 프롬프트 주입      으로 응답 생성"                           
 **Personica 대비 차이점:**
 - 설문/인터뷰 시뮬레이션만 — Personica는 같은 영역을 커버하면서 제품 체험·A/B 테스트·전문가 리뷰·광고/퍼널 리서치 등 추가 모드도 지원
 - 감정 모델이 단일 추론 단계 (Personica는 OCC + PAD + SDE 연속적 감정 상태)
-- 인지/의사결정 모델 레이어 없음 (Personica 5-Layer 페르소나 리얼리티의 핵심 차별점)
+- 인지/의사결정 모델 레이어 없음 (Personica 페르소나 리얼리티 엔진의 핵심 차별점)
 - 메모리 아키텍처 불분명
 
 ---
@@ -446,7 +446,7 @@ LLM에 프롬프트 주입      으로 응답 생성"                           
   - 에이전트 행동 vs 실제 인간 행동 정량 비교 없음 (저자가 명시적 한계로 인정)
 
 **Personica 대비 차이점:**
-1. 인구통계만, 심리 모델 없음 — Personica는 Big Five → PRISM 수학적 매핑 + 5-Layer 페르소나 리얼리티
+1. 인구통계만, 심리 모델 없음 — Personica는 Big Five → PRISM 수학적 매핑 + 페르소나 리얼리티 엔진
 2. 감정 상태 모델링 없음 — Personica 핵심 해자 (OCC + PAD + SDE)
 3. 세션 간 메모리 지속 없음
 4. 연구 도구, 상용 제품 아님
@@ -537,7 +537,7 @@ LLM에 프롬프트 주입      으로 응답 생성"                           
 
 ## 6. Personica 포지셔닝 근거
 
-> **Personica는 합성 페르소나 시뮬레이션 플랫폼이다.** 핵심 해자는 5-Layer 페르소나 리얼리티(감정·인지·의사결정 시뮬레이션의 깊이)이며, 제품 체험(Playwright), 서베이, A/B 테스트, 전문가 리뷰, 광고/퍼널 리서치 등 다양한 적용 모드를 지원한다.
+> **Personica는 합성 페르소나 시뮬레이션 플랫폼이다.** 핵심 해자는 페르소나 리얼리티 엔진(감정·인지·의사결정 시뮬레이션의 깊이)이며, 제품 체험(Playwright), 서베이, A/B 테스트, 전문가 리뷰, 광고/퍼널 리서치 등 다양한 적용 모드를 지원한다.
 
 ### 핵심 해자: 페르소나 리얼리티 — 아무도 결합하지 않는 시뮬레이션 깊이
 
@@ -553,7 +553,7 @@ LLM에 프롬프트 주입      으로 응답 생성"                           
 
 ### 경쟁사 대비 Personica의 위치: 교집합 + 추가 차별화
 
-Personica는 다른 합성 페르소나 제품들(Synthetic Users, Aaru, Simile 등)이 커버하는 설문/인터뷰 영역도 포함하면서, 5-Layer 페르소나 리얼리티와 실제 제품 체험 모드에서 추가 차별화된다. Playwright는 "제품 체험" 모드에서 쓰는 하나의 인터페이스일 뿐이다.
+Personica는 다른 합성 페르소나 제품들(Synthetic Users, Aaru, Simile 등)이 커버하는 설문/인터뷰 영역도 포함하면서, 페르소나 리얼리티 엔진과 실제 제품 체험 모드에서 추가 차별화된다. Playwright는 "제품 체험" 모드에서 쓰는 하나의 인터페이스일 뿐이다.
 
 ```
 [설문/인터뷰 시뮬레이션]          [브라우저 자동화]
@@ -568,7 +568,7 @@ Ditto                            Uxia
 
        ┌──────────────────────────────────┐
        │          Personica               │
-       │  5-Layer 페르소나 리얼리티 엔진   │
+       │    페르소나 리얼리티 엔진          │
        │  (감정·인지·의사결정 깊이)        │
        │                                  │
        │  적용 모드:                       │

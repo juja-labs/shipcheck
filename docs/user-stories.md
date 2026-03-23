@@ -15,7 +15,7 @@ Story 1 ──▶ Story 2 ──▶ Story 3 ──▶ Story 4 ──▶ Story 5 
 생성          분석 확인                                라이브 뷰         결과                                          인터뷰          시뮬레이션
 
                                                       ↑ WOW #1          ↑ WOW #2                      ↑ WOW #3       ↑ WOW #4        ↑ WOW #5
-                                                      5-Layer 증거       30명 비교        세그먼트 분기   Memory 기반    시장 동역학
+                                                      엔진 증거          30명 비교        세그먼트 분기   Memory 기반    시장 동역학
 ```
 
 ## 우선순위
@@ -99,24 +99,24 @@ Story 1 ──▶ Story 2 ──▶ Story 3 ──▶ Story 4 ──▶ Story 5 
 > **목업 Screen 1 — 핵심 WOW 포인트**
 > AI가 실제 제품을 사용하고 있다는 "증거"를 보여주는 화면.
 
-**Title:** 시뮬레이션 라이브 뷰 (Action Trace + 제품 화면 + 5-Layer State)
+**Title:** 시뮬레이션 라이브 뷰 (Action Trace + 제품 화면 + 페르소나 리얼리티 엔진 State)
 
-**Description:** As a 제품 책임자, I want to 특정 페르소나가 내 제품을 사용하는 과정을 Action Trace, 실제 제품 화면, 5-Layer 엔진 상태와 함께 보고 싶다, so that "AI가 진짜 제품을 쓰고 있다"는 것과 "왜 그렇게 행동하는지"를 동시에 확인할 수 있다.
+**Description:** As a 제품 책임자, I want to 특정 페르소나가 내 제품을 사용하는 과정을 Action Trace, 실제 제품 화면, 페르소나 리얼리티 엔진 상태와 함께 보고 싶다, so that "AI가 진짜 제품을 쓰고 있다"는 것과 "왜 그렇게 행동하는지"를 동시에 확인할 수 있다.
 
 **Acceptance Criteria:**
 1. **3-column 레이아웃**으로 구성된다:
    - 좌측: Action Trace (시간순 행동 로그)
    - 중앙: 해당 시점의 실제 제품 스크린샷
-   - 우측: 5-Layer Engine State
+   - 우측: 페르소나 리얼리티 엔진 State
 2. Action Trace 각 항목에는 타임스탬프, 행동 유형(click/scroll/type/wait/exit), 타겟 요소, 행동 이유가 표시된다.
 3. 각 행동 옆에 해당 시점의 감정 상태가 이모지로 표시된다.
 4. 중앙 제품 스크린샷에서 문제 지점(이해 불가, 미지 용어 등)이 어노테이션으로 하이라이트된다.
-5. 우측 5-Layer 패널에 현재 선택된 행동 시점의 상태가 표시된다:
+5. 우측 페르소나 리얼리티 엔진 패널에 현재 선택된 행동 시점의 상태가 표시된다:
    - **L2 인지**: 정보 향기(Information Scent), 인지 부하(%), 멘탈 모델 Gap, TAM 유용성
    - **L3 감정**: 현재 감정 라벨, PAD 3축 값(Pleasure/Arousal/Dominance), 변동성(σ)
    - **L4 의사결정**: BDI-E(Belief/Desire/Intent), Fogg Check(Motivation × Ability × Prompt) 결과
    - **L5 메모리**: Observation + Reflection 엔트리 (importance, recency 스코어 포함)
-6. Action Trace에서 특정 행동을 클릭하면 중앙 스크린샷과 우측 5-Layer 상태가 해당 시점으로 전환된다.
+6. Action Trace에서 특정 행동을 클릭하면 중앙 스크린샷과 우측 페르소나 리얼리티 엔진 상태가 해당 시점으로 전환된다.
 
 ---
 
@@ -133,7 +133,7 @@ Story 1 ──▶ Story 2 ──▶ Story 3 ──▶ Story 4 ──▶ Story 5 
 1. 전체 SUS 점수가 세그먼트별로 집계되어 표시된다. (예: 코어 74/100, 엣지 48/100, 와일드카드 28/100)
 2. SUS 10문항 각각에 대해 세그먼트별 평균 점수 바 차트가 표시된다.
 3. 특정 문항을 클릭하면 개별 페르소나의 점수 + 이유(Memory Stream 기반 서술)가 펼쳐진다.
-4. 이유 서술에 5-Layer 엔진 수치가 근거로 인용된다. (예: "cognitive_load: 85%", "ability: 0.2")
+4. 이유 서술에 페르소나 리얼리티 엔진 수치가 근거로 인용된다. (예: "cognitive_load: 85%", "ability: 0.2")
 5. 고객이 추가한 커스텀 질문(NPS, 가격 만족도 등)도 같은 형식으로 표시된다.
 6. 설문 결과를 CSV/PDF로 내보낼 수 있다.
 
@@ -150,7 +150,7 @@ Story 1 ──▶ Story 2 ──▶ Story 3 ──▶ Story 4 ──▶ Story 5 
 **Acceptance Criteria:**
 1. 리포트 최상단에 출시 준비도 판정(Go / 조건부 / No-Go)과 근거 요약이 표시된다.
 2. 핵심 메트릭 4개가 표시된다: 핵심 플로우 완료율, 평균 만족도, 페르소나 수, 치명적 이탈 지점 수.
-3. 핵심 이탈 지점 Top 3가 이탈률과 함께 표시되고, 각 지점에 이유(5-Layer 근거 포함)와 개선 제안이 제공된다.
+3. 핵심 이탈 지점 Top 3가 이탈률과 함께 표시되고, 각 지점에 이유(페르소나 리얼리티 엔진 근거 포함)와 개선 제안이 제공된다.
 4. 세그먼트별 × 플로우별 만족도 히트맵 매트릭스가 제공된다.
 5. 리포트를 PDF로 내보내거나 링크로 팀원에게 공유할 수 있다.
 
