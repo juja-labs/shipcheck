@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personic AI — Simulation Dashboard</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #F5F5F6;
+      --surface: #FFFFFF;
+      --border: #E4E4E7;
+      --border-strong: #CBCBD0;
+      --text: #1A1A1E;
+      --text-2: #52525A;
+      --text-3: #8A8A95;
+      --text-4: #AEAEB8;
+      --green: #3D8B63;
+      --green-bg: #F0F7F3;
+      --red: #B04040;
+      --red-bg: #F9F0F0;
+      --blue: #4A6FA5;
+      --blue-bg: #F0F3F8;
+      --sans: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+    }
+
+    body {
+      background: var(--bg);
+      font-family: var(--sans);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .app {
+      display: flex;
+      width: 1320px;
+      height: 860px;
+      margin: 20px auto;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 220px;
+      background: #1A1A1E;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+    .sidebar-logo {
+      padding: 24px 22px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .logo-text {
+      font-size: 17px; font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.3px;
+    }
+    .logo-text .ai {
+      font-weight: 400;
+      color: rgba(255,255,255,0.35);
+      margin-left: 4px;
+      font-size: 14px;
+    }
+
+    .sidebar-group { padding: 20px 12px 6px; }
+    .sidebar-group-label {
+      font-size: 11px; font-weight: 600;
+      color: rgba(255,255,255,0.2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0 12px;
+      margin-bottom: 6px;
+    }
+    .sidebar-link {
+      display: flex; align-items: center;
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-size: 13.5px; font-weight: 400;
+      color: rgba(255,255,255,0.4);
+      cursor: pointer;
+      margin-bottom: 1px;
+    }
+    .sidebar-link.active {
+      background: rgba(255,255,255,0.07);
+      color: #FFFFFF;
+      font-weight: 500;
+    }
+    .sidebar-link .count {
+      margin-left: auto;
+      font-family: var(--mono); font-size: 11px;
+      color: rgba(255,255,255,0.18);
+    }
+
+    .sidebar-bottom {
+      margin-top: auto;
+      padding: 20px 22px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .sidebar-project-name {
+      font-size: 13px; font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 3px;
+    }
+    .sidebar-project-meta {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── Main ── */
+    .main {
+      flex: 1; display: flex; flex-direction: column;
+      overflow: hidden; background: var(--bg);
+    }
+
+    .topbar {
+      height: 54px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 32px;
+      flex-shrink: 0;
+    }
+    .topbar-title {
+      font-size: 15px; font-weight: 700;
+      color: var(--text);
+    }
+    .topbar-sep {
+      width: 1px; height: 20px;
+      background: var(--border);
+      margin: 0 18px;
+    }
+    .topbar-meta {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-3);
+    }
+    .topbar-right {
+      margin-left: auto;
+      display: flex; align-items: center;
+    }
+    .topbar-status {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13px; font-weight: 600;
+      color: var(--green);
+    }
+    .topbar-status .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+    .content {
+      flex: 1; overflow-y: auto;
+      padding: 26px 32px;
+    }
+
+    /* ── Metrics ── */
+    .metrics-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .metric-tile {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 22px;
+    }
+    .metric-label {
+      font-size: 12px; font-weight: 500;
+      color: var(--text-3);
+      margin-bottom: 6px;
+    }
+    .metric-value {
+      font-family: var(--mono);
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      color: var(--text);
+    }
+    .metric-value.v-green { color: var(--green); }
+    .metric-value.v-red { color: var(--red); }
+    .metric-desc {
+      font-size: 12px;
+      color: var(--text-4);
+      margin-top: 4px;
+    }
+
+    /* ── Progress ── */
+    .progress-row {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 24px;
+    }
+    .progress-track {
+      flex: 1; height: 5px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 3px;
+      background: var(--green);
+    }
+    .progress-text {
+      font-family: var(--mono);
+      font-size: 12px; font-weight: 500;
+      color: var(--text-3);
+      white-space: nowrap;
+    }
+
+    /* ── Section Header ── */
+    .section-header {
+      display: flex; align-items: baseline; gap: 10px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 15px; font-weight: 700;
+      color: var(--text);
+    }
+    .section-badge {
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 500;
+      color: var(--text-3);
+    }
+
+    /* ── Persona Cards ── */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .persona-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+
+    /* Card Header — 이니셜 원 없이 텍스트만 */
+    .p-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .p-info { flex: 1; min-width: 0; }
+    .p-name {
+      font-size: 19px; font-weight: 700;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+      color: var(--text);
+    }
+    .p-name .age {
+      font-weight: 400;
+      color: var(--text-3);
+      font-size: 14px;
+      margin-left: 4px;
+    }
+    .p-occupation {
+      font-size: 13px;
+      color: var(--text-3);
+      margin-top: 3px;
+    }
+    .p-status {
+      font-family: var(--mono);
+      font-size: 12px; font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 5px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .p-status.completed { background: var(--green-bg); color: var(--green); }
+    .p-status.abandoned { background: var(--red-bg); color: var(--red); }
+
+    /* Segment — 톤 다운된 컬러 배경 */
+    .p-segment {
+      display: inline-block;
+      font-size: 12px; font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    .seg-cautious { background: #F0F1F5; color: #5C6070; }
+    .seg-intuitive { background: #EEF1F8; color: #506090; }
+    .seg-critical { background: #F5F0F0; color: #8B5858; }
+
+    /* Big Five — 톤 다운된 컬러 */
+    .trait-section { margin-bottom: 16px; }
+    .trait-section-label {
+      font-size: 11px; font-weight: 600;
+      color: var(--text-4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .trait-row {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 5px;
+    }
+    .trait-label {
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 600;
+      color: var(--text-4);
+      width: 14px;
+      text-align: right;
+    }
+    .trait-bar-bg {
+      flex: 1; height: 6px;
+      background: #EDEDF0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .trait-bar-fill {
+      height: 100%; border-radius: 3px;
+    }
+    /* 톤 다운된 Big Five 색상 */
+    .bar-o { background: #8E8EB0; }
+    .bar-c { background: #7898AD; }
+    .bar-e { background: #C0A468; }
+    .bar-a { background: #6EA585; }
+    .bar-n { background: #B07878; }
+    .trait-val {
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 500;
+      color: var(--text-3);
+      width: 30px;
+    }
+
+    /* Emotion / Pleasure */
+    .emotion-section { margin-bottom: 14px; }
+    .emotion-row {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .emotion-indicator {
+      width: 8px; height: 8px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .emotion-indicator.positive { background: var(--green); }
+    .emotion-indicator.negative { background: var(--red); }
+    .emotion-label {
+      font-size: 16px; font-weight: 600;
+      color: var(--text);
+    }
+    .pleasure-badge {
+      margin-left: auto;
+      display: flex; align-items: baseline; gap: 5px;
+    }
+    .pleasure-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-4);
+    }
+    .pleasure-val {
+      font-family: var(--mono);
+      font-size: 20px; font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .pleasure-val.pos { color: var(--green); }
+    .pleasure-val.neg { color: var(--red); }
+
+    /* Pleasure bar */
+    .pbar {
+      height: 4px;
+      background: #EDEDF0;
+      border-radius: 2px;
+      position: relative;
+      margin: 10px 0 0;
+    }
+    .pbar-center {
+      position: absolute;
+      left: 50%; top: -1px; bottom: -1px;
+      width: 1px;
+      background: var(--border-strong);
+    }
+    .pbar-fill {
+      position: absolute;
+      top: 0; height: 100%;
+      border-radius: 2px;
+    }
+    .pbar-fill.pos { background: var(--green); left: 50%; }
+    .pbar-fill.neg { background: var(--red); right: 50%; }
+
+    /* Steps */
+    .steps-row {
+      display: flex; align-items: center; gap: 6px;
+      margin-top: 14px;
+      margin-bottom: 14px;
+    }
+    .steps-label {
+      font-size: 12px;
+      color: var(--text-3);
+    }
+    .steps-value {
+      font-family: var(--mono);
+      font-size: 13px; font-weight: 600;
+      color: var(--text-2);
+    }
+
+    /* Quote */
+    .p-quote {
+      font-size: 13.5px;
+      color: var(--text-2);
+      line-height: 1.65;
+      padding: 12px 14px;
+      background: #F8F8FA;
+      border-radius: 6px;
+      border-left: 2.5px solid var(--border-strong);
+      margin-bottom: 12px;
+    }
+
+    /* Activity */
+    .p-activity {
+      font-size: 12px;
+      color: var(--text-3);
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-text">Personic<span class="ai">AI</span></span>
+    </div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">Monitoring</div>
+      <div class="sidebar-link active">실시간 현황</div>
+      <div class="sidebar-link">페르소나 관리 <span class="count">30</span></div>
+    </div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">Analysis</div>
+      <div class="sidebar-link">시뮬레이션 리플레이</div>
+      <div class="sidebar-link">감정 궤적</div>
+      <div class="sidebar-link">교차분석</div>
+    </div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">Report</div>
+      <div class="sidebar-link">종합 리포트</div>
+      <div class="sidebar-link">페르소나 인터뷰</div>
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-project-name">Tally.so UX 검증</div>
+      <div class="sidebar-project-meta">30 personas &middot; 제품 체험</div>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">실시간 시뮬레이션 현황</div>
+      <div class="topbar-sep"></div>
+      <div class="topbar-meta">Tally.so &middot; 제품 체험 &middot; 2026-03-15 14:23</div>
+      <div class="topbar-right">
+        <div class="topbar-status">
+          <span class="dot"></span>
+          실행 중
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- Metrics -->
+      <div class="metrics-strip">
+        <div class="metric-tile">
+          <div class="metric-label">완료</div>
+          <div class="metric-value">24</div>
+          <div class="metric-desc">30명 중 24명 완료</div>
+        </div>
+        <div class="metric-tile">
+          <div class="metric-label">실행 중</div>
+          <div class="metric-value v-green">3</div>
+          <div class="metric-desc">현재 제품 체험 중</div>
+        </div>
+        <div class="metric-tile">
+          <div class="metric-label">이탈</div>
+          <div class="metric-value v-red">3</div>
+          <div class="metric-desc">자발적 종료</div>
+        </div>
+        <div class="metric-tile">
+          <div class="metric-label">평균 감정 (Pleasure)</div>
+          <div class="metric-value v-green">+0.16</div>
+          <div class="metric-desc">완료 24명 기준 / PAD 모델</div>
+        </div>
+      </div>
+
+      <!-- Progress: 완료 24 + 이탈 3 = 27 처리, 실행 중 3 = 30 total → 90% -->
+      <div class="progress-row">
+        <span class="progress-text">진행 90%</span>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:90%"></div>
+        </div>
+        <span class="progress-text">경과 54m &middot; 잔여 ~6m</span>
+      </div>
+
+      <!-- Persona Cards -->
+      <div class="section-header">
+        <span class="section-title">페르소나별 시뮬레이션 상세</span>
+        <span class="section-badge">3 / 30</span>
+      </div>
+
+      <div class="persona-grid">
+
+        <!-- 1. 정민아 — 신중형 — 완료 -->
+        <div class="persona-card">
+          <div class="p-header">
+            <div class="p-info">
+              <div class="p-name">정민아 <span class="age">36</span></div>
+              <div class="p-occupation">미술/음악 학원 강사</div>
+            </div>
+            <span class="p-status completed">완료</span>
+          </div>
+
+          <span class="p-segment seg-cautious">신중형</span>
+
+          <div class="trait-section">
+            <div class="trait-section-label">Big Five</div>
+            <div class="trait-row">
+              <span class="trait-label">O</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-o" style="width:55%"></div></div>
+              <span class="trait-val">0.55</span>
+            </div>
+            <div class="trait-row">
+              <span class="trait-label">C</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-c" style="width:82%"></div></div>
+              <span class="trait-val">0.82</span>
+            </div>
+            <div class="trait-row">
+              <span class="trait-label">E</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-e" style="width:38%"></div></div>
+              <span class="trait-val">0.38</span>
+            </div>
+            <div class="trait-row">
+              <span class="trait-label">A</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-a" style="width:71%"></div></div>
+              <span class="trait-val">0.71</span>
+            </div>
+            <div class="trait-row">
+              <span class="trait-label">N</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-n" style="width:63%"></div></div>
+              <span class="trait-val">0.63</span>
+            </div>
+          </div>
+
+          <div class="emotion-section">
+            <div class="emotion-row">
+              <span class="emotion-indicator positive"></span>
+              <span class="emotion-label">안도</span>
+              <div class="pleasure-badge">
+                <span class="pleasure-label">P</span>
+                <span class="pleasure-val pos">+0.21</span>
+              </div>
+            </div>
+            <div class="pbar">
+              <div class="pbar-center"></div>
+              <div class="pbar-fill pos" style="width:10.5%"></div>
+            </div>
+          </div>
+
+          <div class="steps-row">
+            <span class="steps-label">행동 수</span>
+            <span class="steps-value">12 steps</span>
+          </div>
+
+          <div class="p-quote">"과목별 분기가 되니까 학부모 문의가 줄겠다. 세 과목 시나리오 다 커버된다."</div>
+
+          <div class="p-activity">과목별 조건 분기 폼 저장 완료</div>
+        </div>
+
+        <!-- 2. 김수진 — 직감형 — 완료 -->
+        <div class="persona-card">
+          <div class="p-header">
+            <div class="p-info">
+              <div class="p-name">김수진 <span class="age">37</span></div>
+              <div class="p-occupation">피트니스 코치</div>
+            </div>
+            <span class="p-status completed">완료</span>
+          </div>
+
+          <span class="p-segment seg-intuitive">직감형</span>
+
+          <div class="trait-section">
+            <div class="trait-section-label">Big Five</div>
+            <div class="trait-row">
+              <span class="trait-label">O</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-o" style="width:72%"></div></div>
+              <span class="trait-val">0.72</span>
+            </div>
+            <div class="trait-row">
+              <span class="trait-label">C</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-c" style="width:41%"></div></div>
+              <span class="trait-val">0.41</span>
+            </div>
+            <div class="trait-row">
+              <span class="trait-label">E</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-e" style="width:85%"></div></div>
+              <span class="trait-val">0.85</span>
+            </div>
+            <div class="trait-row">
+              <span class="trait-label">A</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-a" style="width:68%"></div></div>
+              <span class="trait-val">0.68</span>
+            </div>
+            <div class="trait-row">
+              <span class="trait-label">N</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-n" style="width:25%"></div></div>
+              <span class="trait-val">0.25</span>
+            </div>
+          </div>
+
+          <div class="emotion-section">
+            <div class="emotion-row">
+              <span class="emotion-indicator positive"></span>
+              <span class="emotion-label">만족</span>
+              <div class="pleasure-badge">
+                <span class="pleasure-label">P</span>
+                <span class="pleasure-val pos">+0.42</span>
+              </div>
+            </div>
+            <div class="pbar">
+              <div class="pbar-center"></div>
+              <div class="pbar-fill pos" style="width:21%"></div>
+            </div>
+          </div>
+
+          <div class="steps-row">
+            <span class="steps-label">행동 수</span>
+            <span class="steps-value">9 steps</span>
+          </div>
+
+          <div class="p-quote">"링크 하나면 카톡 단체방에 바로 뿌릴 수 있겠다. 딱 이 정도면 충분해."</div>
+
+          <div class="p-activity">부트캠프 등록 폼 공유 링크 생성</div>
+        </div>
+
+        <!-- 3. 최유진 — 비평형 — 이탈 -->
+        <div class="persona-card">
+          <div class="p-header">
+            <div class="p-info">
+              <div class="p-name">최유진 <span class="age">33</span></div>
+              <div class="p-occupation">브랜드 사진작가</div>
+            </div>
+            <span class="p-status abandoned">이탈</span>
+          </div>
+
+          <span class="p-segment seg-critical">비평형</span>
+
+          <div class="trait-section">
+            <div class="trait-section-label">Big Five</div>
+            <div class="trait-row">
+              <span class="trait-label">O</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-o" style="width:88%"></div></div>
+              <span class="trait-val">0.88</span>
+            </div>
+            <div class="trait-row">
+              <span class="trait-label">C</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-c" style="width:35%"></div></div>
+              <span class="trait-val">0.35</span>
+            </div>
+            <div class="trait-row">
+              <span class="trait-label">E</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-e" style="width:42%"></div></div>
+              <span class="trait-val">0.42</span>
+            </div>
+            <div class="trait-row">
+              <span class="trait-label">A</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-a" style="width:29%"></div></div>
+              <span class="trait-val">0.29</span>
+            </div>
+            <div class="trait-row">
+              <span class="trait-label">N</span>
+              <div class="trait-bar-bg"><div class="trait-bar-fill bar-n" style="width:76%"></div></div>
+              <span class="trait-val">0.76</span>
+            </div>
+          </div>
+
+          <div class="emotion-section">
+            <div class="emotion-row">
+              <span class="emotion-indicator negative"></span>
+              <span class="emotion-label">좌절</span>
+              <div class="pleasure-badge">
+                <span class="pleasure-label">P</span>
+                <span class="pleasure-val neg">-0.61</span>
+              </div>
+            </div>
+            <div class="pbar">
+              <div class="pbar-center"></div>
+              <div class="pbar-fill neg" style="width:30.5%"></div>
+            </div>
+          </div>
+
+          <div class="steps-row">
+            <span class="steps-label">행동 수</span>
+            <span class="steps-value">5 steps</span>
+          </div>
+
+          <div class="p-quote">"포트폴리오에 맞는 템플릿이 하나도 없잖아. 시간 낭비다."</div>
+
+          <div class="p-activity">포트폴리오 폼 템플릿 검색 중 이탈</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
