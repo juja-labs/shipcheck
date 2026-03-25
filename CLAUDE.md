@@ -93,8 +93,6 @@ Step 3: 분석 및 리포트
 | Unit Economics (원가·마진·가격) | `docs/scale/unit-economics.md` |
 | 팀 구성 및 예산 | `docs/scale/team-budget-plan.md` |
 | TAM / SAM / SOM 시장규모 | `docs/market-sizeing/market-sizing-yechangpae-appendix-software-first.md` |
-| 수익 모델 | `docs/scale/revenue-model.md` |
-| 시장진입 전략 | `docs/scale/market-entry-strategy.md` |
 
 ## Conventions
 - 한국어 코멘트 사용
