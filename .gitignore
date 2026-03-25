@@ -19,3 +19,7 @@ landing/node_modules/
 # OS
 .DS_Store
 Thumbs.db
+
+# Office / Windows metadata
+~$*.docx
+*:Zone.Identifier
